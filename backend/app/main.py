@@ -3,10 +3,12 @@ from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
 from .database import SessionLocal, engine
+from .routers import events
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.include_router(events.router)
 
 
 # Dependency
