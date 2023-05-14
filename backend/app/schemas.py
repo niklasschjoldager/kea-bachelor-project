@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, constr
 
 
 class ItemBase(BaseModel):
@@ -20,6 +20,7 @@ class Item(ItemBase):
 
 class UserBase(BaseModel):
     email: str
+    full_name: constr(max_length=30)
 
 
 class UserCreate(UserBase):
