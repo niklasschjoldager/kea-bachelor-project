@@ -10,7 +10,6 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
-    is_active = Column(Boolean, default=True)
     full_name = Column(String(25))
 
     sites = relationship("Site", back_populates="owner")
@@ -75,7 +74,7 @@ class Ticket(Base):
     price = Column(Integer)
 
     order_id = Column(Integer, ForeignKey("orders.id"))
-    order = relationship("Event", back_populates="tickets")
+    order = relationship("Order", back_populates="tickets")
 
 
 class Integration(Base):
