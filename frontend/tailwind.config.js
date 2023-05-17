@@ -14,11 +14,15 @@ module.exports = {
       'slate-gray': '#7C90A0',
       'paynes-gray': '#3E6680',
       'dark-gray': '#121E26',
+      'dark-gray-faded': '#121E26',
       'card-border': '#E9EDF0',
       'input-border': '#D5DDE3',
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
+    },
+    maxWidth: {
+      lg: '1192px',
     },
     fontSize: {
       h1: "1.875rem",
@@ -48,13 +52,6 @@ module.exports = {
       animation: {
         slideUpAndFade: 'slideUpAndFade .2s cubic-bezier(0.16, 1, 0.3, 1)',
       },
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-    },
   },
   plugins: [],
 }

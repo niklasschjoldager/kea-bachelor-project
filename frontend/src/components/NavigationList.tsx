@@ -12,6 +12,7 @@ const NavigationList = ({ navElements }: Props) => {
             {navElements.map(navElement => {
                 return (
                     <li
+                        key={navElement}
                         onClick={() => setActive(navElement)}
                         className={`${active == navElement && 'active border-b-[3px] border-b-dark-gray'} text-dark-gray px-3 pb-4 cursor-pointer`}
                     >
