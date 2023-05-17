@@ -9,7 +9,11 @@ import {
 } from '@radix-ui/react-select';
 import * as Select from '@radix-ui/react-select';
 
-const SiteSelector = ({ sites }) => (
+type Props = {
+    sites: string[]
+}
+
+const SiteSelector = ({ sites }: Props) => (
     <Select.Root>
         <Select.Trigger
             className="rounded-2 bg-ghost-white py-[6px] px-3 text-dark-gray text-body flex items-center justify-between w-40 truncate group focus:outline-none">

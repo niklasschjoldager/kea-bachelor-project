@@ -5,7 +5,11 @@ import UserIcon from './UserIcon';
 import Image from 'next/image';
 import ArrowDown from '../assets/icons/arrow-down-paynes.svg';
 
-const UserSettingsMenu = ({ userInitials }) => (
+type Props = {
+    userInitials: string
+}
+
+const UserSettingsMenu = ({ userInitials }: Props) => (
     <div >
         <DropdownMenu.Root align="right"
         >

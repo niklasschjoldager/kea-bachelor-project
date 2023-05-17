@@ -5,9 +5,14 @@ import UserSettingsMenu from './UserSettingsMenu';
 import SiteSelector from './SiteSelector';
 import NavigationList from './NavigationList';
 
+type Props = {
+    sites: string[]
+    navElements: string[]
+}
 
 
-const TopNav = ({ sites, navElements }) => (
+
+const TopNav = ({ sites, navElements }: Props) => (
     <div className="w-full border-b-2 border-b-paynes-gray bg-white pt-5 px-5">
         <div className="flex justify-between mb-8">
             <div className="flex gap-4">

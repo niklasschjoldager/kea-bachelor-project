@@ -1,7 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 
-const NavigationList = ({ navElements }) => {
+type Props = {
+    navElements: string[]
+}
+
+const NavigationList = ({ navElements }: Props) => {
     const [active, setActive] = useState("Events")
     return (
         <ul className="flex gap-4">
