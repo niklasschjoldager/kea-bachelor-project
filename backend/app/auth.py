@@ -28,12 +28,7 @@ def get_password_hash(password: str):
 
 
 def authenticate_user(username: str, password: str, db: Session):
-    print("hi")
     user = crud.get_user_by_email(db, username)
-
-    print(user)
-    print(user.email)
-    print(user.full_name),
 
     if not user:
         return False
@@ -43,18 +38,18 @@ def authenticate_user(username: str, password: str, db: Session):
     return user
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
-    to_encode = data.copy()
+# def create_access_token(data: dict, expires_delta: timedelta | None = None):
+#     to_encode = data.copy()
 
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+#     if expires_delta:
+#         expire = datetime.utcnow() + expires_delta
+#     else:
+#         expire = datetime.utcnow() + timedelta(minutes=15)
 
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+#     to_encode.update({"exp": expire})
+#     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-    return encoded_jwt
+#     return encoded_jwt
 
 
 # async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):

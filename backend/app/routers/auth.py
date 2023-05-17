@@ -7,7 +7,7 @@ from typing import Annotated
 from app import crud
 from app.schemas import UserCreate, User, Token
 from app.dependencies import get_db
-from app.auth import authenticate_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
+from app.auth import authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES
 
 router = APIRouter(tags=["authentication"])
 
@@ -22,12 +22,10 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
             detail="User with email already exists",
         )
 
-    print(create_access_token(data={"emailaddress": user.email}))
-
     return crud.create_user(db, user)
 
 
-@router.post("/token", response_model=Token)
+@router.post("/token", response_model=User)
 def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: Session = Depends(get_db),
@@ -37,13 +35,17 @@ def login_for_access_token(
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incrrect username or password",
+            detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
-    )
+    # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    # access_token = create_access_token(
+    #     data={"sub": user.email}, expires_delta=access_token_expires
+    # )
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    print(user)
+
+    # return {"access_token": access_token, "token_type": "bearer"}
+    return user
+    # return access_token
