@@ -13,6 +13,7 @@ export default async function Home() {
       <TopNav sites={sites} navElements={navElements} />
       <EventsOverview />
       <Modal title={"Create an event"} buttonText={"Create event"} children={<EventForm />} />
+      <EventsOverview />
     </main>
   );
 }
