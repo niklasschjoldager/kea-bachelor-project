@@ -30,7 +30,7 @@ const EventsList = ({ events }: Props) => {
                         }}
                     />
                     <div className='basis-1/2 px-[24px] py-[38px]'>
-                        <h2 className="text-h2 mb-3 text-dark-gray">{event.title}</h2>
+                        <h3 className="text-h3 mb-3 text-dark-gray">{event.title}</h3>
                         <p className="text-label text-dark-gray-faded mb-6">{event.short_desc}</p>
                             <div className='flex gap-3 flex-wrap'>
                                 <p className="text-label text-slate-gray flex items-center gap-2">

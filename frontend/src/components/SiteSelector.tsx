@@ -1,9 +1,9 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
-import ArrowDown from '../assets/icons/arrow-down-black.svg';
-import ArrowRight from '../assets/icons/arrow-right.svg';
-import Check from '../assets/icons/checkmark.svg';
+import ArrowDown from '../../public/assets/icons/arrow-down-black.svg';
+import ArrowRight from '../../public/assets/icons/arrow-right.svg';
+import Check from '../../public/assets/icons/checkmark.svg';
 import {
     SelectItem,
 } from '@radix-ui/react-select';

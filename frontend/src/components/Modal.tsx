@@ -16,7 +16,7 @@ const Modal = ({ title, buttonText, children }: Props) => {
     return (
         <Dialog.Root modal="true">
             <Dialog.Trigger asChild>
-                <button className="px-3 py-2 bg-dark-gray text-white rounded-2">
+                <button className="px-3 py-2 bg-dark-gray text-white text-button">
                     {buttonText}
                 </button>
             </Dialog.Trigger>
