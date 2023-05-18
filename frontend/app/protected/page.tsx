@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
 import LogOutButton from "../components/LogOutButton";
 
 async function getData(accessToken: string) {
@@ -15,6 +14,7 @@ async function getData(accessToken: string) {
   // Recommendation: handle errors
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
+    // @TODO: Handle errors
     throw new Error("Failed to fetch data");
   }
 
@@ -23,11 +23,6 @@ async function getData(accessToken: string) {
 
 export default async function Protected() {
   const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect("/");
-  }
-
   const data = await getData(session.user["access_token"]);
 
   return (
