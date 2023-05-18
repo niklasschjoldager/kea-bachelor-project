@@ -1,9 +1,9 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
-import ArrowDown from '../../public/assets/icons/arrow-down-black.svg';
-import ArrowRight from '../../public/assets/icons/arrow-right.svg';
-import Check from '../../public/assets/icons/checkmark.svg';
+import ArrowDown from '../assets/icons/arrow-down-black.svg';
+import ArrowRight from '../assets/icons/arrow-right.svg';
+import Check from '../assets/icons/checkmark.svg';
 import {
     SelectItem,
 } from '@radix-ui/react-select';
@@ -52,7 +52,7 @@ const SiteSelector = ({ sites }: Props) => {
                             </Select.Label>
                             {sites.map(site => {
                                 return (
-                                    <Select.Item key={site} value={site} className="text-dark-gray px-2 pb-3 last:pb-0 cursor-pointer flex justify-between items-center hover:outline-none focus:outline-none truncate data-[state=checked]:font-semibold">
+                                    <Select.Item value={site} key={site} className="text-dark-gray px-2 pb-3 last:pb-0 cursor-pointer flex justify-between items-center hover:outline-none focus:outline-none truncate data-[state=checked]:font-semibold">
                                         <Select.ItemText>{site}</Select.ItemText>
                                         <Select.ItemIndicator>
                                             <Image
@@ -78,4 +78,20 @@ const SiteSelector = ({ sites }: Props) => {
                             </a>
                         </Select.Group>
 
+                        <Select.Separator />
+                    </Select.Viewport>
+                    <Select.ScrollDownButton
+                        className="flex items-center justify-center h-[25px] bg-white cursor-default">
+                        <Image
+                            priority
+                            src={ArrowDown}
+                            alt="Arrow down"
+                        />
+                    </Select.ScrollDownButton>
+                    <Select.Arrow />
+                </Select.Content>
+            </Select.Portal>
+        </Select.Root>
+    )
+}
 export default SiteSelector;
