@@ -1,15 +1,19 @@
-import React from 'react';
-import TopNav from '../src/components/TopNav'
-import EventsOverview from '../src/components/EventsOverview'
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import SignInForm from "./components/SignInForm";
 
 export default async function Home() {
-  const sites = ['My site', 'My other site', 'My third site']
-  const navElements = ['Events', 'Integration']
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/events");
+  }
 
   return (
-    <main className="max-w-screen-lg mx-auto mt-[137px] px-4 py-[100px]">
-      <TopNav sites={sites} navElements={navElements} />
-      <EventsOverview />
+    <main className="flex flex-col items-center justify-center min-h-screen p-24">
+      <h1 className="text-4xl">Log in</h1>
+      <SignInForm />
     </main>
   );
 }

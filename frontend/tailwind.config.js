@@ -21,9 +21,6 @@ module.exports = {
     fontFamily: {
       sans: ["Heebo", "sans-serif"],
     },
-    // maxWidth: {
-    //   lg: "1000px",
-    // },
     fontSize: {
       h1: "1.875rem",
       h2: "1.5rem",
