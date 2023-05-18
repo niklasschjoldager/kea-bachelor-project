@@ -25,10 +25,12 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@/app/*": ["app/*"],
       "@/assets/*": ["public/assets/*"],
       "@/components/*": ["src/components/*"],
       "@/icons/*": ["public/assets/icons/*"],
       "@/images/*": ["public/images/*"],
+      "@/src/*": ["src/*"]
     }
   },
   "include": [

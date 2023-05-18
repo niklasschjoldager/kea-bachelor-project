@@ -1,4 +1,4 @@
-import { NextAuthProvider } from "./providers";
+import { NextAuthProvider } from "@/app/providers";
 import { Heebo } from "next/font/google";
 import "./globals.css";
 
