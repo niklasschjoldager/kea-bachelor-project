@@ -21,6 +21,7 @@ function SignInForm() {
       <label className="grid" htmlFor="email">
         <span>Email</span>
         <input
+          className="bg-paynes-gray text-ghost-white"
           id="email"
           type="email"
           name="username"
@@ -31,6 +32,7 @@ function SignInForm() {
       <label className="grid" htmlFor="password">
         <span>Password</span>
         <input
+          className=" bg-paynes-gray text-ghost-white"
           id="password"
           type="password"
           name="password"
@@ -38,9 +40,7 @@ function SignInForm() {
           onChange={(event) => setPassword(event.target.value)}
         />
       </label>
-      <button className="px-4 py-2 text-white bg-black rounded-full">
-        Log in
-      </button>
+      <button className="px-4 py-2 text-white bg-dark-gray">Log in</button>
     </form>
   );
 }

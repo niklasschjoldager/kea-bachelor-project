@@ -1,37 +1,20 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]/route";
-import LogOutButton from "../components/LogOutButton";
-
-async function getData(accessToken: string) {
-  const res = await fetch("http://127.0.0.1:8000/users/me", {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    // @TODO: Handle errors
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import TopNav from "@/src/components/TopNav";
+import EventsOverview from "@/src/components/EventsOverview";
+import Modal from "@/src/components/Modal";
+import EventForm from "@/src/components/EventForm";
 
 export default async function Events() {
-  const session = await getServerSession(authOptions);
-  const data = await getData(session.user["access_token"]);
+  const sites = ["My site", "My other site", "My third site"];
+  const navElements = ["Events", "Integration"];
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-24">
-      <h1 className="text-4xl">
-        Protected page, you are logged in as {session.user?.name}
-      </h1>
-      <h2>Hentet fra /users/me: {data.email}</h2>
-      <LogOutButton />
+    <main className="max-w-screen-lg mx-auto mt-[137px] px-4 py-[100px]">
+      <TopNav sites={sites} navElements={navElements} />
+      <EventsOverview />
+      <Modal title={"Create an event"} buttonText={"Create event"}>
+        <EventForm />
+      </Modal>
+      <EventsOverview />
     </main>
   );
 }
