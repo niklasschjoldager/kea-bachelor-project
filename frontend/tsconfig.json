@@ -23,10 +23,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/assets/*": ["public/assets/*"],
+      "@/components/*": ["src/components/*"],
+      "@/icons/*": ["public/assets/icons/*"],
+      "@/images/*": ["public/images/*"],
     }
   },
   "include": [
