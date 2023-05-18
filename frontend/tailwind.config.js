@@ -63,16 +63,9 @@ module.exports = {
       overlayShow: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
     },
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-    },
-    animation: {
-      slideUpAndFade: "slideUpAndFade .2s cubic-bezier(0.16, 1, 0.3, 1)",
-    },
+  },
+  animation: {
+    slideUpAndFade: "slideUpAndFade .2s cubic-bezier(0.16, 1, 0.3, 1)",
   },
   plugins: [
     require("tailwindcss/plugin")(({ addVariant }) => {
