@@ -1,4 +1,5 @@
 import EventsList from './EventsList'
+import ViewSwitcher from './ViewSwitcher'
 
 const EventsOverview = () => {
     const events = [
@@ -40,8 +41,19 @@ const EventsOverview = () => {
         },
     ]
 
+    const views = [{text: 'List', icon: 'list', position: 'left'}, {text: 'Calendar', icon: 'calendar', position: 'right'}]
     return (
-        <EventsList events={events} />
+        <>
+            <div className='flex justify-between mb-6'>
+                <h1 className='text-h1'>Events</h1>
+                {/* buttons */}
+            </div>
+            <div className='flex justify-between items-end mb-6'>
+                <h2 className='text-h2 text-slate-gray leading-none'>May</h2>
+                <ViewSwitcher views={views}/>
+            </div>
+            <EventsList events={events} />
+        </>
     )
 }
 
