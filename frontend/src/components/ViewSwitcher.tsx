@@ -21,16 +21,18 @@ const ViewSwitcher = ({ views }: Props) => {
             aria-label="Text alignment"
         >
             {views.map((view, index) => (
-                <ToggleGroup.Item key={index} className="data-[state=on]:bg-white data-[state=on]:shadow-switcher px-2 py-1 inline-flex gap-2 items-center grow transition" value={view.position}>
-                    <Image
-                        priority
-                        src={require(`../../public/assets/icons/${view.icon}.svg`)}
-                        alt={`${view.text} icon`}
-                        width={18}
-                        height={18}
-                    />
-                {view.text}
-                </ToggleGroup.Item>
+                <div key={index} className="cursor-pointer flex">
+                    <ToggleGroup.Item className="data-[state=on]:bg-white data-[state=on]:shadow-switcher data-[state=on]:pointer-events-none px-3 py-2 inline-flex gap-2 items-center grow transition" value={view.position}>
+                        <Image
+                            priority
+                            src={require(`../../public/assets/icons/${view.icon}.svg`)}
+                            alt={`${view.text} icon`}
+                            width={15}
+                            height={15}
+                        />
+                    <span className="text-button leading-none mt-[1px]">{view.text}</span>
+                    </ToggleGroup.Item>
+                </div>
             ))}
         </ToggleGroup.Root>
     )

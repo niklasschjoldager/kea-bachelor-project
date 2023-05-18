@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={heebo.className}>{children}</body>
+      <body className={`${heebo.className} bg-ghost-white`}>{children}</body>
     </html>
   )
 }

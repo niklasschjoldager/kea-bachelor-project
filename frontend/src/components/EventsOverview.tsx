@@ -1,5 +1,7 @@
 import EventsList from './EventsList'
 import ViewSwitcher from './ViewSwitcher'
+import Modal from './Modal'
+import EventForm from './EventForm'
 
 const EventsOverview = () => {
     const events = [
@@ -44,9 +46,9 @@ const EventsOverview = () => {
     const views = [{text: 'List', icon: 'list', position: 'left'}, {text: 'Calendar', icon: 'calendar', position: 'right'}]
     return (
         <>
-            <div className='flex justify-between mb-6'>
+            <div className='flex justify-between items-center mb-8'>
                 <h1 className='text-h1'>Events</h1>
-                {/* buttons */}
+                <Modal title={"Create an event"} buttonText={"Create event"} children={<EventForm />} />
             </div>
             <div className='flex justify-between items-end mb-6'>
                 <h2 className='text-h2 text-slate-gray leading-none'>May</h2>
