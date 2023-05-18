@@ -24,7 +24,7 @@ const ViewSwitcher = ({ views }: Props) => {
                 <ToggleGroup.Item key={index} className="data-[state=on]:bg-white data-[state=on]:shadow-switcher px-2 py-1 inline-flex gap-2 items-center grow transition" value={view.position}>
                     <Image
                         priority
-                        src={require(`../assets/icons/${view.icon}.svg`)}
+                        src={require(`../../public/assets/icons/${view.icon}.svg`)}
                         alt={`${view.text} icon`}
                         width={18}
                         height={18}

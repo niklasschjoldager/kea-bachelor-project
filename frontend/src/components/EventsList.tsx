@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import clock from '../assets/icons/clock.svg';
-import calendar from '../assets/icons/calendar.svg';
-import pin from '../assets/icons/pin.svg';
+import clock from '../../public/assets/icons/clock.svg';
+import calendar from '../../public/assets/icons/calendar.svg';
+import pin from '../../public/assets/icons/pin.svg';
 
 type Props = {
     events: 

@@ -19,7 +19,7 @@ module.exports = {
       "input-border": "#D5DDE3",
     },
     fontFamily: {
-      sans: ["Inter", "sans-serif"],
+      sans: ["Heebo", "sans-serif"],
     },
     // maxWidth: {
     //   lg: "1000px",
@@ -49,10 +49,37 @@ module.exports = {
         from: { opacity: 0, transform: "translateY(-4px)" },
         to: { opacity: 1, transform: "translateY(0px)" },
       },
+      overlayShow: {
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+      },
+      contentShow: {
+        from: { opacity: 0, transform: "translate(-50%, -48%) scale(0.96)" },
+        to: { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+      },
+    },
+    animation: {
+      slideUpAndFade: "slideUpAndFade .2s cubic-bezier(0.16, 1, 0.3, 1)",
+      overlayShow: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+      contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    },
+    extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
     },
     animation: {
       slideUpAndFade: "slideUpAndFade .2s cubic-bezier(0.16, 1, 0.3, 1)",
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss/plugin")(({ addVariant }) => {
+      addVariant(
+        "calendar-picker-indicator",
+        "&::-webkit-calendar-picker-indicator"
+      );
+    }),
+  ],
 };

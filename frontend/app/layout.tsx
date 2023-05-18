@@ -1,7 +1,8 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Heebo } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const heebo = Heebo({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-ghost-white`}>{children}</body>
+      <body className={heebo.className}>{children}</body>
     </html>
   )
 }
