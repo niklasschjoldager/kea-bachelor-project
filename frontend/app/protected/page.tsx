@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import LogOutButton from "../components/LogOutButton";
 
 async function getData(accessToken: string) {
   const res = await fetch("http://127.0.0.1:8000/users/me", {
@@ -35,6 +36,7 @@ export default async function Protected() {
         Protected page, you are logged in as {session.user?.name}
       </h1>
       <h2>Hentet fra /users/me: {data.email}</h2>
+      <LogOutButton />
     </main>
   );
 }
