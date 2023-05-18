@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={heebo.className}>
+      <body className={`${heebo.className} bg-ghost-white`}>
         <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>

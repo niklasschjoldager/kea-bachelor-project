@@ -27,10 +27,11 @@ module.exports = {
       h3: "1.125rem",
       body: "1rem",
       label: "0.75rem",
+      button: "0.875rem",
     },
     boxShadow: {
       card: "2px 0px 15px 5px rgb(18, 30, 38, 0.03)",
-      switcher: "2px 0px 7px 5px rgb(18, 30, 38, 0.06)",
+      switcher: "0px 0px 8px 2px rgb(18, 30, 38, 0.08)",
     },
     borderRadius: {
       2: "2px",
