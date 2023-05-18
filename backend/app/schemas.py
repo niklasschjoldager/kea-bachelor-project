@@ -22,6 +22,12 @@ class Token(BaseModel):
     token_type: str
 
 
+class LoginData(BaseModel):
+    access_token: str
+    name: str
+    email: str
+
+
 class TokenData(BaseModel):
     username: str | None = None
     scopes: list[str] = []

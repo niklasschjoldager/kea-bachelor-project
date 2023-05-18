@@ -28,9 +28,8 @@ export const authOptions = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: body,
         });
-        const user = await res.json();
 
-        console.log("user ", user);
+        const user = await res.json();
 
         if (res.ok && user) {
           return user;
@@ -39,6 +38,18 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      session.user = token.user;
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

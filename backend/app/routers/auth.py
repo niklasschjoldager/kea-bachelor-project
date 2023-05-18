@@ -5,9 +5,14 @@ from sqlalchemy.orm import Session
 from typing import Annotated
 
 from app import crud
-from app.schemas import UserCreate, User, Token
+from app.schemas import UserCreate, User, Token, LoginData
 from app.dependencies import get_db
-from app.auth import authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES
+from app.auth import (
+    authenticate_user,
+    ACCESS_TOKEN_EXPIRE_MINUTES,
+    create_access_token,
+    get_current_user,
+)
 
 router = APIRouter(tags=["authentication"])
 
@@ -25,7 +30,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db, user)
 
 
-@router.post("/token", response_model=User)
+@router.post("/token", response_model=LoginData)
 def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: Session = Depends(get_db),
@@ -39,13 +44,15 @@ def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    # access_token = create_access_token(
-    #     data={"sub": user.email}, expires_delta=access_token_expires
-    # )
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.email, "exp": access_token_expires},
+        expires_delta=access_token_expires,
+    )
 
-    print(user)
+    return {"access_token": access_token, "name": user.full_name, "email": user.email}
 
-    # return {"access_token": access_token, "token_type": "bearer"}
-    return user
-    # return access_token
+
+@router.get("/users/me", response_model=User)
+async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
+    return current_user
