@@ -21,7 +21,7 @@ async function getData(accessToken: string) {
   return res.json();
 }
 
-export default async function Protected() {
+export default async function Events() {
   const session = await getServerSession(authOptions);
   const data = await getData(session.user["access_token"]);
 
