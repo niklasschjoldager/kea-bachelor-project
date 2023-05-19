@@ -17,7 +17,7 @@ from app.auth import (
 router = APIRouter(tags=["authentication"])
 
 
-@router.post("/signup", response_model=User)
+@router.post("/signup", response_model=LoginData)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, user.email)
 
@@ -27,11 +27,23 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
             detail="User with email already exists",
         )
 
-    return crud.create_user(db, user)
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.email, "exp": access_token_expires},
+        expires_delta=access_token_expires,
+    )
+
+    new_user = crud.create_user(db, user)
+
+    return {
+        "access_token": access_token,
+        "name": new_user.full_name,
+        "email": new_user.email,
+    }
 
 
-@router.post("/token", response_model=LoginData)
-def login_for_access_token(
+@router.post("/login", response_model=LoginData)
+def read_user(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: Session = Depends(get_db),
 ):
