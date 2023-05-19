@@ -6,9 +6,12 @@ export default async function Events() {
   const navElements = ["Events", "Integration"];
 
   return (
-    <main className="max-w-screen-lg mx-auto mt-[137px] px-4 py-[100px]">
+    <main>
       <TopNav sites={sites} navElements={navElements} />
-      <EventsOverview />
+      <div className="max-w-screen-lg mx-auto px-4 py-[100px]">
+        <EventsOverview />
+      </div>
+
     </main>
   );
 }

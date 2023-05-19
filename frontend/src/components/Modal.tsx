@@ -3,7 +3,6 @@ import React, { ReactNode } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import Close from '../../public/assets/icons/close.svg';
 import Card from './Card'
-import Button from './Button';
 import Image from 'next/image';
 
 type Props = {
@@ -14,9 +13,9 @@ type Props = {
 
 const Modal = ({ title, buttonText, children }: Props) => {
     return (
-        <Dialog.Root modal="true">
+        <Dialog.Root>
             <Dialog.Trigger asChild>
-                <button className="px-3 py-2 bg-dark-gray text-white text-button">
+                <button className="px-3 py-2 bg-dark-gray text-white text-button rounded-2">
                     {buttonText}
                 </button>
             </Dialog.Trigger>
