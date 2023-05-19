@@ -8,10 +8,9 @@ export default async function Events() {
   return (
     <main>
       <TopNav sites={sites} navElements={navElements} />
-      <div className="max-w-screen-lg mx-auto px-4 py-[100px]">
+      <div className="mx-auto max-w-screen-lg px-4 py-[100px]">
         <EventsOverview />
       </div>
-
     </main>
   );
 }
