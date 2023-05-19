@@ -91,25 +91,23 @@ const Calendar = ({ events }: Props) => {
             <div className='grow'>
             <Card>
                 <div className='flex justify-center items-center gap-8'>
-                    <div className="bg-ghost-white rounded-full inline-flex w-[30px] justify-center items-center cursor-pointer">
+                    <div onClick={handleClickBack} className="bg-ghost-white rounded-full inline-flex w-[30px] justify-center items-center cursor-pointer">
                         <Image
                             priority
                             src={arrowLeft}
                             alt="Arrow left icon"
                             height={14}
-                            onClick={handleClickBack}
-                            className="m-2"
+                            className="m-2 pr-[1px]"
                         />
                     </div>
                     <h3 className='text-h3'>{activeMonthName} {activeYear}</h3>
-                    <div className="bg-ghost-white rounded-full inline-flex w-[30px] justify-center items-center cursor-pointer">
+                    <div onClick={handleClickForward} className="bg-ghost-white rounded-full inline-flex w-[30px] justify-center items-center cursor-pointer">
                         <Image
                             priority
                             src={arrowRight}
                             alt="Arrow right icon"
                             height={14}
-                            onClick={handleClickForward}
-                            className="m-2"
+                            className="m-2 pl-[1px]"
                         />
                     </div>
                 </div>
