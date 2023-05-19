@@ -1,24 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 
 type Props = {
-  navElements: string[];
+  navElements: { name: string; href: string }[];
 };
 
 const NavigationList = ({ navElements }: Props) => {
-  const [active, setActive] = useState("Events");
+  const pathname = usePathname();
+
   return (
     <ul className="flex gap-4">
-      {navElements.map((navElement) => {
+      {navElements.map(({ name, href }) => {
         return (
           <li
-            key={navElement}
-            onClick={() => setActive(navElement)}
+            key={name}
             className={`${
-              active == navElement && "active border-b-[3px] border-b-dark-gray"
+              pathname == href && "active border-b-[3px] border-b-dark-gray"
             } cursor-pointer px-3 pb-4 text-dark-gray`}
           >
-            {navElement}
+            <Link href={href}>{name}</Link>
           </li>
         );
       })}
