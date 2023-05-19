@@ -49,7 +49,6 @@ async function signup(credentials: {
 export const authOptions = {
   pages: {
     signIn: "/",
-    signOut: "/",
   },
   providers: [
     CredentialsProvider({
