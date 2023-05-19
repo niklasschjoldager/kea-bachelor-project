@@ -8,16 +8,22 @@ import Image from "next/image";
 type Props = {
   title: string;
   buttonText: string;
+  button?: JSX.Element;
   children: ReactNode;
 };
 
-const Modal = ({ title, buttonText, children }: Props) => {
+const Modal = ({ title, buttonText, button, children }: Props) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="px-3 py-2 bg-dark-gray text-white text-button rounded-2">
-          {buttonText}
-        </button>
+        {button ? (
+          button
+        ) : (
+          <button className="px-3 py-2 bg-dark-gray text-white text-button rounded-2">
+            {buttonText}
+          </button>
+        )}
+
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-dark-gray opacity-15 fixed inset-0 pointer-events-none" />

@@ -5,6 +5,8 @@ import ArrowDown from "@/icons/arrow-down-black.svg";
 import ArrowRight from "@/icons/arrow-right.svg";
 import Check from "@/icons/checkmark.svg";
 import * as Select from "@radix-ui/react-select";
+import Modal from "./Modal";
+import SiteForm from "./SiteForm";
 
 type Props = {
   sites: string[];
@@ -54,19 +56,24 @@ const SiteSelector = ({ sites }: Props) => {
                   </Select.Item>
                 );
               })}
-              <a
-                href="#"
-                className="flex justify-between p-2 text-dark-gray bg-ghost-white rounded-2"
-              >
-                Create a new site
-                <Image
-                  priority
-                  src={ArrowRight}
-                  alt="Arrow right"
-                  width={15}
-                  height={15}
-                />
-              </a>
+
+              <Modal
+                title={"Create a new site"}
+                buttonText={"Create a new site"}
+                children={<SiteForm />}
+                button={<button
+                  className="flex justify-between items-center p-2 text-dark-gray bg-ghost-white rounded-2 w-full"
+                >
+                  Create a new site
+                  <Image
+                    priority
+                    src={ArrowRight}
+                    alt="Arrow right"
+                    width={15}
+                    height={15}
+                  />
+                </button>}
+              />
             </Select.Group>
 
             <Select.Separator />
