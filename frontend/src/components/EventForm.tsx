@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Form from "./FormBase";
-import Input from "./Input";
+import Form from "@/components/FormBase";
+import Input from "@/components/Input";
 
 const EventForm = () => {
     const paymentOptions = [
@@ -14,7 +14,7 @@ const EventForm = () => {
 
     const changePayment = (paymentType: string) => {
         setIfPayment(paymentType);
-    }
+    };
 
     return (
         <Form formAction="" submitText="Create event">
@@ -36,9 +36,7 @@ const EventForm = () => {
             {ifPayment == "signup" && (
                 <Input type="number" labelText="Total amount of tickets" inputId="event-ticket-amount" required={true} />
             )}
-
         </Form>
     )
 }
-
 export default EventForm;

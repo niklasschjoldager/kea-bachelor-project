@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
 type Props = {
-    userInitials: string
-}
+  userInitials: string;
+};
 
 const UserIcon = ({ userInitials }: Props) => {
-    return (
-        <div className="rounded-full bg-paynes-gray w-10 h-10 text-white flex items-center justify-center leading-4">
-            {userInitials}
-        </div>
-    )
-}
+  return (
+    <div className="flex items-center justify-center w-10 h-10 leading-4 text-white rounded-full bg-paynes-gray">
+      {userInitials}
+    </div>
+  );
+};
 
 export default UserIcon;
