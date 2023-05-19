@@ -21,7 +21,7 @@ label,
 h1,
 h2,
 h3 {
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   line-height: 24px;
 }
 
@@ -32,7 +32,7 @@ h3 {
 h1,
 h2,
 h3 {
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   line-height: 24px;
 }
 
@@ -42,7 +42,7 @@ h2 {
 
 p,
 label {
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   line-height: 16px;
 }
 

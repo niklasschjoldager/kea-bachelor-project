@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import ArrowDown from "@/public/assets/icons/arrow-down-black.svg";
-import ArrowRight from "@/public/assets/icons/arrow-right.svg";
-import Check from "@/public/assets/icons/checkmark.svg";
+import ArrowDown from "@/icons/arrow-down-black.svg";
+import ArrowRight from "@/icons/arrow-right.svg";
+import Check from "@/icons/checkmark.svg";
 import * as Select from "@radix-ui/react-select";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 const SiteSelector = ({ sites }: Props) => {
   return (
     <Select.Root>
-      <Select.Trigger className="rounded-2 bg-ghost-white py-[6px] px-3 text-dark-gray text-body flex items-center justify-between w-40 truncate group focus:outline-none">
+      <Select.Trigger className="group flex w-40 items-center justify-between truncate rounded-2 bg-ghost-white px-3 py-[6px] text-body text-dark-gray focus:outline-none">
         <Select.Value placeholder="Selected Site" className="" />
         <Select.Icon className="group-aria-expanded:rotate-180 ">
           <Image priority src={ArrowDown} alt="Arrow down" />
@@ -24,9 +24,9 @@ const SiteSelector = ({ sites }: Props) => {
         <Select.Content
           align="start"
           position="popper"
-          className="overflow-hidden bg-white rounded-2 border-[1px] border-card-border shadow-card w-[275px] will-change-[opacity,transform] data-[side=bottom]:animate-slideUpAndFade"
+          className="w-[275px] overflow-hidden rounded-2 border-[1px] border-card-border bg-white shadow-card will-change-[opacity,transform] data-[side=bottom]:animate-slideUpAndFade"
         >
-          <Select.ScrollUpButton className="flex items-center justify-center h-[25px] bg-white cursor-default rotate-180">
+          <Select.ScrollUpButton className="flex h-[25px] rotate-180 cursor-default items-center justify-center bg-white">
             <Image priority src={ArrowDown} alt="Arrow down" />
           </Select.ScrollUpButton>
           <Select.Viewport>
@@ -39,7 +39,7 @@ const SiteSelector = ({ sites }: Props) => {
                   <Select.Item
                     value={site}
                     key={site}
-                    className="text-dark-gray px-2 pb-3 last:pb-0 cursor-pointer flex justify-between items-center hover:outline-none focus:outline-none truncate data-[state=checked]:font-semibold"
+                    className="flex cursor-pointer items-center justify-between truncate px-2 pb-3 text-dark-gray last:pb-0 hover:outline-none focus:outline-none data-[state=checked]:font-semibold"
                   >
                     <Select.ItemText>{site}</Select.ItemText>
                     <Select.ItemIndicator>
@@ -56,7 +56,7 @@ const SiteSelector = ({ sites }: Props) => {
               })}
               <a
                 href="#"
-                className="flex justify-between p-2 text-dark-gray bg-ghost-white rounded-2"
+                className="flex justify-between p-2 rounded-2 bg-ghost-white text-dark-gray"
               >
                 Create a new site
                 <Image
@@ -71,7 +71,7 @@ const SiteSelector = ({ sites }: Props) => {
 
             <Select.Separator />
           </Select.Viewport>
-          <Select.ScrollDownButton className="flex items-center justify-center h-[25px] bg-white cursor-default">
+          <Select.ScrollDownButton className="flex h-[25px] cursor-default items-center justify-center bg-white">
             <Image priority src={ArrowDown} alt="Arrow down" />
           </Select.ScrollDownButton>
           <Select.Arrow />
