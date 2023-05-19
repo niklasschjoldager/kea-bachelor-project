@@ -4,6 +4,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import UserIcon from "@/components/UserIcon";
 import Image from "next/image";
 import ArrowDown from "@/icons/arrow-down-paynes.svg";
+import { signOut } from "next-auth/react";
 
 type Props = {
   userInitials: string;
@@ -33,7 +34,10 @@ const UserSettingsMenu = ({ userInitials }: Props) => {
             align="end"
           >
             <DropdownMenu.Label />
-            <DropdownMenu.Item className="w-40 p-4 cursor-pointer text-dark-gray hover:outline-none">
+            <DropdownMenu.Item
+              className="w-40 p-4 cursor-pointer text-dark-gray hover:outline-none"
+              onClick={() => signOut()}
+            >
               Log out
             </DropdownMenu.Item>
           </DropdownMenu.Content>
