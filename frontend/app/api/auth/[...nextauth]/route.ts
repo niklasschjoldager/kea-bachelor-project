@@ -11,7 +11,7 @@ async function login(credentials: { username: string; password: string }) {
     })
     .join("&");
 
-  const res = await fetch("http://127.0.0.1:8000/token", {
+  const res = await fetch("http://127.0.0.1:8000/login", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: body,
@@ -49,6 +49,7 @@ async function signup(credentials: {
 export const authOptions = {
   pages: {
     signIn: "/",
+    signOut: "/",
   },
   providers: [
     CredentialsProvider({
