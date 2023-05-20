@@ -19,6 +19,9 @@ const TopNav = ({ sites }: Props) => {
     { name: "Integration", href: "/integration" },
   ];
 
+  const name = session?.user?.name?.split(" ");
+  const nameInitials = name ? `${name[0][0]}${name[name.length - 1][0]}` : "";
+
   return (
     <div className="w-full border-b-[1px] border-b-card-border bg-white px-5 pt-5 shadow-card">
       <div className="flex justify-between mb-8">
@@ -26,11 +29,7 @@ const TopNav = ({ sites }: Props) => {
           <Image priority src={Logo} alt="Logo" height={30} />
           <SiteSelector sites={sites} />
         </div>
-        {session?.user?.name ? (
-          <UserSettingsMenu userInitials="SM" />
-        ) : (
-          <p>Loading...</p>
-        )}
+        <UserSettingsMenu userInitials={nameInitials} />
       </div>
       <div>
         <NavigationList navElements={navElements} />
