@@ -1,8 +1,8 @@
-import EventsList from './EventsList'
-import ViewSwitcher from './ViewSwitcher'
-import Modal from './Modal'
-import EventForm from './EventForm'
-import Calender from './calendar/Calendar'
+import EventsList from "@/components/EventsList";
+import ViewSwitcher from "@/components/ViewSwitcher";
+import Modal from "@/components/Modal";
+import EventForm from "@/components/EventForm";
+import Calender from '@/components/calendar/Calendar'
 
 
 const EventsOverview = () => {
@@ -71,5 +71,5 @@ const EventsOverview = () => {
         </>
     )
 }
-
+ 
 export default EventsOverview;
