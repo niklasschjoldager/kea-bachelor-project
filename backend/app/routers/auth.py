@@ -42,7 +42,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     }
 
 
-@router.post("/login", response_model=LoginData)
+@router.post("/token", response_model=LoginData)
 def read_user(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: Session = Depends(get_db),
