@@ -46,6 +46,7 @@ const EventForm = () => {
             <Input type="text" labelText="Title" inputId="event-title" required={true} getData={updateData} />
             <Input type="text" labelText="Short description" inputId="event-short-desc" required={false} getData={updateData} />
             <Input type="longDesc" labelText="Long description" inputId="event-long-desc" required={true} getData={updateData} />
+            <Input type="text" labelText="Location" inputId="event-location" required={true} getData={updateData} />
             <div className="flex gap-5 flex-col md:flex-row">
                 <Input type="time" labelText="Event start date" inputId="event-start-date" required={true} getData={updateData} />
                 <Input type="time" labelText="Event end date" inputId="event-end-date" required={false} getData={updateData} />

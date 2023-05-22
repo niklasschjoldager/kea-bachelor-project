@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ArrowDown from "@/icons/arrow-down-black.svg";
 import ArrowRight from "@/icons/arrow-right.svg";
@@ -9,10 +9,35 @@ import Modal from "./Modal";
 import SiteForm from "./SiteForm";
 
 type Props = {
-  sites: string[];
+  userId: string;
 };
 
-const SiteSelector = ({ sites }: Props) => {
+const SiteSelector = ({ userId }: Props) => {
+
+  const [sites, setSites] = useState([]);
+
+  useEffect(() => {
+    const fetchSites = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/users/${userId}/sites`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch sites');
+        }
+        const data = await response.json();
+        setSites(data);
+
+      } catch (error) {
+        console.error('Error fetching sites:', error);
+      }
+    };
+
+    fetchSites();
+  }, []);
+
+
+  console.log(sites);
+
+
   return (
     <Select.Root>
       <Select.Trigger className="rounded-2 bg-ghost-white py-[6px] px-3 text-dark-gray text-body flex items-center justify-between w-40 truncate group focus:outline-none">
@@ -39,11 +64,11 @@ const SiteSelector = ({ sites }: Props) => {
               {sites.map((site) => {
                 return (
                   <Select.Item
-                    value={site}
-                    key={site}
+                    value={site.id}
+                    key={site.id}
                     className="text-dark-gray px-2 pb-3 last:pb-0 cursor-pointer flex justify-between items-center hover:outline-none focus:outline-none truncate data-[state=checked]:font-semibold"
                   >
-                    <Select.ItemText className="text-body">{site}</Select.ItemText>
+                    <Select.ItemText className="text-body">{site.name}</Select.ItemText>
                     <Select.ItemIndicator>
                       <Image
                         priority
@@ -61,18 +86,19 @@ const SiteSelector = ({ sites }: Props) => {
                 title={"Create a new site"}
                 buttonText={"Create a new site"}
                 children={<SiteForm />}
-                button={<button
-                  className="flex justify-between items-center p-2 text-dark-gray bg-ghost-white rounded-2 w-full"
-                >
-                  Create a new site
-                  <Image
-                    priority
-                    src={ArrowRight}
-                    alt="Arrow right"
-                    width={15}
-                    height={15}
-                  />
-                </button>}
+                button={
+                  <button
+                    className="flex justify-between items-center p-2 text-dark-gray bg-ghost-white rounded-2 w-full"
+                  >
+                    Create a new site
+                    <Image
+                      priority
+                      src={ArrowRight}
+                      alt="Arrow right"
+                      width={15}
+                      height={15}
+                    />
+                  </button>}
               />
             </Select.Group>
 
