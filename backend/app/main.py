@@ -2,9 +2,10 @@ import logging
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from . import models
 from .database import engine
-from .routers import events, users, auth
+from .routers import events, users, auth, sites
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -12,6 +13,19 @@ app = FastAPI()
 app.include_router(auth.router)
 app.include_router(events.router)
 app.include_router(users.router)
+app.include_router(sites.router)
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.exception_handler(RequestValidationError)

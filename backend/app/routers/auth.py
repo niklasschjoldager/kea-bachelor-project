@@ -20,7 +20,7 @@ router = APIRouter(tags=["authentication"])
 @router.post("/signup", response_model=LoginData)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, user.email)
-
+    
     if db_user is not None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
