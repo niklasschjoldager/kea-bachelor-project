@@ -25,6 +25,7 @@ module.exports = {
       h1: "1.875rem",
       h2: "1.5rem",
       h3: "1.125rem",
+      h4: "1rem",
       body: "1rem",
       label: "0.75rem",
       button: "0.875rem",
@@ -37,11 +38,11 @@ module.exports = {
       2: "2px",
       full: "100%",
     },
-    opacity: {
-      75: ".75",
-      60: ".60",
-      15: ".15",
-    },
+    // opacity: {
+    //   75: ".75",
+    //   60: ".60",
+    //   15: ".15",
+    // },
     keyframes: {
       slideUpAndFade: {
         from: { opacity: 0, transform: "translateY(-4px)" },

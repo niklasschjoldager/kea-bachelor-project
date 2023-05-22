@@ -27,9 +27,14 @@ h2 {
   font-weight: 300;
 }
 
+h4 {
+  font-weight: 500;
+}
+
 p,
-label {
-  letter-spacing: 0.4px;
+label,
+h4 {
+  letter-spacing: .4px;
   line-height: 16px;
 }
 

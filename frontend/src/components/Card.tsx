@@ -5,11 +5,11 @@ type Props = {
 };
 
 const Card = ({ children }: Props) => {
-  return (
-    <div className="flex flex-col gap-5 rounded-2 border-[1px] border-card-border bg-white p-6 shadow-card">
-      {children}
-    </div>
-  );
-};
+    return (
+        <div className="bg-white border-[1px] rounded-2 border-card-border shadow-card p-6 flex flex-col gap-6">
+            {children}
+        </div>
+    )
+}
 
 export default Card;
