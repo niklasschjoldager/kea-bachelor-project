@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 
+
 class UserBase(BaseModel):
     email: str
     full_name: str = Field(..., max_length=30)
@@ -23,6 +24,7 @@ class Token(BaseModel):
 
 
 class LoginData(BaseModel):
+    id: int
     access_token: str
     name: str
     email: str
@@ -38,7 +40,7 @@ class SiteBase(BaseModel):
     url: str
 
 
-class Site (SiteBase):
+class Site(SiteBase):
     id: int
 
     class Config:
