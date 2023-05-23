@@ -29,12 +29,8 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 
-def get_sites(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Site).offset(skip).limit(limit).all()
-
-
-def get_sites_by_user(db: Session, user_id: int, skip: int = 0, limit: int = 100):
-    sites = db.query(models.Site).filter(models.Site.owner_id == user_id).offset(skip).limit(limit).all()
+def get_sites_by_user(db: Session, user_id: int):
+    sites = db.query(models.Site).filter(models.Site.owner_id == user_id).all()
     return sites
 
 
