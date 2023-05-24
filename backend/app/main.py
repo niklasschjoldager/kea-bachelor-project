@@ -5,7 +5,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from . import models
 from .database import engine
-from .routers import events, users, auth, sites
+from .routers import events, users, auth
 
 models.Base.metadata.create_all(bind=engine)
 

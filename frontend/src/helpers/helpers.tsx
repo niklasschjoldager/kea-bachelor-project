@@ -45,6 +45,6 @@ export const request = async ({ type, endpoint, session, status, body }: PostPro
 
     } catch (error) {
         console.log("hey im an error!!");
-        console.error("Error fetching sites:", error);
+        console.error("Error fetching:", error);
     }
 }
