@@ -15,7 +15,6 @@ const TopNav = () => {
     { name: "Events", href: "/events" },
     { name: "Integration", href: "/integration" },
   ];
-  const userId = "1"
 
   const name = session?.user?.name?.split(" ");
   const nameInitials = name ? `${name[0][0]}${name[name.length - 1][0]}` : "";
@@ -25,7 +24,7 @@ const TopNav = () => {
       <div className="flex justify-between mb-8">
         <div className="flex gap-4">
           <Image priority src={Logo} alt="Logo" height={30} />
-          <SiteSelector userId={userId} />
+          <SiteSelector/>
         </div>
         <UserSettingsMenu userInitials={nameInitials} />
       </div>

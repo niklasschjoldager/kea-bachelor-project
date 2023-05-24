@@ -35,22 +35,6 @@ class TokenData(BaseModel):
     scopes: list[str] = []
 
 
-class SiteBase(BaseModel):
-    name: str
-    url: str
-
-
-class Site(SiteBase):
-    id: int
-
-    class Config:
-        orm_mode = True
-
-
-class SiteCreate(SiteBase):
-    pass
-
-
 class EventBase(BaseModel):
     title: str
     price: int
