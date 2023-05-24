@@ -3,8 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import Logo from "@/icons/logo.svg";
-import UserSettingsMenu from "@/components/UserSettingsMenu";
-import NavigationList from "@/components/NavigationList";
+import UserSettingsMenu from "@/components/common/UserSettingsMenu";
+import NavigationList from "@/components/ui/NavigationList";
 import { useSession } from "next-auth/react";
 
 const TopNav = () => {

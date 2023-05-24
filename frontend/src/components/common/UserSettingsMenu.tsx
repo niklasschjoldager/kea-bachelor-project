@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import UserIcon from "@/components/UserIcon";
+import UserIcon from "@/components/ui/UserIcon";
 import Image from "next/image";
 import ArrowDown from "@/icons/arrow-down-paynes.svg";
 import { signOut } from "next-auth/react";

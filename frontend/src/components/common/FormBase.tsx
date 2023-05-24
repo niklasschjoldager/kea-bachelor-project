@@ -1,7 +1,7 @@
 "use client";
 import React, { ReactNode, FormEvent } from "react";
 import * as Form from "@radix-ui/react-form";
-import Button from "@/components/Button";
+import Button from "@/components/ui/Button";
 
 type Props = {
   formAction: (event: FormEvent<HTMLFormElement>) => void;
