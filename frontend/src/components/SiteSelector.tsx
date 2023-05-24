@@ -8,6 +8,7 @@ import Check from "@/icons/checkmark.svg";
 import * as Select from "@radix-ui/react-select";
 import Modal from "./Modal";
 import SiteForm from "./SiteForm";
+import { request } from "../helpers/helpers";
 
 type Props = {
   userId: string;
@@ -21,26 +22,30 @@ const SiteSelector = ({ userId }: Props) => {
 
   useEffect(() => {
     const fetchSites = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:8000/sites`, {
-          headers: {
-            Authorization: `Bearer ${session?.user.access_token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch sites");
-        }
-        const data = await response.json();
-        setSites(data);
-      } catch (error) {
-        console.error("Error fetching sites:", error);
-      }
+      // try {
+      //   const response = await fetch(`http://127.0.0.1:8000/sites`, {
+      //     headers: {
+      //       Authorization: `Bearer ${session?.user.access_token}`,
+      //     },
+      //   });
+      //   if (!response.ok) {
+      //     throw new Error("Failed to fetch sites");
+      //   }
+      //   const data = await response.json();
+      //   setSites(data);
+      // } catch (error) {
+      //   console.error("Error fetching sites:", error);
+      // }
+      const response = await request({ type: "GET", endpoint: "/sites", session: session, status: status })
+      setSites(response);
     };
 
-    if (status === "authenticated") {
-      fetchSites();
-    }
-  }, [status, session?.user.access_token]);
+    // if (status === "authenticated") {
+    //   fetchSites();
+    // }
+    fetchSites();
+
+  }, [status, session]);
 
   console.log(sites);
 
@@ -67,7 +72,7 @@ const SiteSelector = ({ userId }: Props) => {
               <Select.Label className="px-2 py-0 pb-3 text-label text-dark-gray opacity-60 last:pb-0">
                 Sites
               </Select.Label>
-              {sites.map((site) => {
+              {sites?.map((site) => {
                 return (
                   <Select.Item
                     value={site.id}

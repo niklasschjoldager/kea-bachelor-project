@@ -1,55 +1,37 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import Form from "@/components/FormBase";
 import Input from "@/components/Input";
+import { request } from "../helpers/helpers";
 import { useSession } from "next-auth/react";
 
 const SiteForm = () => {
-  const [data, setData] = useState({});
+  const [sites, setSites] = useState({});
   const { data: session, status } = useSession();
 
   const updateData = (event: ChangeEvent<HTMLInputElement>) => {
-    setData({
-      ...data,
+    setSites({
+      ...sites,
       [event.target.name]: event.target.value,
     });
   };
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
+  const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(data);
-
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/sites`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.user.access_token}`,
-        },
-        body: JSON.stringify({
-          name: "Cool site",
-          url: "alleroed-vin.dk",
-        }),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch sites");
-      }
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching sites:", error);
-    }
+    console.log(sites);
+    request({ type: "POST", endpoint: "/sites", body: sites, session: session, status: status })
   };
+
 
   return (
     <Form formAction={submit} submitText={"Create site"}>
       <Input
-        inputId={"site-title"}
+        inputId={"name"}
         labelText={"Title"}
         required={true}
         type={"text"}
         getData={updateData}
       />
       <Input
-        inputId={"site-url"}
+        inputId={"url"}
         labelText={"Url"}
         required={true}
         type={"text"}
