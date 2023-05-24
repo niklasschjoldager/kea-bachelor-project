@@ -12,23 +12,9 @@ class User(Base):
     hashed_password = Column(String)
     full_name = Column(String(25))
 
-    sites = relationship("Site", back_populates="owner")
+    event = relationship("Event", back_populates="user")
 
-
-class Site(Base):
-    __tablename__ = "sites"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    url = Column(String)
-
-    owner_id = Column(Integer, ForeignKey("users.id"))
-    owner = relationship("User", back_populates="sites")
-
-    events = relationship("Event", back_populates="site")
-
-    integration = relationship("Integration", back_populates="site")
-
+    integration = relationship("Integration", back_populates="user")
 
 class Event(Base):
     __tablename__ = "events"
@@ -45,10 +31,11 @@ class Event(Base):
     location = Column(String)
     ticket_quantity = Column(Integer)
 
-    site_id = Column(Integer, ForeignKey("sites.id"))
-    site = relationship("Site", back_populates="events")
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User", back_populates="event")
 
     orders = relationship("Order", back_populates="event")
+
 
 
 class Order(Base):
@@ -82,5 +69,5 @@ class Integration(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    site_id = Column(Integer, ForeignKey("sites.id"))
-    site = relationship("Site", back_populates="integration")
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User", back_populates="integration")
