@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Logo from "@/icons/logo.svg";
 import UserSettingsMenu from "@/components/UserSettingsMenu";
-import SiteSelector from "@/components/SiteSelector";
 import NavigationList from "@/components/NavigationList";
 import { useSession } from "next-auth/react";
 
@@ -24,7 +23,6 @@ const TopNav = () => {
       <div className="flex justify-between mb-8">
         <div className="flex gap-4">
           <Image priority src={Logo} alt="Logo" height={30} />
-          <SiteSelector/>
         </div>
         <UserSettingsMenu userInitials={nameInitials} />
       </div>
