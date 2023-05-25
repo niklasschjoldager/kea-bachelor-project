@@ -116,7 +116,7 @@ const Input = ({ inputId, labelText, options, type, changePayment, required, get
           <div className="image-input relative h-28 overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-[1]">
             <img alt="preview image" src={uploadedFile} className="w-full h-full object-cover relative border-2 border-white rounded-2" />
             <div onClick={() => setUploadedFile(null)} className="absolute z-10 top-2 right-2 cursor-pointer p-1 h-6 w-6 rounded-full overflow-hidden inline-flex items-center justify-center group">
-              <div className="w-full h-full opacity-15 absolute group-hover:bg-dark-gray"></div>
+              <div className="w-full h-full opacity-[0.15] absolute group-hover:bg-dark-gray"></div>
               <Image
                 priority
                 src={Close}

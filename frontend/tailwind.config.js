@@ -38,11 +38,6 @@ module.exports = {
       2: "2px",
       full: "100%",
     },
-    // opacity: {
-    //   75: ".75",
-    //   60: ".60",
-    //   15: ".15",
-    // },
     keyframes: {
       slideUpAndFade: {
         from: { opacity: 0, transform: "translateY(-4px)" },

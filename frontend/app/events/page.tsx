@@ -1,5 +1,5 @@
-import TopNav from "@/components/TopNav";
-import EventsOverview from "@/components/EventsOverview";
+import TopNav from "@/components/common/TopNav";
+import EventsOverview from "@/components/views/EventsOverview";
 
 export default async function Events() {
 

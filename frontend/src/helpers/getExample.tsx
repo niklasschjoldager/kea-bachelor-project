@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import { request } from "../helpers/helpers";
+import { request } from "./helpers";
 
 const SiteSelector = () => {
   const [sites, setSites] = useState([]);
