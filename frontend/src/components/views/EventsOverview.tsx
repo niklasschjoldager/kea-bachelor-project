@@ -1,7 +1,7 @@
-import EventsList from "@/components/EventsList";
-import ViewSwitcher from "@/components/ViewSwitcher";
-import Modal from "@/components/Modal";
-import EventForm from "@/components/EventForm";
+import EventsList from "@/components/common/EventsList";
+import ViewSwitcher from "@/components/ui/ViewSwitcher";
+import Modal from "@/components/ui/Modal";
+import EventForm from "@/components/forms/EventForm";
 import Calender from '@/components/calendar/Calendar'
 
 
@@ -55,7 +55,7 @@ const EventsOverview = () => {
     ]
 
 
-    const views = [{text: 'List', icon: 'list', position: 'left'}, {text: 'Calendar', icon: 'calendar', position: 'right'}]
+    const views = [{ text: 'List', icon: 'list', position: 'left' }, { text: 'Calendar', icon: 'calendar', position: 'right' }]
     return (
         <>
             <div className='flex justify-between items-center mb-8'>
@@ -64,12 +64,12 @@ const EventsOverview = () => {
             </div>
             <div className='flex justify-between items-end mb-6'>
                 <h2 className='text-h2 text-slate-gray leading-none'>May</h2>
-                <ViewSwitcher views={views}/>
+                <ViewSwitcher views={views} />
             </div>
             {/* <EventsList events={events} /> */}
-            <Calender events={events}/>
+            <Calender events={events} />
         </>
     )
 }
- 
+
 export default EventsOverview;

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, FormEvent, ChangeEvent } from "react";
-import Form from "@/components/FormBase";
-import Input from "@/components/Input";
+import Form from "@/components/common/FormBase";
+import Input from "@/components/ui/Input";
 
 const EventForm = () => {
     const paymentOptions = [

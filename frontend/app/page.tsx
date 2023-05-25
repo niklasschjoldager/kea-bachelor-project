@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import SignInForm from "@/components/SignInForm";
+import SignInForm from "@/components/forms/SignInForm";
 import Link from "next/link";
 
 export default async function Home() {
