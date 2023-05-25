@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 async function login(credentials: { username: string; password: string }) {
@@ -11,11 +12,14 @@ async function login(credentials: { username: string; password: string }) {
     })
     .join("&");
 
-  const res = await fetch("http://127.0.0.1:8000/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: body,
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"}/token`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body,
+    }
+  );
 
   const user = await res.json();
 
@@ -31,13 +35,16 @@ async function signup(credentials: {
   password: string;
   full_name: string;
 }) {
-  const res = await fetch("http://127.0.0.1:8000/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"}/signup`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    }
+  );
 
   const user = await res.json();
 
@@ -48,7 +55,7 @@ async function signup(credentials: {
   return null;
 }
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/",
   },
@@ -90,6 +97,7 @@ export const authOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
+      // @ts-ignore // Fix next auth types later
       session.user = token.user;
       return session;
     },
