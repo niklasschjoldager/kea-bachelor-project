@@ -32,7 +32,7 @@ const ViewSwitcher = ({ views }: Props) => {
           >
             <Image
               priority
-              src={require(`../../public/assets/icons/${view.icon}.svg`)}
+              src={require(`../../../public/assets/icons/${view.icon}.svg`)}
               alt={`${view.text} icon`}
               width={15}
               height={15}

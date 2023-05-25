@@ -5,6 +5,7 @@ type PostProps = {
     // Session and status should come from a global useSession
     session: any
     status: any
+    // ^^Needs the right types
 }
 
 export function addLeadingZero(value: number | string) {
