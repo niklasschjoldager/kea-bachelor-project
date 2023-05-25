@@ -13,7 +13,7 @@ type Props = {
 const UserSettingsMenu = ({ userInitials }: Props) => {
   return (
     <div>
-      <DropdownMenu.Root align="right">
+      <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button className="flex items-center gap-2 group focus:outline-none">
             <UserIcon userInitials={userInitials} />
