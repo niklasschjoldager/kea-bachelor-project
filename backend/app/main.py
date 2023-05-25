@@ -17,7 +17,7 @@ app.include_router(users.router)
 origins = [
     "http://localhost:3000",
     "http://localhost:8000",
-    "https://eventel-1-z8790677.deta.app/",
+    "https://kea-bachelor-project.vercel.app/",
 ]
 
 app.add_middleware(
