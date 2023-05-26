@@ -1,3 +1,4 @@
+from typing import Union
 from pydantic import BaseModel, Field
 from datetime import datetime
 
@@ -31,7 +32,7 @@ class LoginData(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str | None = None
+    username: Union[str, None] = None
     scopes: list[str] = []
 
 
