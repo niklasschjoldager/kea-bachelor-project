@@ -29,7 +29,7 @@ class Event(Base):
     endDate = Column(DateTime)
     created_at = Column(DateTime)
     location = Column(String)
-    ticket_quantity = Column(Integer)
+    ticket_quantity = Column(Integer, nullable=True, default=None)
 
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("User", back_populates="event")
@@ -46,7 +46,9 @@ class Order(Base):
     email = Column(String(255))
     phone_number = Column(String)
     created_at = Column(DateTime)
-    status = Column(String)
+    status = Column(String, default="pending")
+    ticket_amount = Column(Integer)
+    total_price = Column(Integer)
 
     event_id = Column(Integer, ForeignKey("events.id"))
     event = relationship("Event", back_populates="orders")
