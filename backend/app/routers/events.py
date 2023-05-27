@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from app import crud
@@ -16,7 +16,7 @@ def get_events(user_id, db: Session = Depends(get_db)):
 
     if events is None:
         raise HTTPException(status_code=404, detail="No events for this user")
-    
+
     return events
 
 
@@ -26,11 +26,14 @@ def get_event(user_id, event_id, db: Session = Depends(get_db)):
 
     if events is None:
         raise HTTPException(status_code=404, detail="No events for this user")
-    
+
     return events
 
 
 @router.post("/events")
-def create_event(current_user: Annotated[User, Depends(get_current_user)], event: EventCreate, db: Session = Depends(get_db)):
-
+def create_event(
+    current_user: Annotated[User, Depends(get_current_user)],
+    event: EventCreate,
+    db: Session = Depends(get_db),
+):
     return crud.create_event(db=db, event=event, user_id=current_user.id)
