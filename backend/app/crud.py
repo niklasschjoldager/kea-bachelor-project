@@ -42,7 +42,7 @@ def get_events(db: Session, user_id: int):
 
 
 def get_event(db: Session, user_id: int, event_id: int):
-    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).all()
+    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
     return event
 
 
@@ -60,5 +60,23 @@ def get_orders(db: Session, event_id: int):
 
 
 def get_order(db: Session, order_id: int, event_id: int):
-    order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).all()
+    order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).first()
     return order
+
+
+def create_ticket(db: Session, ticket: schemas.TicketCreate, order_id: int):
+    db_ticket = models.Ticket(**ticket.dict(), order_id=order_id)
+    db.add(db_ticket)
+    db.commit()
+    db.refresh(db_ticket)
+    return db_ticket
+
+
+def get_tickets(db: Session, order_id: int):
+    tickets = db.query(models.Ticket).filter(models.Ticket.order_id == order_id).all()
+    return tickets
+
+
+def get_ticket(db: Session, order_id: int, ticket_id: int):
+    ticket = db.query(models.Ticket).filter(models.Ticket.order_id == order_id).filter(models.Ticket.id == ticket_id).first()
+    return ticket
