@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from app import crud
-from app.schemas import Event, User, EventCreate
+from app.schemas import User, EventCreate
 from app.dependencies import get_db
 from app.auth import get_current_user
 from typing import Annotated
