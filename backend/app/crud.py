@@ -35,6 +35,30 @@ def create_event(db: Session, event: schemas.EventCreate, user_id: int):
     db.refresh(db_event)
     return db_event
 
+
 def get_events(db: Session, user_id: int):
     events = db.query(models.Event).filter(models.Event.user_id == user_id).all()
     return events
+
+
+def get_event(db: Session, user_id: int, event_id: int):
+    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).all()
+    return event
+
+
+def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
+    db_order = models.Order(**order.dict(), event_id=event_id)
+    db.add(db_order)
+    db.commit()
+    db.refresh(db_order)
+    return db_order
+
+
+def get_orders(db: Session, event_id: int):
+    orders = db.query(models.Order).filter(models.Order.event_id == event_id).all()
+    return orders
+
+
+def get_order(db: Session, order_id: int, event_id: int):
+    order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).all()
+    return order

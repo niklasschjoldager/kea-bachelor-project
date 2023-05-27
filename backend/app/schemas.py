@@ -58,3 +58,21 @@ class Event(EventBase):
 
     class Config:
         orm_mode = True
+
+class OrderBase(BaseModel):
+    email: str
+    full_name: str = Field(..., max_length=30)
+    phone_number: int
+    created_at: datetime
+    status: str
+
+
+class OrderCreate(OrderBase):
+    pass
+
+
+class Order(OrderBase):
+    id: int
+
+    class Config:
+        orm_mode = True
