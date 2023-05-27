@@ -5,7 +5,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from . import models
 from .database import engine
-from .routers import events, users, auth, orders
+from .routers import events, users, auth, orders, tickets
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -14,6 +14,7 @@ app.include_router(auth.router)
 app.include_router(events.router)
 app.include_router(users.router)
 app.include_router(orders.router)
+app.include_router(tickets.router)
 
 origins = [
     "http://localhost:3000",
