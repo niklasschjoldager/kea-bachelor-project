@@ -10,9 +10,19 @@ from typing import Annotated
 router = APIRouter(tags=["events"])
 
 
-@router.get("/events")
-def get_events(current_user: Annotated[User, Depends(get_current_user)], db: Session = Depends(get_db)):
-    events = crud.get_events(db, user_id=current_user.id)
+@router.get("/users/{user_id}/events")
+def get_events(user_id, db: Session = Depends(get_db)):
+    events = crud.get_events(db, user_id)
+
+    if events is None:
+        raise HTTPException(status_code=404, detail="No events for this user")
+    
+    return events
+
+
+@router.get("/users/{user_id}/events/{event_id}")
+def get_event(user_id, event_id, db: Session = Depends(get_db)):
+    events = crud.get_event(db, user_id, event_id)
 
     if events is None:
         raise HTTPException(status_code=404, detail="No events for this user")

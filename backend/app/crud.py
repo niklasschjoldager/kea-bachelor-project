@@ -35,6 +35,12 @@ def create_event(db: Session, event: schemas.EventCreate, user_id: int):
     db.refresh(db_event)
     return db_event
 
+
 def get_events(db: Session, user_id: int):
     events = db.query(models.Event).filter(models.Event.user_id == user_id).all()
     return events
+
+
+def get_event(db: Session, user_id: int, event_id: int):
+    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).all()
+    return event
