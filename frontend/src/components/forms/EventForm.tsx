@@ -33,7 +33,6 @@ const EventForm = () => {
         event.preventDefault()
 
         const response = request({ type: "POST", endpoint: "/events", body: data, session: session, status: status })
-        console.log(response)
     }
 
     const handleSelectChange = (value: string) => {

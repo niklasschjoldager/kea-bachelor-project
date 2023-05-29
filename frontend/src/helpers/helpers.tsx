@@ -46,7 +46,7 @@ export const request = async ({
       throw new Error("Failed to fetch");
     }
     const data = await response.json();
-    console.log(data);
+    console.log(data, 'data !');
     return {
       "data": data,
       "response": response

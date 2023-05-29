@@ -12,6 +12,7 @@ import { request } from "../../helpers/helpers";
 const EventsOverview = () => {
   const [events, setEvents] = useState([]);
   const { data: session, status } = useSession();
+  const user_id = session?.user.id;
 
   const [activeView, setActiveView] = useState('List');
 
@@ -21,8 +22,8 @@ const EventsOverview = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await request({ type: "GET", endpoint: "/events", session: session, status: status })
-      setEvents(response);
+      const response = await request({ type: "GET", endpoint: `/users/${user_id}/events`, session: session, status: status })
+      setEvents(response?.data);
     };
     fetchEvents();
     
