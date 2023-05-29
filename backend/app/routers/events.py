@@ -37,3 +37,12 @@ def create_event(
     db: Session = Depends(get_db),
 ):
     return crud.create_event(db=db, event=event, user_id=current_user.id)
+
+
+@router.delete("/events/{event_id}")
+def delete_event(
+    event_id,
+    current_user: Annotated[User, Depends(get_current_user)],
+    db: Session = Depends(get_db),
+):
+    return crud.delete_event(db, user_id=current_user.id, event_id=event_id)

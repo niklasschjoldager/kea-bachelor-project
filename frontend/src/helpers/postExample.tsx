@@ -14,7 +14,7 @@ const SiteForm = () => {
   };
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(sites);
+    // console.log(sites);
     request({ type: "POST", endpoint: "/sites", body: sites, session: session, status: status })
   };
 };

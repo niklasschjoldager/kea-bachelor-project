@@ -1,6 +1,8 @@
+import { useState } from "react";
+
 type PostProps = {
   endpoint: string;
-  type: "GET" | "POST";
+  type: "GET" | "POST" | "DELETE";
   body?: Object;
   // Session and status should come from a global useSession
   session: any;
@@ -26,11 +28,10 @@ export const request = async ({
   if (status !== "authenticated") {
     return;
   }
-  console.log({ type, endpoint, session, status, body });
+  console.log(body, ' body');
   try {
     const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
+      `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
       }${endpoint}`,
       {
         method: type,
@@ -45,12 +46,31 @@ export const request = async ({
       throw new Error("Failed to fetch");
     }
     const data = await response.json();
-    console.log(data);
-    if (type == "GET") {
-      return data;
+    console.log(data, 'data !');
+    return {
+      "data": data,
+      "response": response
     }
+
+
   } catch (error) {
-    console.log("hey im an error!!");
     console.error("Error fetching:", error);
   }
 };
+
+export function convertToDate(datetime: string){
+  const date = datetime.split('T')[0]
+  const year = date.split('-')[0]
+  const month = date.split('-')[1]
+  const day = date.split('-')[2]
+
+  return `${day}/${month}/${year}`
+}
+
+export function convertToTime(datetime: string){
+  const date = datetime.split('T')[1]
+  const hour = date.split(':')[0]
+  const minuttes = date.split(':')[1]
+
+  return `${hour}:${minuttes}`
+}

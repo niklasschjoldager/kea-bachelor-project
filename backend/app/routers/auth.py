@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from typing import Annotated
 
 from app import crud
-from app.schemas import UserCreate, User, Token, LoginData
+from app.schemas import UserCreate, User, LoginData
 from app.dependencies import get_db
 from app.auth import (
     authenticate_user,
@@ -69,8 +69,3 @@ def read_user(
         "email": user.email,
         "id": user.id,
     }
-
-
-@router.get("/users/me", response_model=User)
-async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
-    return current_user

@@ -7,18 +7,18 @@ const SiteSelector = () => {
   const [sites, setSites] = useState([]);
   const { data: session, status } = useSession();
 
-  console.log({ session, status });
+  // console.log({ session, status });
 
   useEffect(() => {
     const fetchSites = async () => {
       const response = await request({ type: "GET", endpoint: "/sites", session: session, status: status })
-      setSites(response);
+      setSites(response?.data);
     };
     fetchSites();
 
   }, [status, session]);
 
-  console.log(sites);
+  // console.log(sites);
 
 };
 export default SiteSelector;

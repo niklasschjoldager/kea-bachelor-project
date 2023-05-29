@@ -1,4 +1,6 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import func
+from fastapi import HTTPException
 
 from app import models, schemas
 from app.auth import get_password_hash
@@ -42,15 +44,42 @@ def get_events(db: Session, user_id: int):
 
 
 def get_event(db: Session, user_id: int, event_id: int):
-    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).all()
+    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
     return event
 
 
+def delete_event(db: Session, user_id: int, event_id: int):
+    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
+    db.delete(event)
+    db.commit()
+    return {"ok": True}
+
+
 def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
-    db_order = models.Order(**order.dict(), event_id=event_id)
+    event = db.query(models.Event).filter(models.Event.id == event_id).first()
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found")
+    
+    # check the ticket availability if there is one on the event
+    if event.ticket_quantity is not None:
+        sold_tickets = db.query(func.sum(models.Order.ticket_amount)).filter(models.Order.event_id == event_id).scalar()
+        remaining_tickets = event.ticket_quantity - (sold_tickets or 0)
+
+        if order.ticket_amount > remaining_tickets:
+            raise HTTPException(status_code=400, detail="Insufficient ticket quantity available")
+
+    db_order = models.Order(
+        **order.dict(), 
+        event_id=event_id
+        )
+    
+    # Update total_price on order based on event price
+    db_order.total_price = db_order.ticket_amount * event.price
+
     db.add(db_order)
     db.commit()
     db.refresh(db_order)
+
     return db_order
 
 
@@ -60,5 +89,5 @@ def get_orders(db: Session, event_id: int):
 
 
 def get_order(db: Session, order_id: int, event_id: int):
-    order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).all()
+    order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).first()
     return order

@@ -46,7 +46,7 @@ class EventBase(BaseModel):
     endDate: datetime
     created_at: datetime
     location: str
-    ticket_quantity: int
+    ticket_quantity: Union[int, None] = None
 
 
 class EventCreate(EventBase):
@@ -64,15 +64,15 @@ class OrderBase(BaseModel):
     full_name: str = Field(..., max_length=30)
     phone_number: int
     created_at: datetime
-    status: str
-
 
 class OrderCreate(OrderBase):
-    pass
+    ticket_amount: int
 
 
 class Order(OrderBase):
     id: int
+    status: str
+    total_price: int
 
     class Config:
         orm_mode = True

@@ -33,7 +33,7 @@ const Input = ({ inputId, labelText, options, type, changePayment, required, get
     if (event.target.files && event.target.files[0]) {
       setUploadedFile(URL.createObjectURL(event.target.files[0]));
     }
-    console.log(uploadedFile);
+    // console.log(uploadedFile);
   }
 
   switch (type) {
@@ -104,13 +104,13 @@ const Input = ({ inputId, labelText, options, type, changePayment, required, get
       {type == "file" && (
         !uploadedFile ? (
           <Form.Label htmlFor={inputId} className="cursor-pointer image-input h-28">
-            <div className="flex flex-col items-center justify-center h-full p-5 gap-5">
+            <div className="flex flex-col items-center justify-center h-full p-5 gap-2">
               <Image
                 priority
                 src={Upload}
                 alt="Upload"
               />
-              <p className="text-body text-slate-gray">Drag and drop or click to upload file</p>
+              <p className="text-label text-slate-gray">Drag and drop or click to upload file</p>
             </div>
           </Form.Label>) : (
           <div className="image-input relative h-28 overflow-hidden before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-[1]">
