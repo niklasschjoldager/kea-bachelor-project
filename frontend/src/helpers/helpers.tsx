@@ -26,7 +26,7 @@ export const request = async ({
   if (status !== "authenticated") {
     return;
   }
-  console.log({ type, endpoint, session, status, body });
+  console.log(body, ' body');
   try {
     const response = await fetch(
       `${
@@ -45,12 +45,29 @@ export const request = async ({
       throw new Error("Failed to fetch");
     }
     const data = await response.json();
-    console.log(data);
+    console.log(response, 'response');
+    console.log(data, 'data');
     if (type == "GET") {
       return data;
     }
   } catch (error) {
-    console.log("hey im an error!!");
     console.error("Error fetching:", error);
   }
 };
+
+export function convertToDate(datetime: string){
+  const date = datetime.split('T')[0]
+  const year = date.split('-')[0]
+  const month = date.split('-')[1]
+  const day = date.split('-')[2]
+
+  return `${day}/${month}/${year}`
+}
+
+export function convertToTime(datetime: string){
+  const date = datetime.split('T')[1]
+  const hour = date.split(':')[0]
+  const minuttes = date.split(':')[1]
+
+  return `${hour}:${minuttes}`
+}

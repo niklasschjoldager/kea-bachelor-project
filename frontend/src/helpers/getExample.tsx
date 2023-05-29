@@ -7,7 +7,7 @@ const SiteSelector = () => {
   const [sites, setSites] = useState([]);
   const { data: session, status } = useSession();
 
-  console.log({ session, status });
+  // console.log({ session, status });
 
   useEffect(() => {
     const fetchSites = async () => {
@@ -18,7 +18,7 @@ const SiteSelector = () => {
 
   }, [status, session]);
 
-  console.log(sites);
+  // console.log(sites);
 
 };
 export default SiteSelector;

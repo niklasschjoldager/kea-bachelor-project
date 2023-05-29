@@ -4,7 +4,7 @@ export default async function Integration() {
   return (
     <main>
       <TopNav />
-      <div className="mx-auto max-w-screen-lg px-4 py-[100px]">
+      <div className="mx-auto max-w-screen-xl px-4 py-[100px]">
         <h1 className="text-h1">Integration page</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

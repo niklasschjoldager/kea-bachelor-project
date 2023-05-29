@@ -78,7 +78,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials) return null;
-        console.log("Creds", credentials);
+        // console.log("Creds", credentials);
 
         if (JSON.parse(credentials.isNewUser)) {
           return await signup({
