@@ -1,5 +1,4 @@
 import Card from "../ui/Card";
-import CardDivider from "../ui/CardDivider";
 import { Order } from '@/app/events/[event_id]/page';
 import StatusElement from "../ui/StatusElement";
 

@@ -53,19 +53,6 @@ class Order(Base):
     event_id = Column(Integer, ForeignKey("events.id"))
     event = relationship("Event", back_populates="orders")
 
-    tickets = relationship("Ticket", back_populates="order")
-
-
-class Ticket(Base):
-    __tablename__ = "tickets"
-
-    id = Column(Integer, primary_key=True, index=True)
-    price = Column(Integer)
-
-    order_id = Column(Integer, ForeignKey("orders.id"))
-    order = relationship("Order", back_populates="tickets")
-
-
 class Integration(Base):
     __tablename__ = "integrations"
 

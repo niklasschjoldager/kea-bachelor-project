@@ -6,7 +6,6 @@ import { request } from '@/src/helpers/helpers';
 import TopNav from "@/components/common/TopNav";
 import OrdersList from "@/components/views/OrdersList"
 import Button from '@/components/ui/Button';
-import ViewSwitcher from '@/components/ui/ViewSwitcher';
 
 type Event = {
     id: number
@@ -40,24 +39,20 @@ export type Order = {
     total_price: number
 }
 
-export function Page() {
+export default function Orders() {
     const params = useParams();
     const event_id = params.event_id;
     const { data: session, status } = useSession();
     const user_id = session?.user.id;
-    const views = [
-        { text: "Attendees" },
-        { text: "Orders" },
-    ];
-    const endpoints: Endpoint[] = [
-        { "setter": "setEvent", "url": `/users/${user_id}/events/${event_id}` },
-        { "setter": "setOrders", "url": `/events/${event_id}/orders` },
-    ]
 
     const [event, setEvent] = useState<Event | null>(null);
     const [orders, setOrders] = useState<Order[]>([])
 
     useEffect(() => {
+        const endpoints: Endpoint[] = [
+            { "setter": "setEvent", "url": `/users/${user_id}/events/${event_id}` },
+            { "setter": "setOrders", "url": `/events/${event_id}/orders` },
+        ]
         const fetchData = async (endpoints: Endpoint[]) => {
             endpoints.forEach(async endpoint => {
                 const response = await request({ type: "GET", endpoint: endpoint.url, session: session, status: status })
@@ -71,12 +66,11 @@ export function Page() {
                         break;
                 }
             });
-
         };
 
         fetchData(endpoints);
 
-    }, [status, session]);
+    }, [status, session, event_id, user_id]);
 
     console.log(event, "event");
     console.log(orders, "orders");
@@ -94,12 +88,8 @@ export function Page() {
                                     <Button buttonText={'Delete event'} />
                                     <Button buttonText={'Update event'} />
                                 </div>
-
                             </div>
-                            <div className='flex justify-between mb-4'>
-                                <h2 className='text-h2 text-slate-gray'>Orders</h2>
-                                <ViewSwitcher views={views} />
-                            </div>
+                            <h2 className='text-h2 mb-4 text-slate-gray'>Orders</h2>
                             <OrdersList orders={orders} />
                         </>
                     ) : (
@@ -110,7 +100,4 @@ export function Page() {
             </div>
         </main>
     )
-
 }
-
-export default Page;

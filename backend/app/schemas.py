@@ -76,17 +76,3 @@ class Order(OrderBase):
 
     class Config:
         orm_mode = True
-
-class TicketBase(BaseModel):
-    price: int
-
-
-class TicketCreate(TicketBase):
-    pass
-
-
-class Ticket(TicketBase):
-    id: int
-
-    class Config:
-        orm_mode = True
