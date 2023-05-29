@@ -1,6 +1,8 @@
+import { useState } from "react";
+
 type PostProps = {
   endpoint: string;
-  type: "GET" | "POST";
+  type: "GET" | "POST" | "DELETE";
   body?: Object;
   // Session and status should come from a global useSession
   session: any;
@@ -29,8 +31,7 @@ export const request = async ({
   console.log(body, ' body');
   try {
     const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
+      `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
       }${endpoint}`,
       {
         method: type,
@@ -45,11 +46,13 @@ export const request = async ({
       throw new Error("Failed to fetch");
     }
     const data = await response.json();
-    console.log(response, 'response');
-    console.log(data, 'data');
-    if (type == "GET") {
-      return data;
+    console.log(data);
+    return {
+      "data": data,
+      "response": response
     }
+
+
   } catch (error) {
     console.error("Error fetching:", error);
   }

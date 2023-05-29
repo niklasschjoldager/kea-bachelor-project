@@ -7,8 +7,8 @@ type Props = {
   updateView: (value: string) => void,
   views: {
     text: string;
-    icon: string;
-    position: string;
+    icon?: string;
+    position?: string;
   }[];
 };
 
@@ -32,13 +32,16 @@ const ViewSwitcher = ({ views, updateView }: Props) => {
             className="inline-flex grow items-center gap-2 px-3 py-2 transition data-[state=on]:pointer-events-none data-[state=on]:bg-white data-[state=on]:shadow-switcher"
             value={view.text}
           >
-            <Image
-              priority
-              src={require(`../../../public/assets/icons/${view.icon}.svg`)}
-              alt={`${view.text} icon`}
-              width={15}
-              height={15}
-            />
+            {view.icon && (
+              <Image
+                priority
+                src={require(`../../../public/assets/icons/${view.icon}.svg`)}
+                alt={`${view.text} icon`}
+                width={15}
+                height={15}
+              />
+            )}
+
             <span className="mt-[1px] text-button leading-none">
               {view.text}
             </span>

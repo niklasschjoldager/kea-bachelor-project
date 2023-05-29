@@ -17,6 +17,9 @@ module.exports = {
       "dark-gray-faded": "#121e26bf",
       "card-border": "#E9EDF0",
       "input-border": "#D5DDE3",
+      "success": "#95CB8C",
+      "pending": "#E8CC80",
+      "failed": "#D35F4F",
     },
     fontFamily: {
       sans: ["Heebo", "sans-serif"],
