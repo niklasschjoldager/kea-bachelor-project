@@ -11,8 +11,8 @@ const OrdersList = ({ orders }: Props) => {
         <Card>
             {orders?.length > 0 ? (
                 <table>
-                    <thead>
-                        <tr className="text-body border-b border-card-border !font-semibold [&>*]:pb-6 [&>*]:whitespace-nowrap [&>*]:pr-8 [&>*]:text-left">
+                    <tbody>
+                        <tr className="text-body border-b border-card-border font-medium [&>*]:pb-6 [&>*]:whitespace-nowrap [&>*]:pr-8 [&>*]:text-left">
                             <th>Full name</th>
                             <th>Order created</th>
                             <th>Ticket amount</th>
@@ -20,7 +20,7 @@ const OrdersList = ({ orders }: Props) => {
                             <th>Order number</th>
                             <th>Payment state</th>
                         </tr>
-                    </thead>
+                    </tbody>
 
                     {orders.map((order, i) => {
                         const date = new Date(`${order.created_at}`).toDateString()

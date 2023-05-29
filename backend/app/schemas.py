@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union
 from pydantic import BaseModel, Field
 from datetime import datetime
 
@@ -46,7 +46,7 @@ class EventBase(BaseModel):
     endDate: datetime
     created_at: datetime
     location: str
-    ticket_quantity: Optional[int]
+    ticket_quantity: Union[int, None] = None
 
 
 class EventCreate(EventBase):

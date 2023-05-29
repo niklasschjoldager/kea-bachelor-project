@@ -1,6 +1,5 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship
-
 from .database import Base
 
 
@@ -35,7 +34,6 @@ class Event(Base):
     user = relationship("User", back_populates="event")
 
     orders = relationship("Order", back_populates="event")
-
 
 
 class Order(Base):

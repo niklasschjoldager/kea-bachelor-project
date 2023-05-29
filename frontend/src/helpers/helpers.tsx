@@ -1,6 +1,8 @@
+import { useState } from "react";
+
 type PostProps = {
   endpoint: string;
-  type: "GET" | "POST";
+  type: "GET" | "POST" | "DELETE";
   body?: Object;
   // Session and status should come from a global useSession
   session: any;
@@ -45,9 +47,12 @@ export const request = async ({
     }
     const data = await response.json();
     console.log(data);
-    if (type == "GET") {
-      return data;
+    return {
+      "data": data,
+      "response": response
     }
+
+
   } catch (error) {
     console.log("hey im an error!!");
     console.error("Error fetching:", error);

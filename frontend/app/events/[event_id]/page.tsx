@@ -2,6 +2,7 @@
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRouter } from "next/navigation"
 import { request } from '@/src/helpers/helpers';
 import TopNav from "@/components/common/TopNav";
 import OrdersList from "@/components/views/OrdersList"
@@ -44,6 +45,7 @@ export default function Orders() {
     const event_id = params.event_id;
     const { data: session, status } = useSession();
     const user_id = session?.user.id;
+    const router = useRouter()
 
     const [event, setEvent] = useState<Event | null>(null);
     const [orders, setOrders] = useState<Order[]>([])
@@ -56,13 +58,14 @@ export default function Orders() {
         const fetchData = async (endpoints: Endpoint[]) => {
             endpoints.forEach(async endpoint => {
                 const response = await request({ type: "GET", endpoint: endpoint.url, session: session, status: status })
+                console.log("response", response)
                 switch (endpoint.setter) {
                     case "setEvent":
-                        setEvent(response);
+                        setEvent(response?.data);
                         break;
 
                     case "setOrders":
-                        setOrders(response)
+                        setOrders(response?.data)
                         break;
                 }
             });
@@ -75,6 +78,11 @@ export default function Orders() {
     console.log(event, "event");
     console.log(orders, "orders");
 
+    const deleteEvent = async () => {
+        const response = await request({ type: "DELETE", endpoint: `/events/${event_id}`, session: session, status: status })
+        if (response?.response.ok) { router.push("/events") }
+    }
+
     return (
         <main>
             <TopNav />
@@ -85,7 +93,7 @@ export default function Orders() {
                             <div className='flex flex-col md:flex-row justify-between mb-9'>
                                 <h1 className='text-h1 pb-3 md:pb-0'>{event.title}</h1>
                                 <div className='flex gap-3'>
-                                    <Button buttonText={'Delete event'} />
+                                    <Button buttonText={'Delete event'} onClick={() => deleteEvent()} />
                                     <Button buttonText={'Update event'} />
                                 </div>
                             </div>
