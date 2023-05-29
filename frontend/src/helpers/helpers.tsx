@@ -29,8 +29,7 @@ export const request = async ({
   console.log({ type, endpoint, session, status, body });
   try {
     const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
+      `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
       }${endpoint}`,
       {
         method: type,
