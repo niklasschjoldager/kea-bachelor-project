@@ -12,7 +12,7 @@ const SiteSelector = () => {
   useEffect(() => {
     const fetchSites = async () => {
       const response = await request({ type: "GET", endpoint: "/sites", session: session, status: status })
-      setSites(response);
+      setSites(response?.data);
     };
     fetchSites();
 

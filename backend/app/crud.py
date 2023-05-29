@@ -48,6 +48,13 @@ def get_event(db: Session, user_id: int, event_id: int):
     return event
 
 
+def delete_event(db: Session, user_id: int, event_id: int):
+    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
+    db.delete(event)
+    db.commit()
+    return {"ok": True}
+
+
 def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
     event = db.query(models.Event).filter(models.Event.id == event_id).first()
     if not event:
