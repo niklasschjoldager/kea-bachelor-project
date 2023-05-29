@@ -41,6 +41,10 @@ module.exports = {
       2: "2px",
       full: "100%",
     },
+    maxWidth: {
+      'lg': '1200px',
+      'modal': '800px'
+    },
     keyframes: {
       slideUpAndFade: {
         from: { opacity: 0, transform: "translateY(-4px)" },

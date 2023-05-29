@@ -1,57 +1,33 @@
+"use client";
 import EventsList from "@/components/common/EventsList";
 import ViewSwitcher from "@/components/ui/ViewSwitcher";
 import Modal from "@/components/ui/Modal";
 import EventForm from "@/components/forms/EventForm";
 import Calender from "@/components/calendar/Calendar";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { request } from "../../helpers/helpers";
+
 
 const EventsOverview = () => {
-  const events = [
-    {
-      title: "Vinfestival",
-      short_desc:
-        "Så slår vi igen pavillonerne op i vores gårdhave og inviterer nogle af vores producenter herop. Kom og mød de dejlige mennesker, der laver vinene, og smag på varerne.",
-      date: "12/04/2023",
-      time: "16:00 - 23:00",
-      address: "Prins Valdemars Alle 5C, 3450 Allerød",
-      image_path: "image_1",
-    },
-    {
-      title: "Wine & Dine på Espehus Kro",
-      short_desc:
-        "Vi gentager succesen fra sidste år og teamer endnu engang op med Espehus Kro for en mindeværdig wine & dine aften, denne gang med vine fra både Di Meo og Marion.",
-      date: "12/04/2023",
-      time: "16:00 - 23:00",
-      address: "Prins Valdemars Alle 5C, 3450 Allerød",
-      image_path: "image_2",
-    },
-    {
-      title: "Kældersmagning deluxe",
-      short_desc:
-        "Så er der igen linet op til en af de rigtig gode aftener. Her kommer de store og sjældne vine frem fra kælderen. Og vi har et par spændende nyheder med her også...",
-      date: "04/07/2023",
-      time: "16:00 - 23:00",
-      address: "Prins Valdemars Alle 5C, 3450 Allerød",
-      image_path: "image_3",
-    },
-    {
-      title: "Vinfestival",
-      short_desc:
-        "Så slår vi igen pavillonerne op i vores gårdhave og inviterer nogle af vores producenter herop. Kom og mød de dejlige mennesker, der laver vinene, og smag på varerne.",
-      date: "20/06/2023",
-      time: "16:00 - 23:00",
-      address: "Prins Valdemars Alle 5C, 3450 Allerød",
-      image_path: "image_1",
-    },
-    {
-      title: "Vinfestival",
-      short_desc:
-        "Så slår vi igen pavillonerne op i vores gårdhave og inviterer nogle af vores producenter herop. Kom og mød de dejlige mennesker, der laver vinene, og smag på varerne.",
-      date: "19/05/2023",
-      time: "16:00 - 23:00",
-      address: "Prins Valdemars Alle 5C, 3450 Allerød",
-      image_path: "image_1",
-    },
-  ];
+  const [events, setEvents] = useState([]);
+  const { data: session, status } = useSession();
+  const user_id = session?.user.id;
+
+  const [activeView, setActiveView] = useState('List');
+
+  const updateView = (view: string) => {
+    setActiveView(view)
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const response = await request({ type: "GET", endpoint: `/users/${user_id}/events`, session: session, status: status })
+      setEvents(response?.data);
+    };
+    fetchEvents();
+    
+  }, [status, session]);
 
   const views = [
     { text: "List", icon: "list", position: "left" },
@@ -67,10 +43,12 @@ const EventsOverview = () => {
       </div>
       <div className="flex items-end justify-between mb-6">
         <h2 className="leading-none text-h2 text-slate-gray">May</h2>
-        <ViewSwitcher views={views} />
+        <ViewSwitcher views={views} updateView={updateView}/>
       </div>
-      {/* <EventsList events={events} /> */}
-      <Calender events={events} />
+      {activeView === 'List'
+        ? <EventsList events={events} />
+        : events && <Calender events={events} />
+      }
     </>
   );
 };

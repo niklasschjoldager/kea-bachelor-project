@@ -4,6 +4,7 @@ import * as React from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 
 type Props = {
+  updateView: (value: string) => void,
   views: {
     text: string;
     icon?: string;
@@ -11,8 +12,9 @@ type Props = {
   }[];
 };
 
-const ViewSwitcher = ({ views }: Props) => {
+const ViewSwitcher = ({ views, updateView }: Props) => {
   const [value, setValue] = React.useState('List');
+  console.log(value, 'viewswitcher')
   return (
     <ToggleGroup.Root
       className="inline-flex overflow-hidden transition border rounded-2 border-card-border"
@@ -21,7 +23,7 @@ const ViewSwitcher = ({ views }: Props) => {
       value={value}
       onValueChange={(value) => {
         if (value) setValue(value);
-        console.log(value, 'switcher value')
+        updateView(value)
       }}
     >
       {views.map((view, index) => (
