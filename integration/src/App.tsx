@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { EventProps } from "./components/Event";
+import EventList from "./components/EventList";
 
 function App() {
-  const [events, setEvents] = useState(null);
+  const [events, setEvents] = useState<EventProps[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getEvents() {
@@ -17,6 +20,7 @@ function App() {
 
       const response = await request.json();
       setEvents(response);
+      setIsLoading(false);
     }
 
     getEvents();
@@ -25,7 +29,7 @@ function App() {
   return (
     <>
       <h2 className="text-lg">Events</h2>
-      <pre>{JSON.stringify(events)}</pre>
+      {isLoading ? <p>Loading...</p> : <EventList events={events} />}
     </>
   );
 }
