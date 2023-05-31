@@ -3,6 +3,7 @@ import { convertToDate, convertToTime } from "../../helpers/helpers";
 
 type Props = {
   selectedDateEvents: {
+    id: number;
     title: string;
     short_description: string;
     startDate: string;
@@ -29,27 +30,27 @@ const CalendarList = ({ selectedDateEvents, selectedDate }: Props) => {
       </div>
       <CardDivider />
       {selectedDateEvents?.map((event, index) => (
-        <div
+        <a href={`/events/${event.id}`}
           key={index}
-          className="rounded-sm mt-6 border border-input-border p-2 text-dark-gray-faded"
+          className="rounded-sm mt-6 border border-input-border p-2 text-dark-gray-faded block"
         >
           <h4 className="mb-3 text-h4">{event.title}</h4>
           <p className="mt-1 text-label text-slate-gray">
             {convertToDate(event.startDate) === convertToDate(event.endDate)
               ? convertToDate(event.startDate)
               : `${convertToDate(event.startDate)} - ${convertToDate(
-                  event.endDate
-                )}`}
+                event.endDate
+              )}`}
           </p>
           <p className="mt-1 text-label text-slate-gray">
             {convertToTime(event.startDate) === convertToTime(event.endDate)
               ? convertToTime(event.startDate)
               : `${convertToTime(event.startDate)} - ${convertToTime(
-                  event.endDate
-                )}`}
+                event.endDate
+              )}`}
           </p>
           <p className="mt-1 text-label text-slate-gray">{event.location}</p>
-        </div>
+        </a>
       ))}
     </div>
   );

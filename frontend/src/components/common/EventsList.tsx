@@ -6,6 +6,7 @@ import { convertToDate, convertToTime } from "../../helpers/helpers";
 
 type Props = {
   events: {
+    id: number;
     title: string;
     short_description: string;
     startDate: string;
@@ -21,7 +22,8 @@ const EventsList = ({ events }: Props) => {
   return (
     <div className="flex flex-col gap-6">
       {events?.map((event, index) => (
-        <div
+        <a
+          href={`/events/${event.id}`}
           key={index}
           className="rounded-sm border border-card-border bg-white shadow-card md:flex"
         >
@@ -46,16 +48,16 @@ const EventsList = ({ events }: Props) => {
                 {convertToDate(event.startDate) === convertToDate(event.endDate)
                   ? convertToDate(event.startDate)
                   : `${convertToDate(event.startDate)} - ${convertToDate(
-                      event.endDate
-                    )}`}
+                    event.endDate
+                  )}`}
               </p>
               <p className="flex items-center gap-2 text-label text-slate-gray">
                 <Image priority src={clock} alt="Clock icon" width={18} />
                 {convertToTime(event.startDate) === convertToTime(event.endDate)
                   ? convertToTime(event.startDate)
                   : `${convertToTime(event.startDate)} - ${convertToTime(
-                      event.endDate
-                    )}`}
+                    event.endDate
+                  )}`}
               </p>
               <p className="flex basis-full items-center gap-2 text-label text-slate-gray">
                 <Image priority src={pin} alt="Pin icon" width={18} />
@@ -63,7 +65,7 @@ const EventsList = ({ events }: Props) => {
               </p>
             </div>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   );

@@ -12,7 +12,7 @@ const OrdersList = ({ orders }: Props) => {
             {orders?.length > 0 ? (
                 <table>
                     <tbody>
-                        <tr className="text-body border-b border-card-border font-medium [&>*]:pb-6 [&>*]:whitespace-nowrap [&>*]:pr-8 [&>*]:text-left">
+                        <tr className="text-body border-b border-card-border [&>*]:font-bold [&>*]:pb-6 [&>*]:whitespace-nowrap [&>*]:pr-8 [&>*]:text-left [&>*]:text-dark-gray [&>*]:text-button">
                             <th>Full name</th>
                             <th>Order created</th>
                             <th>Ticket amount</th>
@@ -26,7 +26,7 @@ const OrdersList = ({ orders }: Props) => {
                         const date = new Date(`${order.created_at}`).toDateString()
                         return (
                             <tbody key={i} className="border-b border-card-border last:border-none">
-                                <tr className=" [&>*]:py-4 [&>*]:pr-8 [&>*]:whitespace-nowrap">
+                                <tr className=" [&>*]:py-4 [&>*]:pr-8 [&>*]:whitespace-nowrap [&>*]:text-button ">
                                     <td>{order.full_name}</td>
                                     <td>{date}</td>
                                     <td>{order.ticket_amount}</td>
