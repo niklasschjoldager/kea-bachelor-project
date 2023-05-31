@@ -5,7 +5,7 @@ import clock from "../../assets/clock.svg"
 import pin from "../../assets/pin.svg"
 import CardDivider from "../ui/CardDivider"
 import Button from "../ui/Button"
-import { useEffect, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import * as Form from '@radix-ui/react-form';
 import Input from "../ui/Input"
 
@@ -15,7 +15,10 @@ type Props = {
 
 function EventSingleView({ props }: Props) {
     const [eventType, setEventType] = useState<string>("free")
-    const [signupState, setSignupState] = useState<boolean>(false)
+    const [signupState, setSignupState] = useState<string>("preSignup")
+    const [data, setData] = useState({})
+    console.log(props.id);
+
 
     useEffect(() => {
         if (props.ticket_quantity && props.ticket_quantity > 0 && props.price && props.price > 0) {
@@ -26,26 +29,43 @@ function EventSingleView({ props }: Props) {
     }, [eventType, props.price, props.ticket_quantity])
     console.log(eventType);
 
+    const submit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(data);
+        if (eventType === "payment") {
+            console.log("Go to payment");
+        } else if (eventType === "signup") {
+            const request = await fetch(
+                `http://127.0.0.1:8000/events/${props.id}/orders`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+            );
+            const response = await request.json();
+            console.log(response);
+            console.log("You are signed up!");
+            setSignupState("success")
+        }
 
-
-    const changeState = () => {
-        setSignupState(true)
     }
 
-    const submit = () => {
-        console.log("Go to payment");
-    }
-
-    const updateData = () => {
-        console.log("updateData");
+    const updateData = (event: ChangeEvent<HTMLInputElement>) => {
+        setData({
+            ...data,
+            [event.target.name]: event.target.value
+        })
     }
 
     return (
         <>
-            <div className={`p-6 flex flex-col gap-3 md:flex-row-reverse md:gap-6 ${signupState ? "md:h-52 pb-0 md:pb-6" : ""}`}>
-                <div className={`flex flex-col gap-3 py-5 md:w-1/2 ${signupState ? "gap-6 md:gap-3 pb-0 md:py-5" : ""}`}>
+            <div className={`p-6 flex flex-col gap-3 md:flex-row-reverse md:gap-6 ${signupState == "signup" ? "md:h-52 pb-0 md:pb-6" : ""}`}>
+                <div className={`flex flex-col gap-3 py-5 md:w-1/2 ${signupState == "signup" ? "gap-6 md:gap-3 pb-0 md:py-5" : ""}`}>
                     <h1 className="text-h1 text-dark-gray">{props.title}</h1>
-                    <p className={`text-body text-dark-gray-faded ${signupState ? "hidden" : ""}`}>{props.short_description}</p>
+                    <p className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""}`}>{props.short_description}</p>
                     <div className="flex flex-wrap gap-3">
                         <p className="flex items-center gap-2 text-label text-slate-gray">
                             <img src={calendar} alt="Calender icon" className="w-[18px]" />
@@ -69,15 +89,15 @@ function EventSingleView({ props }: Props) {
                         </p>
                     </div>
                     <CardDivider />
-                    <p className={`text-body text-dark-gray-faded ${signupState ? "hidden" : ""}`}>{props.long_description}</p>
+                    <p className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""}`}>{props.long_description}</p>
                 </div>
 
-                <div className={`md:w-1/2 ${signupState ? "hidden md:block" : ""}`}>
+                <div className={`md:w-1/2 ${signupState == "signup" ? "hidden md:block" : ""}`}>
                     <img src="https://picsum.photos/200" alt="" className="w-full h-full object-cover" />
                 </div>
             </div>
-            {signupState ? (
-                <Form.Root>
+            {signupState == "signup" ? (
+                <Form.Root onSubmit={submit} >
                     <div className="p-6 flex flex-col gap-6">
                         <Input inputId={"full_name"} labelText={"Full name"} required={true} type={"text"} getData={updateData} />
                         <Input inputId={"email"} labelText={"E-mail"} required={true} type={"text"} getData={updateData} />
@@ -87,7 +107,10 @@ function EventSingleView({ props }: Props) {
 
                     <div className="w-full p-6 shadow-card flex justify-between items-center flex-col gap-6 md:py-3 md:flex-row">
                         <p>Price per ticket: <b>{props.price} DKK</b></p>
-                        <Button buttonText={eventType === "payment" ? "Go to payment" : "Sign up for event"} onClick={() => submit()} />
+                        <Form.Submit>
+                            <Button buttonText={eventType === "payment" ? "Go to payment" : "Sign up for event"} />
+                        </Form.Submit>
+
                     </div>
 
                 </Form.Root>
@@ -95,7 +118,7 @@ function EventSingleView({ props }: Props) {
                 eventType !== "free" && (
                     <div className="w-full p-6 shadow-card flex justify-between items-center flex-col gap-6 md:py-3 md:flex-row">
                         <p>Price per ticket: <b>{props.price} DKK</b></p>
-                        <Button buttonText={"Sign up for event"} onClick={() => changeState()} />
+                        <Button buttonText={"Sign up for event"} onClick={() => setSignupState("signup")} />
                     </div>
                 )
             )}
