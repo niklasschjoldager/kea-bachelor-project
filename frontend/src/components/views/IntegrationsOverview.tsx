@@ -29,18 +29,18 @@ const IntegrationsOverview = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-8 mt-12">
+    <div className="mt-12 flex flex-col gap-8">
       {integrationStep.map((step, i) => {
         return (
           <Card key={i}>
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center text-white h-9 w-9 rounded-2 bg-paynes-gray text-h2">
+              <div className="rounded-sm flex h-9 w-9 items-center justify-center bg-paynes-gray text-h2 text-white">
                 {i + 1}
               </div>
               <h2 className="text-h2">{step.title}</h2>
             </div>
             <CardDivider />
-            <h3 className="font-semibold text-h3">{step.subtitle}</h3>
+            <h3 className="text-h3 font-semibold">{step.subtitle}</h3>
             <p className="max-w-prose">{step.text}</p>
             <CodeBlock>{step.code}</CodeBlock>
           </Card>

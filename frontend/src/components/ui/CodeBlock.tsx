@@ -24,10 +24,10 @@ const CodeBlock = ({ children }: Props) => {
   };
 
   return (
-    <div className="relative px-3 pb-3 bg-ghost-white pt-11">
+    <div className="relative bg-ghost-white px-3 pb-3 pt-11">
       <pre className="overflow-x-auto ">{children}</pre>
       <div
-        className="absolute top-0 right-0 flex items-center justify-center w-8 h-8 transition cursor-pointer bg-slate-gray hover:bg-paynes-gray"
+        className="absolute right-0 top-0 flex h-8 w-8 cursor-pointer items-center justify-center bg-slate-gray transition hover:bg-paynes-gray"
         onClick={(event) => copy(event)}
       >
         <Image
@@ -35,12 +35,12 @@ const CodeBlock = ({ children }: Props) => {
           src={CopyIcon}
           alt="Copy icon"
           width={20}
-          className="transition pointer-events-none"
+          className="pointer-events-none transition"
         />
         <div
           className={`${
             showTooltip ? "opacity-100" : "opacity-0"
-          } pointer-events-none absolute top-10 rounded-2 bg-dark-gray px-2 py-1 text-white transition-opacity after:absolute after:-top-1 after:left-1/2 after:h-2 after:w-2 after:-translate-x-1/2 after:rotate-45 after:bg-dark-gray`}
+          } rounded-sm pointer-events-none absolute top-10 bg-dark-gray px-2 py-1 text-white transition-opacity after:absolute after:-top-1 after:left-1/2 after:h-2 after:w-2 after:-translate-x-1/2 after:rotate-45 after:bg-dark-gray`}
         >
           Copied!
         </div>

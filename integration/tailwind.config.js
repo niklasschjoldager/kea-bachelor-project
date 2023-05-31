@@ -29,10 +29,6 @@ export default {
       card: "2px 0px 15px 5px rgb(18, 30, 38, 0.03)",
       switcher: "0px 0px 8px 2px rgb(18, 30, 38, 0.08)",
     },
-    borderRadius: {
-      2: "2px",
-      full: "100%",
-    },
     keyframes: {
       slideUpAndFade: {
         from: { opacity: 0, transform: "translateY(-4px)" },
@@ -62,5 +58,6 @@ export default {
     overlayShow: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
     contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
   },
+  extend: {},
   plugins: [],
 };
