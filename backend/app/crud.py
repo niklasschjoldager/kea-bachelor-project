@@ -31,32 +31,10 @@ def create_user(db: Session, user: schemas.UserCreate):
 
     return db_user
 
-def create_event(db: Session, title, price, short_description, long_description, image, startDate, endDate, location, ticket_quantity, user_id: int):
-    EventCreate(
-        title=title, 
-        price=price, 
-        short_description=short_description,
-        long_description=long_description,
-        image=image,
-        startDate=startDate,
-        endDate=endDate,
-        location=location,
-        ticket_quantity=ticket_quantity
-    )
-    
-    event = {
-        'title': title,
-        'price': price,
-        'short_description': short_description,
-        'long_description': long_description,
-        'startDate': startDate,
-        'endDate': endDate,
-        'location': location,
-        'ticket_quantity': ticket_quantity
-    } 
 
-    # db_event = models.Event(dict(**event), user_id=user_id)
-    db_event = models.Event(**event, user_id=user_id)
+def create_event(db: Session, event: EventCreate, user_id):
+    print(event)
+    db_event = models.Event(**event.dict(), user_id=user_id)
     print(db_event)
 
     db.add(db_event)
@@ -71,12 +49,22 @@ def get_events(db: Session, user_id: int):
 
 
 def get_event(db: Session, user_id: int, event_id: int):
-    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
+    event = (
+        db.query(models.Event)
+        .filter(models.Event.user_id == user_id)
+        .filter(models.Event.id == event_id)
+        .first()
+    )
     return event
 
 
 def delete_event(db: Session, user_id: int, event_id: int):
-    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
+    event = (
+        db.query(models.Event)
+        .filter(models.Event.user_id == user_id)
+        .filter(models.Event.id == event_id)
+        .first()
+    )
     db.delete(event)
     db.commit()
     return {"ok": True}
@@ -86,20 +74,23 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
     event = db.query(models.Event).filter(models.Event.id == event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
-    
+
     # check the ticket availability if there is one on the event
     if event.ticket_quantity is not None:
-        sold_tickets = db.query(func.sum(models.Order.ticket_amount)).filter(models.Order.event_id == event_id).scalar()
+        sold_tickets = (
+            db.query(func.sum(models.Order.ticket_amount))
+            .filter(models.Order.event_id == event_id)
+            .scalar()
+        )
         remaining_tickets = event.ticket_quantity - (sold_tickets or 0)
 
         if order.ticket_amount > remaining_tickets:
-            raise HTTPException(status_code=400, detail="Insufficient ticket quantity available")
+            raise HTTPException(
+                status_code=400, detail="Insufficient ticket quantity available"
+            )
 
-    db_order = models.Order(
-        **order.dict(), 
-        event_id=event_id
-        )
-    
+    db_order = models.Order(**order.dict(), event_id=event_id)
+
     # Update total_price on order based on event price
     db_order.total_price = db_order.ticket_amount * event.price
 
@@ -116,5 +107,10 @@ def get_orders(db: Session, event_id: int):
 
 
 def get_order(db: Session, order_id: int, event_id: int):
-    order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).first()
+    order = (
+        db.query(models.Order)
+        .filter(models.Order.event_id == event_id)
+        .filter(models.Order.id == order_id)
+        .first()
+    )
     return order

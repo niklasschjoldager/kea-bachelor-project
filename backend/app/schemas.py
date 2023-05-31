@@ -38,8 +38,9 @@ class TokenData(BaseModel):
 
 class EventBase(BaseModel):
     title: str
-    price: Union[int, None] = 0,
+    price: Union[int, None] = (0,)
     short_description: str
+    image: str
     long_description: Union[str, None] = None
     startDate: datetime
     endDate: Union[datetime, None] = None
@@ -57,11 +58,13 @@ class Event(EventBase):
     class Config:
         orm_mode = True
 
+
 class OrderBase(BaseModel):
     email: str
     full_name: str = Field(..., max_length=30)
     phone_number: int
     created_at: datetime
+
 
 class OrderCreate(OrderBase):
     ticket_amount: int

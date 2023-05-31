@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, File, UploadFile, Form
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from app import crud
-from app.schemas import User
+from app.schemas import User, EventCreate
 from app.dependencies import get_db
 from app.auth import get_current_user
 from typing import Annotated, Optional
@@ -44,20 +44,19 @@ def create_event(
     ticket_quantity: Optional[int] = Form(None),
     db: Session = Depends(get_db),
 ):
-
-    return crud.create_event(
-        db=db,
-        user_id=current_user.id,
-        title=title, 
-        price=price, 
+    event = EventCreate(
+        title=title,
+        price=price,
         short_description=short_description,
         long_description=long_description,
-        image=image,
+        image="hi.png",
         startDate=startDate,
         endDate=endDate,
         location=location,
-        ticket_quantity=ticket_quantity
+        ticket_quantity=ticket_quantity,
     )
+
+    return crud.create_event(db=db, event=event, user_id=current_user.id)
 
 
 @router.delete("/events/{event_id}")

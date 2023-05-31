@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from app import crud
@@ -7,10 +7,11 @@ from app.dependencies import get_db
 
 router = APIRouter(tags=["orders"])
 
+
 @router.post("/events/{event_id}/orders")
 def create_order(event_id, order: OrderCreate, db: Session = Depends(get_db)):
-
     return crud.create_order(db=db, order=order, event_id=event_id)
+
 
 @router.get("/events/{event_id}/orders")
 def get_orders(event_id, db: Session = Depends(get_db)):
@@ -18,8 +19,9 @@ def get_orders(event_id, db: Session = Depends(get_db)):
 
     if orders is None:
         raise HTTPException(status_code=404, detail="No orders for this event")
-    
+
     return orders
+
 
 @router.get("/events/{event_id}/orders/{order_id}")
 def get_order(order_id, event_id, db: Session = Depends(get_db)):
@@ -27,5 +29,5 @@ def get_order(order_id, event_id, db: Session = Depends(get_db)):
 
     if order is None:
         raise HTTPException(status_code=404, detail="No such order")
-    
+
     return order
