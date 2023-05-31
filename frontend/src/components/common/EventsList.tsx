@@ -2,7 +2,7 @@ import Image from "next/image";
 import clock from "@/icons/clock.svg";
 import calendar from "@/icons/calendar.svg";
 import pin from "@/icons/pin.svg";
-import { convertToDate, convertToTime } from "../../helpers/helpers"
+import { convertToDate, convertToTime } from "../../helpers/helpers";
 
 type Props = {
   events: {
@@ -23,7 +23,7 @@ const EventsList = ({ events }: Props) => {
       {events?.map((event, index) => (
         <div
           key={index}
-          className="bg-white border rounded-2 border-card-border shadow-card md:flex"
+          className="rounded-sm border border-card-border bg-white shadow-card md:flex"
         >
           <div
             className="h-[200px] basis-1/2 md:h-auto"
@@ -43,21 +43,21 @@ const EventsList = ({ events }: Props) => {
             <div className="flex flex-wrap gap-3">
               <p className="flex items-center gap-2 text-label text-slate-gray">
                 <Image priority src={calendar} alt="Calender icon" width={18} />
-                {
-                  convertToDate(event.startDate) === convertToDate(event.endDate)
+                {convertToDate(event.startDate) === convertToDate(event.endDate)
                   ? convertToDate(event.startDate)
-                  : `${convertToDate(event.startDate)} - ${convertToDate(event.endDate)}`
-                }
+                  : `${convertToDate(event.startDate)} - ${convertToDate(
+                      event.endDate
+                    )}`}
               </p>
               <p className="flex items-center gap-2 text-label text-slate-gray">
                 <Image priority src={clock} alt="Clock icon" width={18} />
-                {
-                  convertToTime(event.startDate) === convertToTime(event.endDate)
+                {convertToTime(event.startDate) === convertToTime(event.endDate)
                   ? convertToTime(event.startDate)
-                  : `${convertToTime(event.startDate)} - ${convertToTime(event.endDate)}`
-                }
+                  : `${convertToTime(event.startDate)} - ${convertToTime(
+                      event.endDate
+                    )}`}
               </p>
-              <p className="flex items-center gap-2 basis-full text-label text-slate-gray">
+              <p className="flex basis-full items-center gap-2 text-label text-slate-gray">
                 <Image priority src={pin} alt="Pin icon" width={18} />
                 {event.location}
               </p>

@@ -6,7 +6,7 @@ interface EventListProps {
 }
 
 function EventList({ events }: EventListProps) {
-  return events ? (
+  return events && events.length > 0 ? (
     <>
       {events.map((event) => (
 

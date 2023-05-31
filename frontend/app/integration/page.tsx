@@ -6,12 +6,10 @@ export default async function Integration() {
     <main>
       <TopNav />
       <div className="mx-auto max-w-screen-lg px-4 py-[100px]">
-        <h1 className="text-h1 mb-3">Integration guide</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+        <h1 className="mb-3 text-h1">Integration guide</h1>
+        <p className="max-w-prose">
+          Add our events widget to your website in only 2 minutes, with our
+          short and simple integration guide.
         </p>
         <IntegrationsOverview />
       </div>
