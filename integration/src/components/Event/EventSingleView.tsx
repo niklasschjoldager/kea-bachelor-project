@@ -6,7 +6,6 @@ type Props = {
     props: EventProps
 }
 
-
 function EventSingleView({ props }: Props) {
     const [eventType, setEventType] = useState<string>("free")
     const [signupState, setSignupState] = useState<string>("preSignup")
@@ -45,19 +44,17 @@ function EventSingleView({ props }: Props) {
                     body: JSON.stringify(data),
                 }
             );
-            console.log(request);
+            const response = await request.json();
             console.log("You are signed up!");
             if (request.ok) {
                 setSuccessMessage("Thank you for your participation. We look forward to seeing you!")
                 console.log("OK");
             } else {
-                setSuccessMessage("We are so sorry, something went wrong. Please try again later")
+                setSuccessMessage(response.detail)
                 console.log("NOT OK");
             }
             setSignupState("success")
         }
-
-
     }
 
     const updateData = (event: ChangeEvent<HTMLInputElement>) => {

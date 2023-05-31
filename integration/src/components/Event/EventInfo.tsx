@@ -82,7 +82,7 @@ export const EventInfo = ({ props, signupState, updateData, submit, eventType, s
                     ) : (
                         <>
                             <p>Price per ticket: <b>{props.price} DKK</b></p>
-                            <Button buttonText={availability ? "Sign up for event" : "Sold out"} onClick={() => availability ? setSignupState("signup") : ""} />
+                            <Button buttonText={availability ? "Sign up for event" : "Sold out"} onClick={() => availability ? setSignupState("signup") : ""} state={availability ? "enabled" : "disabled"} />
                         </>
                     )}
 

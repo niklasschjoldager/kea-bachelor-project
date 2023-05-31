@@ -66,15 +66,13 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
         remaining_tickets = event.ticket_quantity - (sold_tickets or 0)
 
         if order.ticket_amount > remaining_tickets:
-            raise HTTPException(status_code=400, detail="Insufficient ticket quantity available")
+            raise HTTPException(status_code=400, detail="We are very sorry, there are not enough tickets!")
 
         # update event.available_tickets with ticket sold_tickets 
         event.available_tickets = event.ticket_quantity - sold_tickets
         db.add(event)
         db.commit()
         db.refresh(event)
-
-        
 
     db_order = models.Order(
         **order.dict(), 
