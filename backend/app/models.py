@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, column_property
 from .database import Base
 
 
@@ -29,6 +29,7 @@ class Event(Base):
     created_at = Column(DateTime)
     location = Column(String)
     ticket_quantity = Column(Integer, nullable=True, default=None)
+    available_tickets = Column(Integer, nullable=True, default=None)
 
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("User", back_populates="event")

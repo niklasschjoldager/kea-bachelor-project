@@ -15,6 +15,7 @@ export interface EventProps {
   ticket_quantity: number;
   title: string;
   user_id: number;
+  available_tickets: number;
 }
 
 function formatDate(date: string) {
