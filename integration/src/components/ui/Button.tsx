@@ -3,13 +3,14 @@ type Props = {
   buttonText: string;
   onClick?: () => void;
   type?: "submit";
+  state?: "disabled" | "enabled";
 };
 
-const Button = ({ buttonText, onClick, type }: Props) => {
+const Button = ({ buttonText, onClick, type, state }: Props) => {
   return (
     <button
       type={type}
-      className="px-3 h-10 text-white rounded-2 bg-dark-gray text-body"
+      className={`px-3 h-10 text-white rounded-2 text-body ${state == "disabled" ? "bg-dark-gray-faded cursor-default" : "bg-dark-gray"}`}
       onClick={onClick}
     >
       {buttonText}
