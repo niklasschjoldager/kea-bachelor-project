@@ -38,13 +38,11 @@ class TokenData(BaseModel):
 
 class EventBase(BaseModel):
     title: str
-    price: int
+    price: Union[int, None] = 0,
     short_description: str
-    long_description: str
-    image: str
+    long_description: Union[str, None] = None
     startDate: datetime
-    endDate: datetime
-    created_at: datetime
+    endDate: Union[datetime, None] = None
     location: str
     ticket_quantity: Union[int, None] = None
 

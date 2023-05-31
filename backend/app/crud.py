@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from fastapi import HTTPException
+from app.schemas import EventCreate
 
 from app import models, schemas
 from app.auth import get_password_hash
@@ -30,8 +31,34 @@ def create_user(db: Session, user: schemas.UserCreate):
 
     return db_user
 
-def create_event(db: Session, event: schemas.EventCreate, user_id: int):
-    db_event = models.Event(**event.dict(), user_id=user_id)
+def create_event(db: Session, title, price, short_description, long_description, image, startDate, endDate, location, ticket_quantity, user_id: int):
+    EventCreate(
+        title=title, 
+        price=price, 
+        short_description=short_description,
+        long_description=long_description,
+        image=image,
+        startDate=startDate,
+        endDate=endDate,
+        location=location,
+        ticket_quantity=ticket_quantity
+    )
+    
+    event = {
+        'title': title,
+        'price': price,
+        'short_description': short_description,
+        'long_description': long_description,
+        'startDate': startDate,
+        'endDate': endDate,
+        'location': location,
+        'ticket_quantity': ticket_quantity
+    } 
+
+    # db_event = models.Event(dict(**event), user_id=user_id)
+    db_event = models.Event(**event, user_id=user_id)
+    print(db_event)
+
     db.add(db_event)
     db.commit()
     db.refresh(db_event)
