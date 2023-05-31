@@ -12,6 +12,9 @@ export default {
       "dark-gray-faded": "#121e26bf",
       "card-border": "#E9EDF0",
       "input-border": "#D5DDE3",
+      success: "#95CB8C",
+      pending: "#E8CC80",
+      failed: "#D35F4F",
     },
     fontFamily: {
       sans: ["Heebo", "sans-serif"],
@@ -29,10 +32,6 @@ export default {
       card: "2px 0px 15px 5px rgb(18, 30, 38, 0.03)",
       switcher: "0px 0px 8px 2px rgb(18, 30, 38, 0.08)",
     },
-    borderRadius: {
-      2: "2px",
-      full: "100%",
-    },
     keyframes: {
       slideUpAndFade: {
         from: { opacity: 0, transform: "translateY(-4px)" },
@@ -47,20 +46,18 @@ export default {
         to: { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
       },
     },
+
     animation: {
       slideUpAndFade: "slideUpAndFade .2s cubic-bezier(0.16, 1, 0.3, 1)",
       overlayShow: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
     },
-    contentShow: {
-      from: { opacity: 0, transform: "translate(-50%, -48%) scale(0.96)" },
-      to: { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+    extend: {
+      maxWidth: {
+        lg: "1200px",
+        modal: "800px",
+      },
     },
-  },
-  animation: {
-    slideUpAndFade: "slideUpAndFade .2s cubic-bezier(0.16, 1, 0.3, 1)",
-    overlayShow: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-    contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
   },
   plugins: [],
 };

@@ -1,4 +1,3 @@
-
 type Props = {
   buttonText: string;
   onClick?: () => void;
@@ -9,7 +8,7 @@ const Button = ({ buttonText, onClick, type }: Props) => {
   return (
     <button
       type={type}
-      className="px-3 h-10 text-white rounded-2 bg-dark-gray text-body"
+      className="px-3 h-10 text-white rounded-sm bg-dark-gray text-body"
       onClick={onClick}
     >
       {buttonText}

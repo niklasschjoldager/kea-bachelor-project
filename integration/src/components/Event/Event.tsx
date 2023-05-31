@@ -40,7 +40,7 @@ function Event(props: EventProps) {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <div className="bg-white border cursor-pointer rounded-2 border-card-border shadow-card md:flex">
+        <div className="bg-white border cursor-pointer rounded-sm border-card-border shadow-card md:flex">
           <div
             className="h-[200px] basis-1/2 md:h-auto"
             // style={{
