@@ -31,10 +31,10 @@ function App({ integrationId }: AppProps) {
   }, [integrationId]);
 
   return (
-    <>
-      <h2 className="eventel-text-lg">Events</h2>
+    <div className="max-w-lg px-4 py-8 mx-auto">
+      <h2 className="text-h1">Events</h2>
       {isLoading ? <p>Loading...</p> : <EventList events={events} />}
-    </>
+    </div>
   );
 }
 
