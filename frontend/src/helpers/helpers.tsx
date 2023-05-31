@@ -3,7 +3,7 @@ import { useState } from "react";
 type PostProps = {
   endpoint: string;
   type: "GET" | "POST" | "DELETE";
-  body?: Object;
+  body?: object;
   // Session and status should come from a global useSession
   session: any;
   status: any;
@@ -23,30 +23,34 @@ export const request = async ({
   endpoint,
   session,
   status,
-  body,
+  body
 }: PostProps) => {
   if (status !== "authenticated") {
     return;
   }
-  console.log(body, ' body');
+
   try {
+    // set contentType dynamically
+    const ContentType = 'multipart/form-data'
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
       }${endpoint}`,
       {
         method: type,
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": ContentType,
           Authorization: `Bearer ${session?.user.access_token}`,
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch");
     }
     const data = await response.json();
-    console.log(data, 'data !');
+    console.log(body, 'data')
+
     return {
       "data": data,
       "response": response
