@@ -31,7 +31,7 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 def create_event(db: Session, event: schemas.EventCreate, user_id: int):
-    db_event = models.Event(**event.dict(), user_id=user_id)
+    db_event = models.Event(**event.dict(), user_id=user_id , available_tickets=event.ticket_quantity)
     db.add(db_event)
     db.commit()
     db.refresh(db_event)
@@ -59,7 +59,7 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
     event = db.query(models.Event).filter(models.Event.id == event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
-    
+
     # check the ticket availability if there is one on the event
     if event.ticket_quantity is not None:
         sold_tickets = db.query(func.sum(models.Order.ticket_amount)).filter(models.Order.event_id == event_id).scalar()
@@ -67,6 +67,14 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
 
         if order.ticket_amount > remaining_tickets:
             raise HTTPException(status_code=400, detail="Insufficient ticket quantity available")
+
+        # update event.available_tickets with ticket sold_tickets 
+        event.available_tickets = event.ticket_quantity - sold_tickets
+        db.add(event)
+        db.commit()
+        db.refresh(event)
+
+        
 
     db_order = models.Order(
         **order.dict(), 
