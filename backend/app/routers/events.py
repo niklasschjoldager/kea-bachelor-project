@@ -14,6 +14,7 @@ import imghdr
 router = APIRouter(tags=["events"])
 IMAGEDIR = "./images"
 
+
 @router.get("/users/{user_id}/events")
 def get_events(user_id, db: Session = Depends(get_db)):
     events = crud.get_events(db, user_id)
@@ -48,10 +49,10 @@ def create_event(
     ticket_quantity: Optional[int] = Form(None),
     db: Session = Depends(get_db),
 ):
-    try: 
+    try:
         file_name, file_extension = os.path.splitext(image.filename)
-        if file_extension not in (".png", ".jpeg", ".jpg", ".JPG", ".heic", ".HEIC"):
-            return "image not allowed"
+        if file_extension.lower() not in (".png", ".jpeg", ".jpg", ".heic"):
+            raise HTTPException(status_code=400, detail="Image not allowed")
 
         image_id = str(uuid.uuid4())
         image_name = f"{image_id}{file_extension}"
@@ -61,13 +62,21 @@ def create_event(
         with open(file_location, "wb+") as file_object:
             file_object.write(image.file.read())
 
+        file_extension = file_extension.lower()
+
+        if file_extension.lower() == ".jpg":
+            file_extension = ".jpeg"  # imghdr tells jpg and jpeg images are "jpeg"
+
         imghdr_extension = imghdr.what(f"./images/{image_name}")
 
-        if file_extension != f".{imghdr_extension}":
-            os.remove(f"./images/{image_name}")
-            return "not an image file"
+        print(file_extension)
+        print("imghdr: ", imghdr_extension)
 
-        if endDate == None: 
+        if file_extension != f".{imghdr_extension}":
+            print("not allowed")
+            raise HTTPException(status_code=400, detail="Image not allowed")
+
+        if endDate == None:
             endDate = startDate
 
         event = EventCreate(
@@ -86,12 +95,13 @@ def create_event(
 
         if not createdEvent:
             os.remove(f"./images/{image_name}")
-            raise Exception('Could not create event')
+            raise HTTPException(status_code=500, detail="Could not create event")
 
         return createdEvent
-    except:
+    except Exception as exception:
         os.remove(f"./images/{image_name}")
-        return 'Could not create event'
+        raise exception
+
 
 @router.delete("/events/{event_id}")
 def delete_event(
