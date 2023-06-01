@@ -3,6 +3,7 @@ import clock from "@/icons/clock.svg";
 import calendar from "@/icons/calendar.svg";
 import pin from "@/icons/pin.svg";
 import { convertToDate, convertToTime } from "../../helpers/helpers";
+import Link from "next/link";
 
 type Props = {
   events: {
@@ -22,7 +23,7 @@ const EventsList = ({ events }: Props) => {
   return (
     <div className="flex flex-col gap-6">
       {events?.map((event, index) => (
-        <a
+        <Link
           href={`/events/${event.id}`}
           key={index}
           className="bg-white border rounded-sm border-card-border shadow-card md:flex"
@@ -48,16 +49,16 @@ const EventsList = ({ events }: Props) => {
                 {convertToDate(event.startDate) === convertToDate(event.endDate)
                   ? convertToDate(event.startDate)
                   : `${convertToDate(event.startDate)} - ${convertToDate(
-                    event.endDate
-                  )}`}
+                      event.endDate
+                    )}`}
               </p>
               <p className="flex items-center gap-2 text-label text-slate-gray">
                 <Image priority src={clock} alt="Clock icon" width={18} />
                 {convertToTime(event.startDate) === convertToTime(event.endDate)
                   ? convertToTime(event.startDate)
                   : `${convertToTime(event.startDate)} - ${convertToTime(
-                    event.endDate
-                  )}`}
+                      event.endDate
+                    )}`}
               </p>
               <p className="flex items-center gap-2 basis-full text-label text-slate-gray">
                 <Image priority src={pin} alt="Pin icon" width={18} />
@@ -65,7 +66,7 @@ const EventsList = ({ events }: Props) => {
               </p>
             </div>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
