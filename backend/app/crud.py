@@ -31,10 +31,8 @@ def create_user(db: Session, user: schemas.UserCreate):
 
     return db_user
 
-
-def create_event(db: Session, event: EventCreate, user_id):
-    db_event = models.Event(**event.dict(), user_id=user_id)
-
+def create_event(db: Session, event: schemas.EventCreate, user_id: int):
+    db_event = models.Event(**event.dict(), user_id=user_id , available_tickets=event.ticket_quantity)
     db.add(db_event)
     db.commit()
     db.refresh(db_event)
@@ -75,20 +73,23 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
 
     # check the ticket availability if there is one on the event
     if event.ticket_quantity is not None:
-        sold_tickets = (
-            db.query(func.sum(models.Order.ticket_amount))
-            .filter(models.Order.event_id == event_id)
-            .scalar()
-        )
+        sold_tickets = db.query(func.sum(models.Order.ticket_amount)).filter(models.Order.event_id == event_id).scalar()
         remaining_tickets = event.ticket_quantity - (sold_tickets or 0)
 
         if order.ticket_amount > remaining_tickets:
-            raise HTTPException(
-                status_code=400, detail="Insufficient ticket quantity available"
-            )
+            raise HTTPException(status_code=400, detail="We are very sorry, there are not enough tickets!")
 
-    db_order = models.Order(**order.dict(), event_id=event_id)
+        # update event.available_tickets with ticket sold_tickets 
+        event.available_tickets = event.ticket_quantity - sold_tickets
+        db.add(event)
+        db.commit()
+        db.refresh(event)
 
+    db_order = models.Order(
+        **order.dict(), 
+        event_id=event_id
+        )
+    
     # Update total_price on order based on event price
     db_order.total_price = db_order.ticket_amount * event.price
 
@@ -99,16 +100,22 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
     return db_order
 
 
-def get_orders(db: Session, event_id: int):
+def get_orders(db: Session, user_id: int, event_id: int):
+    if not user_id:
+        raise HTTPException(status_code=405, detail="Method not allowed")
     orders = db.query(models.Order).filter(models.Order.event_id == event_id).all()
     return orders
 
 
-def get_order(db: Session, order_id: int, event_id: int):
-    order = (
-        db.query(models.Order)
-        .filter(models.Order.event_id == event_id)
-        .filter(models.Order.id == order_id)
-        .first()
-    )
+def get_orders(db: Session, user_id: int, event_id: int):
+    if not user_id:
+        raise HTTPException(status_code=405, detail="Method not allowed")
+    orders = db.query(models.Order).filter(models.Order.event_id == event_id).all()
+    return orders
+
+
+def get_order(db: Session, user_id: int, order_id: int, event_id: int):
+    if not user_id:
+        raise HTTPException(status_code=405, detail="Method not allowed")
+    order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).first()
     return order

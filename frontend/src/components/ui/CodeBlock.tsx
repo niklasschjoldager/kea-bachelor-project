@@ -1,50 +1,52 @@
 import Image from "next/image";
-import CopyIcon from "@/icons/copy.svg"
+import CopyIcon from "@/icons/copy.svg";
 import { ReactNode, useState } from "react";
 
 type Props = {
-    children: ReactNode;
-}
+  children: ReactNode;
+};
 
 const CodeBlock = ({ children }: Props) => {
+  const [showTooltip, setShowTooltip] = useState(false);
 
-    const [showTooltip, setShowTooltip] = useState(false);
+  const copy = (event: React.MouseEvent<Element, MouseEvent>) => {
+    const target = event.target as Element;
+    let textElm = target.parentElement?.querySelector("pre");
 
-    const copy = (event: React.MouseEvent<Element, MouseEvent>) => {
-        const target = event.target as Element;
-        let textElm = target.parentElement?.querySelector("pre");
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(textElm?.innerText || "");
 
-        // Copy the text inside the text field
-        navigator.clipboard.writeText(textElm?.innerText || "");
+    // Show tooltip
+    setShowTooltip(true);
+    setTimeout(() => {
+      setShowTooltip(false);
+    }, 1000);
+  };
 
-        // Show tooltip
-        setShowTooltip(true)
-        setTimeout(() => {
-            setShowTooltip(false)
-        }, 1000);
-    }
-
-    return (
-        <div className="bg-ghost-white p-3 relative">
-            <pre>
-                {children}
-            </pre>
-            <div className="bg-slate-gray w-8 h-8 absolute top-0 right-0 flex justify-center items-center cursor-pointer hover:bg-paynes-gray transition"
-                onClick={(event) => copy(event)}>
-                <Image
-                    priority
-                    src={CopyIcon}
-                    alt="Copy icon"
-                    width={20}
-                    className="pointer-events-none transition"
-                />
-                <div className={`${showTooltip ? 'opacity-100' : 'opacity-0'} absolute bg-dark-gray rounded-2 py-1 px-2 text-white pointer-events-none top-10 transition-opacity after:w-2 after:h-2 after:bg-dark-gray after:absolute after:-top-1 after:left-1/2 after:rotate-45 after:-translate-x-1/2`}>
-                    Copied!
-                </div>
-            </div>
+  return (
+    <div className="relative py-3 pl-3 bg-ghost-white pr-11">
+      <pre className="overflow-x-auto text-label">{children}</pre>
+      <div
+        className="absolute top-0 right-0 flex items-center justify-center w-8 h-8 transition cursor-pointer bg-slate-gray hover:bg-paynes-gray"
+        onClick={(event) => copy(event)}
+      >
+        <Image
+          priority
+          src={CopyIcon}
+          alt="Copy icon"
+          width={20}
+          className="transition pointer-events-none"
+        />
+        <div
+          className={`${
+            showTooltip ? "opacity-100" : "opacity-0"
+          } pointer-events-none absolute top-10 rounded-sm bg-dark-gray px-2 py-1 text-white transition-opacity after:absolute after:-top-1 after:left-1/2 after:h-2 after:w-2 after:-translate-x-1/2 after:rotate-45 after:bg-dark-gray`}
+        >
+          Copied!
         </div>
-
-    )
-}
+      </div>
+    </div>
+  );
+};
 
 export default CodeBlock;

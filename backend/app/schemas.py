@@ -47,7 +47,7 @@ class EventBase(BaseModel):
     created_at: datetime = datetime.now()
     location: str
     ticket_quantity: Union[int, None] = None
-
+   
 
 class EventCreate(EventBase):
     pass
@@ -55,6 +55,7 @@ class EventCreate(EventBase):
 
 class Event(EventBase):
     id: int
+    available_tickets: Union[int, None] = None
 
     class Config:
         orm_mode = True
@@ -64,7 +65,7 @@ class OrderBase(BaseModel):
     email: str
     full_name: str = Field(..., max_length=30)
     phone_number: int
-    created_at: datetime
+    created_at: datetime = datetime.now()
 
 
 class OrderCreate(OrderBase):
