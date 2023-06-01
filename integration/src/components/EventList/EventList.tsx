@@ -5,6 +5,8 @@ interface EventListProps {
 }
 
 function EventList({ events }: EventListProps) {
+  console.log(events);
+
   return events && events.length > 0 ? (
     <>
       {events.map((event) => (

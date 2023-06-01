@@ -14,7 +14,7 @@ type Props = {
     endDate: string;
     time: string;
     address: string;
-    image_path: string;
+    image: string;
     location: string;
   }[];
 };
@@ -31,13 +31,14 @@ const EventsList = ({ events }: Props) => {
           <div
             className="h-[200px] basis-1/2 md:h-auto"
             style={{
-              backgroundImage: `url(/images/image_1.png)`,
-              // backgroundImage: `url(/images/${event.image_path}.png)`,
+              backgroundImage: `url(${
+                process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
+              }/images/${event.image})`,
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               width: "100%",
             }}
-          />
+          ></div>
           <div className="basis-1/2 px-[24px] py-[38px]">
             <h3 className="mb-3 text-h3 text-dark-gray">{event.title}</h3>
             <p className="mb-6 text-label text-dark-gray-faded">
