@@ -44,6 +44,7 @@ class EventBase(BaseModel):
     long_description: Union[str, None] = None
     startDate: datetime
     endDate: Union[datetime, None] = None
+    created_at: datetime = datetime.now()
     location: str
     ticket_quantity: Union[int, None] = None
 

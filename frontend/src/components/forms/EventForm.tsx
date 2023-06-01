@@ -40,11 +40,12 @@ const EventForm = () => {
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         console.log(data, 'data')
-
+        
         let formData = new FormData();
         for ( var key in data ) {
             formData.append(key, data[key as keyof typeof data]);
         }
+        console.log(data, 'data')
 
         const response = request({ type: "POST", endpoint: "/events", body: formData, session: session, status: status })
     }

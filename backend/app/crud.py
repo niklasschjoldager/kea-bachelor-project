@@ -33,9 +33,7 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 
 def create_event(db: Session, event: EventCreate, user_id):
-    print(event)
     db_event = models.Event(**event.dict(), user_id=user_id)
-    print(db_event)
 
     db.add(db_event)
     db.commit()
