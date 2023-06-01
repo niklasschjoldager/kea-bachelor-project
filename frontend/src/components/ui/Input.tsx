@@ -14,13 +14,13 @@ type Props = {
   required: true | false;
   options?: { label: string; value: string }[];
   type:
-    | "text"
-    | "time"
-    | "file"
-    | "select"
-    | "longDesc"
-    | "password"
-    | "number";
+  | "text"
+  | "time"
+  | "file"
+  | "select"
+  | "longDesc"
+  | "password"
+  | "number";
   changePayment?: (value: string) => void;
   getData: (event: any) => void;
 };
@@ -50,6 +50,13 @@ const Input = ({
     }
     // console.log(uploadedFile);
   };
+
+  const handleClearImage = () => {
+    const target = event?.target as Element;
+    let input = target.parentElement?.parentElement?.parentElement?.querySelector("input");
+    if (input) { input.value = ''; }
+    setUploadedFile(null);
+  }
 
   switch (type) {
     case "longDesc":
@@ -189,7 +196,7 @@ const Input = ({
               className="rounded-sm relative h-full w-full border-2 border-white object-cover"
             />
             <div
-              onClick={() => setUploadedFile(null)}
+              onClick={() => handleClearImage()}
               className="group absolute right-2 top-2 z-10 inline-flex h-6 w-6 cursor-pointer items-center justify-center overflow-hidden rounded-full p-1"
             >
               <div className="absolute h-full w-full opacity-[0.15] group-hover:bg-dark-gray"></div>

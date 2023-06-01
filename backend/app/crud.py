@@ -89,11 +89,15 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
     return db_order
 
 
-def get_orders(db: Session, event_id: int):
+def get_orders(db: Session, user_id: int, event_id: int):
+    if not user_id:
+        raise HTTPException(status_code=405, detail="Method not allowed")
     orders = db.query(models.Order).filter(models.Order.event_id == event_id).all()
     return orders
 
 
-def get_order(db: Session, order_id: int, event_id: int):
+def get_order(db: Session, user_id: int, order_id: int, event_id: int):
+    if not user_id:
+        raise HTTPException(status_code=405, detail="Method not allowed")
     order = db.query(models.Order).filter(models.Order.event_id == event_id).filter(models.Order.id == order_id).first()
     return order

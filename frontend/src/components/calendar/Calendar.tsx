@@ -17,14 +17,15 @@ let activeMonthName = months[currentMonthNumber];
 
 type Props = {
     events: {
-      title: string;
-      short_description: string;
-      startDate: string;
-      endDate: string;
-      time: string;
-      address: string;
-      image_path: string;
-      location: string;
+        id: number;
+        title: string;
+        short_description: string;
+        startDate: string;
+        endDate: string;
+        time: string;
+        address: string;
+        image_path: string;
+        location: string;
     }[];
 };
 
@@ -127,12 +128,12 @@ const Calendar = ({ events }: Props) => {
                                 }
                             }
 
-                            let modifiedEvents = events.map(function(event){
-                                return {...event, startDate: convertToDate(event.startDate), endDate: convertToDate(event.endDate) };
+                            let modifiedEvents = events.map(function (event) {
+                                return { ...event, startDate: convertToDate(event.startDate), endDate: convertToDate(event.endDate) };
                             });
 
-                           const thisDateEvents = modifiedEvents.filter(event => event.startDate === `${addLeadingZero(day.dayInfo.day)}/${addLeadingZero(activeMonthNumber+1)}/${day.dayInfo.year}`);
-                            
+                            const thisDateEvents = modifiedEvents.filter(event => event.startDate === `${addLeadingZero(day.dayInfo.day)}/${addLeadingZero(activeMonthNumber + 1)}/${day.dayInfo.year}`);
+
                             return (
                                 <CalendarDay key={index}
                                     selectedDate={selectedDate}
