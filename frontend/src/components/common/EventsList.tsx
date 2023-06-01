@@ -25,7 +25,7 @@ const EventsList = ({ events }: Props) => {
         <a
           href={`/events/${event.id}`}
           key={index}
-          className="rounded-sm border border-card-border bg-white shadow-card md:flex"
+          className="bg-white border rounded-sm border-card-border shadow-card md:flex"
         >
           <div
             className="h-[200px] basis-1/2 md:h-auto"
@@ -59,7 +59,7 @@ const EventsList = ({ events }: Props) => {
                     event.endDate
                   )}`}
               </p>
-              <p className="flex basis-full items-center gap-2 text-label text-slate-gray">
+              <p className="flex items-center gap-2 basis-full text-label text-slate-gray">
                 <Image priority src={pin} alt="Pin icon" width={18} />
                 {event.location}
               </p>

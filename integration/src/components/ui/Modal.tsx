@@ -16,7 +16,7 @@ const Modal = ({ children }: Props) => {
           <div>{children}</div>
           <Dialog.Close
             asChild
-            className="absolute top-6 right-6 cursor-pointer"
+            className="absolute cursor-pointer top-6 right-6"
           >
             <svg
               width="14"
@@ -28,9 +28,9 @@ const Modal = ({ children }: Props) => {
               <path
                 d="M1 13L13 1M1 1L13 13"
                 stroke="black"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </Dialog.Close>
