@@ -1,5 +1,5 @@
 import { EventProps } from "../Event";
-import { convertToDate, convertToTime } from "../helpers/helpers";
+import { convertToDate, convertToTime } from "../../helpers/helpers";
 import CardDivider from "../ui/CardDivider";
 import * as Form from "@radix-ui/react-form";
 import Input from "../ui/Input";

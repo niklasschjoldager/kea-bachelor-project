@@ -1,7 +1,7 @@
 import Modal from "../ui/Modal";
 import * as Dialog from "@radix-ui/react-dialog";
 import EventSingleView from "./EventSingleView";
-import { convertToDate, convertToTime } from "../helpers/helpers";
+import { convertToDate, convertToTime } from "../../helpers/helpers";
 
 export interface EventProps {
   created_at: string;
