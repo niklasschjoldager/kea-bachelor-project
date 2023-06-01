@@ -15,14 +15,15 @@ class User(Base):
 
     integration = relationship("Integration", back_populates="user")
 
+
 class Event(Base):
     __tablename__ = "events"
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(50))
-    price = Column(Integer)
+    price = Column(Integer, default=0)
     short_description = Column(String(125))
-    long_description = Column(String(800))
+    long_description = Column(String(800), nullable=True)
     image = Column(String)
     startDate = Column(DateTime)
     endDate = Column(DateTime)
@@ -51,6 +52,7 @@ class Order(Base):
 
     event_id = Column(Integer, ForeignKey("events.id"))
     event = relationship("Event", back_populates="orders")
+
 
 class Integration(Base):
     __tablename__ = "integrations"

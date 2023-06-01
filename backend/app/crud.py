@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from fastapi import HTTPException
+from app.schemas import EventCreate
 
 from app import models, schemas
 from app.auth import get_password_hash
@@ -44,12 +45,22 @@ def get_events(db: Session, user_id: int):
 
 
 def get_event(db: Session, user_id: int, event_id: int):
-    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
+    event = (
+        db.query(models.Event)
+        .filter(models.Event.user_id == user_id)
+        .filter(models.Event.id == event_id)
+        .first()
+    )
     return event
 
 
 def delete_event(db: Session, user_id: int, event_id: int):
-    event = db.query(models.Event).filter(models.Event.user_id == user_id).filter(models.Event.id == event_id).first()
+    event = (
+        db.query(models.Event)
+        .filter(models.Event.user_id == user_id)
+        .filter(models.Event.id == event_id)
+        .first()
+    )
     db.delete(event)
     db.commit()
     return {"ok": True}
@@ -87,6 +98,13 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
     db.refresh(db_order)
 
     return db_order
+
+
+def get_orders(db: Session, user_id: int, event_id: int):
+    if not user_id:
+        raise HTTPException(status_code=405, detail="Method not allowed")
+    orders = db.query(models.Order).filter(models.Order.event_id == event_id).all()
+    return orders
 
 
 def get_orders(db: Session, user_id: int, event_id: int):

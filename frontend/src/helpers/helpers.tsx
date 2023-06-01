@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { json } from "stream/consumers";
 
 type PostProps = {
   endpoint: string;
   type: "GET" | "POST" | "DELETE";
-  body?: Object;
+  body?: object;
   // Session and status should come from a global useSession
   session: any;
   status: any;
@@ -23,35 +24,44 @@ export const request = async ({
   endpoint,
   session,
   status,
-  body,
+  body
 }: PostProps) => {
   if (status !== "authenticated") {
     return;
   }
-  console.log(body, ' body');
+
   try {
+    let headers = {}
+
+    if (body instanceof FormData) {
+      headers = {
+        Authorization: `Bearer ${session?.user.access_token}`,
+      }
+    } else {
+      headers = {
+        "Content-Type": 'application/json',
+        Authorization: `Bearer ${session?.user.access_token}`,
+      }
+    }
+    
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
       }${endpoint}`,
       {
         method: type,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.user.access_token}`,
-        },
-        body: JSON.stringify(body),
+        headers: headers,
+        body: body instanceof FormData ? body : JSON.stringify(body)
       }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch");
     }
     const data = await response.json();
-    console.log(data, 'data !');
+
     return {
       "data": data,
       "response": response
     }
-
 
   } catch (error) {
     console.error("Error fetching:", error);

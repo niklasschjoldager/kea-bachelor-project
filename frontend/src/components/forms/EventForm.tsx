@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, FormEvent, ChangeEvent } from "react";
+import { useRef } from "react";
 import Form from "@/components/common/FormBase";
 import Input from "@/components/ui/Input";
 import { request } from "../../helpers/helpers";
@@ -25,14 +26,28 @@ const EventForm = () => {
             ...data,
             [event.target.name]: event.target.value
         })
+
+        if (event?.target?.files){
+            setData({
+                ...data,
+                'image': event.target.files[0]
+            })
+        }
     }
 
     const { data: session, status } = useSession();
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        console.log(data, 'data')
+        
+        let formData = new FormData();
+        for ( var key in data ) {
+            formData.append(key, data[key as keyof typeof data]);
+        }
+        console.log(data, 'data')
 
-        const response = request({ type: "POST", endpoint: "/events", body: data, session: session, status: status })
+        const response = request({ type: "POST", endpoint: "/events", body: formData, session: session, status: status })
     }
 
     const handleSelectChange = (value: string) => {
@@ -57,7 +72,7 @@ const EventForm = () => {
                 <Input type="time" labelText="Event start date" inputId="startDate" required={true} getData={updateData} />
                 <Input type="time" labelText="Event end date" inputId="endDate" required={false} getData={updateData} />
             </div>
-            <Input type="file" labelText="Image" inputId="image" required={false} getData={updateData} />
+            <Input type="file" labelText="Image" inputId="image" required={false} getData={updateData}/>
             <Input type="select" labelText="Type of payment and registration" inputId="event-type" options={paymentOptions} changePayment={changePayment} required={true} getData={handleSelectChange} />
             {ifPayment == "payment" && (
                 <>
