@@ -31,7 +31,8 @@ type Props = {
 const CalendarDay = ({ day, selectedDate, getSelectedDate, events }: Props) => {
   const dayIsActive =
     selectedDate.day === day.dayInfo.day &&
-    selectedDate.month === day.dayInfo.month
+    selectedDate.month === day.dayInfo.month &&
+    selectedDate.year === day.dayInfo.year
       ? true
       : false;
 
@@ -47,19 +48,21 @@ const CalendarDay = ({ day, selectedDate, getSelectedDate, events }: Props) => {
       } ${dayIsActive && !day.isDisabled ? "bg-ghost-white" : ""}`}
     >
       <p className="text-label text-paynes-gray">{day.dayInfo.day}</p>
-
-      {events.map((event, index) => {
-        return (
-          <div
-            key={index}
-            className={`rounded-sm bg-paynes-gray px-2 py-0.5 text-white ${
-              dayIsActive ? "border-white" : ""
-            }`}
-          >
-            <p className="text-label">{event.title}</p>
-          </div>
-        );
-      })}
+      {!day.isDisabled &&
+        events.map((event, index) => {
+          console.log(event)
+          return (
+            <div
+              key={index}
+              className={`rounded-sm bg-paynes-gray px-2 py-0.5 text-white ${
+                dayIsActive ? "border-white" : ""
+              }`}
+            >
+              <p className="text-label">{event.title}</p>
+            </div>
+          );
+        })
+      }
     </div>
   );
 };
