@@ -12,10 +12,10 @@ export default async function SignUp() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-24">
-      <h1 className="text-4xl">Sign up</h1>
+    <main className="flex flex-col py-[100px] mt-[135px] mx-auto max-w-modal min-h-screen p-24">
+      <h1 className="text-h1 mb-5">Sign up</h1>
       <SignUpForm />
-      <Link href="/">Already got an account? Sign in</Link>
+      <Link href="/" className="text-end mt-5 text-label text-slate-gray">Already got an account? Click here to sign in</Link>
     </main>
   );
 }

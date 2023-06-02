@@ -16,6 +16,9 @@ const TopNav = () => {
 
   const name = session?.user?.name?.split(" ");
   const nameInitials = name ? `${name[0][0]}${name[name.length - 1][0]}` : "";
+  console.log(name);
+  console.log(nameInitials);
+
 
   return (
     <div className="w-full border-b-[1px] border-b-card-border bg-white px-5 pt-5 shadow-card">
