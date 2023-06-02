@@ -34,7 +34,7 @@ const CalendarList = ({ selectedDateEvents, selectedDate }: Props) => {
         <Link
           key={index}
           className="block p-2 mt-6 border rounded-sm border-input-border text-dark-gray-faded"
-          href={`/events/${event.id}`}
+          href={`/dashboard/events/${event.id}`}
         >
           <h4 className="mb-3 text-h4">{event.title}</h4>
           <p className="mt-1 text-label text-slate-gray">

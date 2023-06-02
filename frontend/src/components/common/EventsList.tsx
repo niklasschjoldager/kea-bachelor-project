@@ -24,7 +24,7 @@ const EventsList = ({ events }: Props) => {
     <div className="flex flex-col gap-6">
       {events?.map((event, index) => (
         <Link
-          href={`/events/${event.id}`}
+          href={`/dashboard/events/${event.id}`}
           key={index}
           className="bg-white border rounded-sm border-card-border shadow-card md:flex"
         >
