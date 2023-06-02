@@ -101,14 +101,14 @@ const EventForm = () => {
       />
       <div className="flex flex-col gap-5 md:flex-row">
         <Input
-          type="time"
+          type="datetime-local"
           labelText="Event start date"
           inputId="startDate"
           required={true}
           getData={updateData}
         />
         <Input
-          type="time"
+          type="datetime-local"
           labelText="Event end date"
           inputId="endDate"
           required={false}
