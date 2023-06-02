@@ -12,6 +12,9 @@ type Props = {
   inputId: string;
   labelText: string;
   required: true | false;
+  extraLabel?: string;
+  minLength?: number;
+  maxLength?: number;
   options?: { label: string; value: string }[];
   type:
   | "text"
@@ -34,6 +37,9 @@ const Input = ({
   changePayment,
   required,
   getData,
+  extraLabel,
+  minLength,
+  maxLength
 }: Props) => {
   let input;
 
@@ -96,6 +102,8 @@ const Input = ({
           onChange={getData}
           className="rounded-sm border-[1px] border-input-border px-3 py-2 text-body text-dark-gray focus:outline-dark-gray"
           required={required}
+          minLength={minLength}
+          maxLength={maxLength}
         />
       );
       break;
@@ -157,6 +165,8 @@ const Input = ({
           onChange={getData}
           className="rounded-sm border-[1px] border-input-border px-3 py-2 text-body text-dark-gray focus:outline-dark-gray"
           required={required}
+          minLength={minLength}
+          maxLength={maxLength}
         />
       );
       break;
@@ -167,12 +177,18 @@ const Input = ({
       name={inputId}
       className="flex w-full flex-col justify-end gap-1 text-label text-dark-gray"
     >
-      <Form.Label htmlFor={inputId}>{labelText}</Form.Label>
+      <Form.Label htmlFor={inputId}>{labelText} {extraLabel && (<span className="text-dark-gray opacity-40">{extraLabel}</span>)}</Form.Label>
       <Form.Message className="text-label text-[red]" match="valueMissing">
         Please enter a {labelText}
       </Form.Message>
       <Form.Message className="text-label text-[red]" match="typeMismatch">
         Please provide a valid {labelText}
+      </Form.Message>
+      <Form.Message className="text-label text-[red]" match="tooLong">
+        {labelText} has to be maximum {maxLength} characters
+      </Form.Message>
+      <Form.Message className="text-label text-[red]" match="tooShort">
+        {labelText} has to be at least {minLength} characters
       </Form.Message>
       {type == "file" &&
         (!uploadedFile ? (

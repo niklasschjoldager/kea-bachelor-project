@@ -21,6 +21,7 @@ function SignUpForm() {
     });
   }
 
+
   return (
     <Form formAction={handleSubmit} submitText="Sign up">
       <Input
@@ -28,6 +29,7 @@ function SignUpForm() {
         labelText="Full name"
         inputId="full-name"
         required={true}
+        maxLength={30}
         getData={(event) => setFullName(event.target.value)}
       />
       <Input
@@ -40,47 +42,13 @@ function SignUpForm() {
       <Input
         type="password"
         labelText="Password"
+        extraLabel="(minimum 10 characters)"
         inputId="password"
         required={true}
+        minLength={10}
         getData={(event) => setPassword(event.target.value)}
       />
     </Form>
-    // <form className="grid gap-2" onSubmit={handleSubmit}>
-    //   <label className="grid" htmlFor="full-name">
-    //     <span>Full name</span>
-    //     <input
-    //       className="bg-paynes-gray text-ghost-white"
-    //       id="full-name"
-    //       type="text"
-    //       name="full-name"
-    //       value={fullName}
-    //       onChange={(event) => setFullName(event.target.value)}
-    //     />
-    //   </label>
-    //   <label className="grid" htmlFor="email">
-    //     <span>Email</span>
-    //     <input
-    //       className="bg-paynes-gray text-ghost-white"
-    //       id="email"
-    //       type="email"
-    //       name="username"
-    //       value={email}
-    //       onChange={(event) => setEmail(event.target.value)}
-    //     />
-    //   </label>
-    //   <label className="grid" htmlFor="password">
-    //     <span>Password</span>
-    //     <input
-    //       className=" bg-paynes-gray text-ghost-white"
-    //       id="password"
-    //       type="password"
-    //       name="password"
-    //       value={password}
-    //       onChange={(event) => setPassword(event.target.value)}
-    //     />
-    //   </label>
-    //   <button className="px-4 py-2 text-white bg-dark-gray">Sign up</button>
-    // </form>
   );
 }
 
