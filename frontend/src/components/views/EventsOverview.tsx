@@ -47,8 +47,7 @@ const EventsOverview = () => {
       </div>
       {events && events.length > 0 ? (
         <>
-          <div className="flex items-end justify-between mb-6">
-            <h2 className="leading-none text-h2 text-slate-gray">May</h2>
+          <div className="flex items-end justify-end mb-6">
             <ViewSwitcher views={views} updateView={updateView} />
           </div>
           {activeView === "List" ? (
