@@ -91,7 +91,7 @@ const Calendar = ({ events }: Props) => {
 
 
     return (
-        <div className='flex flex-col md:flex-row gap-4'>
+        <div className='flex flex-col lg:flex-row gap-4'>
             <div className='grow'>
                 <Card>
                     <div className='flex justify-center items-center gap-8'>
@@ -147,9 +147,11 @@ const Calendar = ({ events }: Props) => {
                     </div>
                 </Card>
             </div>
-            <Card>
-                <CalenderList selectedDateEvents={selectedDateEvents} selectedDate={selectedDate} />
-            </Card>
+            <div>
+                <Card>
+                    <CalenderList selectedDateEvents={selectedDateEvents} selectedDate={selectedDate} />
+                </Card>
+            </div>
         </div>
     )
 }
