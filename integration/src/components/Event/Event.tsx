@@ -1,7 +1,11 @@
 import Modal from "../ui/Modal";
 import * as Dialog from "@radix-ui/react-dialog";
 import EventSingleView from "./EventSingleView";
-import { convertToDate, convertToTime } from "../helpers/helpers";
+import {
+  REST_API_URL,
+  convertToDate,
+  convertToTime,
+} from "../../helpers/helpers";
 
 export interface EventProps {
   created_at: string;
@@ -34,7 +38,7 @@ function Event(props: EventProps) {
           <div className="relative h-[200px] md:h-auto basis-1/2">
             <img
               className="object-cover w-full h-full md:h-auto md:absolute"
-              src="https://picsum.photos/200/300"
+              src={`${REST_API_URL}/images/${props.image}`}
               alt={props.title}
             />
           </div>

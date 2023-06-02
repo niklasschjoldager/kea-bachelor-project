@@ -8,11 +8,10 @@ import NavigationList from "@/components/ui/NavigationList";
 import { useSession } from "next-auth/react";
 
 const TopNav = () => {
-
   const { data: session } = useSession();
   const navElements = [
-    { name: "Events", href: "/events" },
-    { name: "Integration", href: "/integration" },
+    { name: "Events", href: "/dashboard/events" },
+    { name: "Integration", href: "/dashboard/integration" },
   ];
 
   const name = session?.user?.name?.split(" ");

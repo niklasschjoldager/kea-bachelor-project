@@ -1,6 +1,7 @@
 import { EventProps } from "../Event";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { EventInfo } from "./EventInfo";
+import { REST_API_URL } from "../../helpers/helpers";
 
 type Props = {
   props: EventProps;
@@ -44,16 +45,13 @@ function EventSingleView({ props }: Props) {
     if (eventType === "payment") {
       console.log("Go to payment");
     } else if (eventType === "signup") {
-      const request = await fetch(
-        `http://127.0.0.1:8000/events/${props.id}/orders`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const request = await fetch(`${REST_API_URL}/events/${props.id}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
       const response = await request.json();
       console.log("You are signed up!");
       if (request.ok) {

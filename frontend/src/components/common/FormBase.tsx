@@ -13,10 +13,12 @@ const FormBase = ({ formAction, submitText, children }: Props) => {
   return (
     <Form.Root onSubmit={formAction} className="flex flex-col gap-5">
       {children}
-      <Form.Submit className="flex justify-end w-full">
-        <Button buttonText={submitText} />
+      <Form.Submit asChild className="flex justify-end">
+        <div>
+          <Button buttonText={submitText} />
+        </div>
       </Form.Submit>
-    </Form.Root >
+    </Form.Root>
   );
 };
 

@@ -1,5 +1,6 @@
 import CardDivider from "../ui/CardDivider";
 import { convertToDate, convertToTime } from "../../helpers/helpers";
+import Link from "next/link";
 
 type Props = {
   selectedDateEvents: {
@@ -30,27 +31,28 @@ const CalendarList = ({ selectedDateEvents, selectedDate }: Props) => {
       </div>
       <CardDivider />
       {selectedDateEvents?.map((event, index) => (
-        <a href={`/events/${event.id}`}
+        <Link
           key={index}
-          className="rounded-sm mt-6 border border-input-border p-2 text-dark-gray-faded block"
+          className="block p-2 mt-6 border rounded-sm border-input-border text-dark-gray-faded"
+          href={`/dashboard/events/${event.id}`}
         >
           <h4 className="mb-3 text-h4">{event.title}</h4>
           <p className="mt-1 text-label text-slate-gray">
             {convertToDate(event.startDate) === convertToDate(event.endDate)
               ? convertToDate(event.startDate)
               : `${convertToDate(event.startDate)} - ${convertToDate(
-                event.endDate
-              )}`}
+                  event.endDate
+                )}`}
           </p>
           <p className="mt-1 text-label text-slate-gray">
             {convertToTime(event.startDate) === convertToTime(event.endDate)
               ? convertToTime(event.startDate)
               : `${convertToTime(event.startDate)} - ${convertToTime(
-                event.endDate
-              )}`}
+                  event.endDate
+                )}`}
           </p>
           <p className="mt-1 text-label text-slate-gray">{event.location}</p>
-        </a>
+        </Link>
       ))}
     </div>
   );

@@ -1,5 +1,6 @@
 import logging
 from fastapi import FastAPI, Request, status
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,6 +14,8 @@ app = FastAPI()
 app.include_router(auth.router)
 app.include_router(events.router)
 app.include_router(orders.router)
+
+app.mount("/images", StaticFiles(directory="images"), name="images")
 
 origins = [
     "*",

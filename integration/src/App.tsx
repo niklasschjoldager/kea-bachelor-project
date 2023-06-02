@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { EventProps } from "./components/Event";
 import EventList from "./components/EventList";
+import { REST_API_URL } from "./helpers/helpers";
 
 interface AppProps {
   integrationId: string;
@@ -13,7 +14,7 @@ function App({ integrationId }: AppProps) {
   useEffect(() => {
     async function getEvents() {
       const request = await fetch(
-        `https://backend-1-k4591778.deta.app/users/${integrationId}/events`,
+        `${REST_API_URL}/users/${integrationId}/events`,
         {
           method: "GET",
           headers: {

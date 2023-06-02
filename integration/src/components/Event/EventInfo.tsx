@@ -1,5 +1,9 @@
 import { EventProps } from "../Event";
-import { convertToDate, convertToTime } from "../helpers/helpers";
+import {
+  REST_API_URL,
+  convertToDate,
+  convertToTime,
+} from "../../helpers/helpers";
 import CardDivider from "../ui/CardDivider";
 import * as Form from "@radix-ui/react-form";
 import Input from "../ui/Input";
@@ -126,7 +130,7 @@ export const EventInfo = ({
           }`}
         >
           <img
-            src="https://picsum.photos/200"
+            src={`${REST_API_URL}/images/${props.image}`}
             alt=""
             className="object-cover w-full h-full"
           />
