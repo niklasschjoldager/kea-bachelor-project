@@ -15,6 +15,7 @@ type Props = {
   options?: { label: string; value: string }[];
   type:
   | "text"
+  | "email"
   | "time"
   | "file"
   | "select"
@@ -86,17 +87,15 @@ const Input = ({
         />
       );
       break;
-    case "time":
+    case "password":
       input = (
         <input
-          type="datetime-local"
+          type={type}
           id={inputId}
           name={inputId}
-          min="2020-06-07T00:00"
-          max="2030-06-14T00:00"
-          className="rounded-sm calendar-picker-indicator:dark-gray cursor-pointer border-[1px] border-input-border px-3 py-2 text-body text-dark-gray focus:outline-dark-gray calendar-picker-indicator:cursor-pointer calendar-picker-indicator:bg-[url('/assets/icons/calendar.svg')]"
-          required={required}
           onChange={getData}
+          className="rounded-sm border-[1px] border-input-border px-3 py-2 text-body text-dark-gray focus:outline-dark-gray"
+          required={required}
         />
       );
       break;

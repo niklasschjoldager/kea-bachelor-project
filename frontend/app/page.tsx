@@ -12,10 +12,10 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-24">
-      <h1 className="text-4xl">Log in</h1>
+    <main className="flex flex-col py-[100px] mx-auto max-w-modal min-h-screen p-24">
+      <h1 className="text-h1 mb-5">Sign up</h1>
       <SignInForm />
-      <Link href="/signup">Create account</Link>
+      <Link href="/signup" className="text-end text-label mt-5 text-slate-gray">Not a member yet? Click here to create an account</Link>
     </main>
   );
 }
