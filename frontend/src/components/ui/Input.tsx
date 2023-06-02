@@ -19,7 +19,7 @@ type Props = {
   type:
   | "text"
   | "email"
-  | "time"
+  | "datetime-local"
   | "file"
   | "select"
   | "longDesc"
