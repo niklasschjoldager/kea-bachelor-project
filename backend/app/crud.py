@@ -68,6 +68,9 @@ def delete_event(db: Session, user_id: int, event_id: int):
         .filter(models.Event.id == event_id)
         .first()
     )
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found")
+
     db.delete(event)
     db.commit()
     return {"ok": True}

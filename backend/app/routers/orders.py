@@ -36,7 +36,9 @@ def get_order(
     event_id,
     db: Session = Depends(get_db),
 ):
-    order = crud.get_order(db, order_id, event_id, user_id=current_user.id)
+    order = crud.get_order(
+        db=db, order_id=order_id, event_id=event_id, user_id=current_user.id
+    )
 
     if order is None:
         raise HTTPException(status_code=404, detail="No such order")
