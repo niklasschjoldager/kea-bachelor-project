@@ -25,7 +25,7 @@ const Modal = ({ title, buttonText, button, children }: Props) => {
         )}
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="pointer-events-none fixed inset-0 bg-dark-gray opacity-[0.15]" />
+        <Dialog.Overlay className="pointer-events-none fixed inset-0 bg-dark-gray opacity-50" />
         <Dialog.Content className="rounded-sm fixed left-[50%] top-[50%] max-h-[85vh] w-full max-w-modal translate-x-[-50%] translate-y-[-50%] overflow-x-scroll focus:outline-none data-[state=open]:animate-contentShow">
           <Card>
             <h1 className="text-h1 text-dark-gray">{title}</h1>

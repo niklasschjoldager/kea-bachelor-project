@@ -80,7 +80,7 @@ def create_order(db: Session, order: schemas.OrderCreate, event_id: int):
             raise HTTPException(status_code=400, detail="We are very sorry, there are not enough tickets!")
 
         # update event.available_tickets with ticket sold_tickets 
-        event.available_tickets = event.ticket_quantity - sold_tickets
+        event.available_tickets = event.ticket_quantity - (sold_tickets or 0)
         db.add(event)
         db.commit()
         db.refresh(event)
