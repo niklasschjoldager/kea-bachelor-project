@@ -4,7 +4,7 @@
 
 ## Backend
 
-[https://backend-1-k4591778.deta.app](https://backend-1-k4591778.deta.app)
+[https://kea-bachelor-project-production.up.railway.app](https://kea-bachelor-project-production.up.railway.app)
 
 ## Integration
 
