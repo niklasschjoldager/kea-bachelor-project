@@ -10,7 +10,7 @@ const Button = ({ buttonText, onClick, type }: Props) => {
   return (
     <button
       type={type}
-      className="rounded-sm h-10 bg-dark-gray px-3 text-body text-white"
+      className="rounded-sm h-10 bg-dark-gray px-3 text-white text-button"
       onClick={onClick}
     >
       {buttonText}
