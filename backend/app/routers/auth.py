@@ -5,13 +5,12 @@ from sqlalchemy.orm import Session
 from typing import Annotated
 
 from app import crud
-from app.schemas import UserCreate, User, LoginData
+from app.schemas import UserCreate, LoginData
 from app.dependencies import get_db
 from app.auth import (
     authenticate_user,
     ACCESS_TOKEN_EXPIRE_MINUTES,
     create_access_token,
-    get_current_user,
 )
 
 router = APIRouter(tags=["authentication"])

@@ -6,7 +6,6 @@ from app.schemas import User, EventCreate
 from app.dependencies import get_db
 from app.auth import get_current_user
 from typing import Annotated, Optional
-from fastapi.responses import FileResponse
 import os
 import uuid
 import imghdr
