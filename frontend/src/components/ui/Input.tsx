@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Form from "@radix-ui/react-form";
 import * as Select from "@radix-ui/react-select";
 import ArrowDown from "@/icons/arrow-down-paynes.svg";
@@ -7,6 +7,7 @@ import Check from "@/icons/checkmark.svg";
 import Close from "@/icons/close.svg";
 import Upload from "@/icons/upload.svg";
 import Image from "next/image";
+import dayjs from "dayjs";
 
 type Props = {
   inputId: string;
@@ -42,6 +43,12 @@ const Input = ({
   maxLength
 }: Props) => {
   let input;
+  const [today, setToday] = useState("")
+  useEffect(() => {
+    const date = new Date();
+    setToday(dayjs(date).add(0, "day").format("YYYY-MM-DDThh:mm"))
+  }, [])
+
 
   const setIfPayment = (value: string) => {
     if (changePayment) {
@@ -55,7 +62,6 @@ const Input = ({
     if (event.target.files && event.target.files[0]) {
       setUploadedFile(URL.createObjectURL(event.target.files[0]));
     }
-    // console.log(uploadedFile);
   };
 
   const handleClearImage = () => {
@@ -167,6 +173,8 @@ const Input = ({
           required={required}
           minLength={minLength}
           maxLength={maxLength}
+          min={today}
+          max={"2050-01-01T00:00"}
         />
       );
       break;
@@ -178,18 +186,25 @@ const Input = ({
       className="flex w-full flex-col justify-end gap-1 text-label text-dark-gray"
     >
       <Form.Label htmlFor={inputId}>{labelText} {extraLabel && (<span className="text-dark-gray opacity-40">{extraLabel}</span>)}</Form.Label>
-      <Form.Message className="text-label text-[red]" match="valueMissing">
-        Please enter a {labelText}
+      <Form.Message className="text-label text-failed" match="valueMissing">
+        Please insert a {labelText.toLowerCase()}
       </Form.Message>
-      <Form.Message className="text-label text-[red]" match="typeMismatch">
+      <Form.Message className="text-label text-failed" match="typeMismatch">
         Please provide a valid {labelText}
       </Form.Message>
-      <Form.Message className="text-label text-[red]" match="tooLong">
+      <Form.Message className="text-label text-failed" match="tooLong">
         {labelText} has to be maximum {maxLength} characters
       </Form.Message>
-      <Form.Message className="text-label text-[red]" match="tooShort">
+      <Form.Message className="text-label text-failed" match="tooShort">
         {labelText} has to be at least {minLength} characters
       </Form.Message>
+      <Form.Message className="text-label text-failed" match="rangeUnderflow">
+        Please provide a valid {labelText.toLowerCase()}
+      </Form.Message>
+      <Form.Message className="text-label text-failed" match="rangeOverflow">
+        Please provide a valid {labelText.toLowerCase()}
+      </Form.Message>
+      { }
       {type == "file" &&
         (!uploadedFile ? (
           <Form.Label
@@ -205,9 +220,11 @@ const Input = ({
           </Form.Label>
         ) : (
           <div className="image-input relative h-28 overflow-hidden before:absolute before:left-0 before:top-0 before:z-[1] before:h-full before:w-full">
-            <img
+            <Image
               alt="preview image"
               src={uploadedFile}
+              width={100}
+              height={100}
               className="rounded-sm relative h-full w-full border-2 border-white object-cover"
             />
             <div
