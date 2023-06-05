@@ -53,10 +53,6 @@ def get_user():
     return response
 
 
-def create_event():
-    return ""
-
-
 def test_signup(test_db):
     request = client.post(
         "/signup",
