@@ -9,7 +9,7 @@ const Button = ({ buttonText, onClick, type, state }: Props) => {
   return (
     <button
       type={type}
-      className={`px-3 h-10 text-white rounded-sm text-body ${state == "disabled" ? "bg-dark-gray-faded cursor-default" : "bg-dark-gray"}`}
+      className={`px-3 h-10 text-white rounded-2 text-button ${state == "disabled" ? "bg-dark-gray-faded cursor-default" : "bg-dark-gray"}`}
       onClick={onClick}
     >
       {buttonText}

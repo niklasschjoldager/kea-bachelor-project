@@ -13,7 +13,7 @@ class UserCreate(UserBase):
 
 
 class User(UserBase):
-    id: int
+    id: str
 
     class Config:
         orm_mode = True
@@ -25,7 +25,7 @@ class Token(BaseModel):
 
 
 class LoginData(BaseModel):
-    id: int
+    id: str
     access_token: str
     name: str
     email: str
@@ -47,14 +47,14 @@ class EventBase(BaseModel):
     created_at: datetime = datetime.now()
     location: str
     ticket_quantity: Union[int, None] = None
-   
+
 
 class EventCreate(EventBase):
     pass
 
 
 class Event(EventBase):
-    id: int
+    id: str
     available_tickets: Union[int, None] = None
 
     class Config:
@@ -73,7 +73,7 @@ class OrderCreate(OrderBase):
 
 
 class Order(OrderBase):
-    id: int
+    id: str
     status: str
     total_price: int
 
