@@ -13,7 +13,6 @@ class User(Base):
     full_name = Column(String(25))
 
     event = relationship("Event", back_populates="user")
-    integration = relationship("Integration", back_populates="user")
 
 
 class Event(Base):
@@ -58,12 +57,3 @@ class Order(Base):
 
     event_id = Column(String(36), ForeignKey("events.id"))
     event = relationship("Event", back_populates="orders")
-
-
-class Integration(Base):
-    __tablename__ = "integrations"
-
-    id = Column(String(36), primary_key=True, index=True, default=str(uuid.uuid4()))
-
-    user_id = Column(String(36), ForeignKey("users.id"))
-    user = relationship("User", back_populates="integration")
