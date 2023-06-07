@@ -32,7 +32,7 @@ function Event(props: EventProps) {
   const endTime = convertToTime(props.endDate);
 
   return (
-    <Dialog.Root>
+    <Dialog.Root modal>
       <Dialog.Trigger asChild>
         <div className="overflow-hidden bg-white border rounded-sm cursor-pointer border-card-border shadow-card md:flex">
           <div className="relative h-[200px] md:h-auto basis-1/2">

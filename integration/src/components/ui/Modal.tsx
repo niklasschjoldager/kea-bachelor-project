@@ -10,8 +10,8 @@ type Props = {
 const Modal = ({ children }: Props) => {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className="bg-dark-gray opacity-50 fixed inset-0 pointer-events-none" />
-      <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] max-w-[800px] w-full translate-x-[-50%] translate-y-[-50%] rounded-sm overflow-x-scroll focus:outline-none">
+      <Dialog.Overlay className="bg-dark-gray opacity-50 fixed inset-0 pointer-events-none z-[100]" />
+      <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] max-w-[800px] w-full translate-x-[-50%] translate-y-[-50%] rounded-sm overflow-x-scroll focus:outline-none z-[200]">
         <Card>
           <div>{children}</div>
           <Dialog.Close
