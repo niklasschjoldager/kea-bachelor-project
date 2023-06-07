@@ -56,7 +56,7 @@ const CalendarDay = ({ day, selectedDate, getSelectedDate, events }: Props) => {
       ? true
       : false;
 
-  const overflowingEvents = events.length > 1 ? events.length - 2 : false
+  const overflowingEvents = events.length > 1 ? events.length - 2 : 0
 
   return (
     <div
