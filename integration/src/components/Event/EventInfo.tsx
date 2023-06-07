@@ -121,7 +121,7 @@ export const EventInfo = ({
         </div>
 
         <div
-          className={`md:w-1/2 ${signupState == "signup" ? "hidden md:block" : ""
+          className={`md:w-1/2 overflow-hidden ${signupState == "signup" ? "hidden md:block" : ""
             }`}
         >
           <img
