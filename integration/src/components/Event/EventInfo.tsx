@@ -32,20 +32,17 @@ export const EventInfo = ({
   return (
     <>
       <div
-        className={`p-6 flex flex-col gap-3 md:flex-row-reverse md:gap-6 ${
-          signupState == "signup" ? "md:h-52 pb-0 md:pb-6" : ""
-        }`}
+        className={`p-6 flex flex-col gap-3 md:flex-row-reverse md:gap-6 ${signupState == "signup" ? "md:h-52 pb-0 md:pb-6" : ""
+          }`}
       >
         <div
-          className={`flex flex-col gap-3 py-5 md:w-1/2 ${
-            signupState == "signup" ? "gap-6 md:gap-3 pb-0 md:py-5" : ""
-          }`}
+          className={`flex flex-col gap-3 py-5 md:w-1/2 ${signupState == "signup" ? "gap-6 md:gap-3 pb-0 md:py-5" : ""
+            }`}
         >
           <h1 className="text-h1 text-dark-gray">{props.title}</h1>
           <p
-            className={`text-body text-dark-gray-faded ${
-              signupState == "signup" ? "hidden" : ""
-            }`}
+            className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""
+              }`}
           >
             {props.short_description}
           </p>
@@ -69,8 +66,8 @@ export const EventInfo = ({
               {convertToDate(props.startDate) === convertToDate(props.endDate)
                 ? convertToDate(props.startDate)
                 : `${convertToDate(props.startDate)} - ${convertToDate(
-                    props.endDate
-                  )}`}
+                  props.endDate
+                )}`}
             </p>
             <p className="flex items-center gap-2 text-label text-slate-gray">
               <svg
@@ -116,23 +113,21 @@ export const EventInfo = ({
           </div>
           <CardDivider />
           <p
-            className={`text-body text-dark-gray-faded ${
-              signupState == "signup" ? "hidden" : ""
-            }`}
+            className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""
+              }`}
           >
             {props.long_description}
           </p>
         </div>
 
         <div
-          className={`md:w-1/2 ${
-            signupState == "signup" ? "hidden md:block" : ""
-          }`}
+          className={`md:w-1/2 ${signupState == "signup" ? "hidden md:block" : ""
+            }`}
         >
           <img
             src={`${REST_API_URL}/images/${props.image}`}
             alt=""
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-auto max-h-96"
           />
         </div>
       </div>
