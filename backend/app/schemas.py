@@ -1,11 +1,11 @@
 from typing import Union
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from datetime import datetime
 
 
 class UserBase(BaseModel):
-    email: str
-    full_name: str = Field(..., max_length=30)
+    email: EmailStr
+    full_name: str = Field(..., max_length=100)
 
 
 class UserCreate(UserBase):
@@ -37,15 +37,15 @@ class TokenData(BaseModel):
 
 
 class EventBase(BaseModel):
-    title: str
+    title: str = Field(..., max_length=100)
     price: Union[int, None] = (0,)
-    short_description: str
+    short_description: str = Field(..., max_length=150)
     image: str
     long_description: Union[str, None] = None
     startDate: datetime
     endDate: Union[datetime, None] = None
     created_at: datetime = datetime.now()
-    location: str
+    location: str = Field(..., max_length=100)
     ticket_quantity: Union[int, None] = None
 
 
@@ -62,8 +62,8 @@ class Event(EventBase):
 
 
 class OrderBase(BaseModel):
-    email: str
-    full_name: str = Field(..., max_length=30)
+    email: EmailStr
+    full_name: str = Field(..., max_length=100)
     phone_number: int
     created_at: datetime = datetime.now()
 
