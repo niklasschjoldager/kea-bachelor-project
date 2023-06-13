@@ -92,6 +92,7 @@ const EventForm = () => {
         <Input
           type="text"
           labelText="Short description"
+          extraLabel="(max 150 characters)"
           inputId="short_description"
           required={true}
           getData={updateData}
