@@ -77,14 +77,14 @@ const CalendarDay = ({ day, selectedDate, getSelectedDate, events }: Props) => {
                 key={index}
                 className={`rounded-sm bg-paynes-gray px-2 py-0.1 text-white w-full ${dayIsActive ? "border-white" : ""
                   }`}
-              >
-                <p className="text-label text-overflow-ellipsis">{event.title}</p>
-              </div>
-            ) : (null);
-          })}</>
-          <>{overflowingEvents > 0 && <p className="text-label text-slate-gray leading-[16px]">{overflowingEvents} more...</p>}</>
-        </>
-        : <div className={events.length && !day.isDisabled ? `w-[5px] h-[5px] rounded-full bg-paynes-gray` : ''}></div>
+                >
+                  <p className="text-label text-overflow-ellipsis">{event.title}</p>
+                </div>
+              ):(null);
+            })}</>
+            <>{overflowingEvents > 0 && <p className="text-label text-slate-gray">{overflowingEvents} more...</p>}</>
+          </>
+        : <div className={events.length > 1 && !day.isDisabled ? `w-[5px] h-[5px] rounded-full bg-paynes-gray` : ''}></div>
       }
     </div>
   );
