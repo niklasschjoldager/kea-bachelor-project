@@ -6,7 +6,7 @@ type Props = {
 
 const Card = ({ children }: Props) => {
   return (
-    <div className="bg-white border-[1px] rounded-sm border-card-border shadow-card flex flex-col gap-6 overflow-scroll">
+    <div className="bg-white border-[1px] rounded-sm border-card-border shadow-card flex flex-col gap-6 overflow-y-auto">
       {children}
     </div>
   );

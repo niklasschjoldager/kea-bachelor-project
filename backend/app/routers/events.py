@@ -68,11 +68,7 @@ def create_event(
 
         imghdr_extension = imghdr.what(f"./images/{image_name}")
 
-        print(file_extension)
-        print("imghdr: ", imghdr_extension)
-
         if file_extension != f".{imghdr_extension}":
-            print("not allowed")
             raise HTTPException(status_code=400, detail="Image not allowed")
 
         if endDate == None:
@@ -90,13 +86,13 @@ def create_event(
             ticket_quantity=ticket_quantity,
         )
 
-        createdEvent = crud.create_event(db=db, event=event, user_id=current_user.id)
+        created_event = crud.create_event(db=db, event=event, user_id=current_user.id)
 
-        if not createdEvent:
+        if not created_event:
             os.remove(f"./images/{image_name}")
             raise HTTPException(status_code=500, detail="Could not create event")
 
-        return createdEvent
+        return created_event
     except Exception as exception:
         os.remove(f"./images/{image_name}")
         raise exception
