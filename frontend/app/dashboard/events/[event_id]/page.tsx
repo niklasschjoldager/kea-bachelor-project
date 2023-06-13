@@ -61,7 +61,6 @@ export default function Orders() {
           session: session,
           status: status,
         });
-        console.log("response", response);
         switch (endpoint.setter) {
           case "setEvent":
             setEvent(response?.data);

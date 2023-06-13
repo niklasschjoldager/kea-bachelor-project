@@ -169,7 +169,7 @@ export const EventInfo = ({
             <p>
               Price per ticket: <b>{props.price} DKK</b>
             </p>
-            <Form.Submit>
+            <Form.Submit asChild>
               <Button
                 buttonText={
                   eventType === "payment"
