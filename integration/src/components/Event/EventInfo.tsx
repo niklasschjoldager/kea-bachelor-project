@@ -140,12 +140,13 @@ export const EventInfo = ({
               required={true}
               type={"text"}
               getData={updateData}
+              maxLength={100}
             />
             <Input
               inputId={"email"}
               labelText={"E-mail"}
               required={true}
-              type={"text"}
+              type={"email"}
               getData={updateData}
             />
             <Input
@@ -168,7 +169,7 @@ export const EventInfo = ({
             <p>
               Price per ticket: <b>{props.price} DKK</b>
             </p>
-            <Form.Submit>
+            <Form.Submit asChild>
               <Button
                 buttonText={
                   eventType === "payment"

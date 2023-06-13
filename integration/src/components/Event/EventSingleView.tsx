@@ -36,35 +36,38 @@ function EventSingleView({ props }: Props) {
     props.id,
     props.available_tickets,
   ]);
-  console.log(eventType);
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(data);
 
-    if (eventType === "payment") {
-      console.log("Go to payment");
-    } else if (eventType === "signup") {
-      const request = await fetch(`${REST_API_URL}/events/${props.id}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const response = await request.json();
-      console.log("You are signed up!");
-      if (request.ok) {
-        setSuccessMessage(
-          "Thank you for your participation. We look forward to seeing you!"
-        );
-        console.log("OK");
-      } else {
-        setSuccessMessage(response.detail);
-        console.log("NOT OK");
-      }
+    const request = await fetch(`${REST_API_URL}/events/${props.id}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const response = await request.json();
+
+    if (!request.ok) {
+      setSuccessMessage(response.detail);
+      console.log("YOYOY FAILED");
       setSignupState("success");
     }
+
+    if (eventType === "payment" && request.ok) {
+      setSuccessMessage(
+        "Thank you for your payment. We look forward to seeing you!"
+      );
+    } else if (eventType === "signup" && request.ok) {
+      setSuccessMessage(
+        "Thank you for your participation. We look forward to seeing you!"
+      );
+    } else {
+      setSuccessMessage(response.detail);
+    }
+    setSignupState("success");
   };
 
   const updateData = (event: ChangeEvent<HTMLInputElement>) => {
