@@ -140,12 +140,13 @@ export const EventInfo = ({
               required={true}
               type={"text"}
               getData={updateData}
+              maxLength={100}
             />
             <Input
               inputId={"email"}
               labelText={"E-mail"}
               required={true}
-              type={"text"}
+              type={"email"}
               getData={updateData}
             />
             <Input

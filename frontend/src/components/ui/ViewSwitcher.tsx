@@ -14,7 +14,6 @@ type Props = {
 
 const ViewSwitcher = ({ views, updateView }: Props) => {
   const [value, setValue] = React.useState("List");
-  console.log(value, "viewswitcher");
   return (
     <ToggleGroup.Root
       className="rounded-sm inline-flex overflow-hidden border border-card-border transition"
