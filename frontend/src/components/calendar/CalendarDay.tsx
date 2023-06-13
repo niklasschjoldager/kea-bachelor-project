@@ -56,7 +56,7 @@ const CalendarDay = ({ day, selectedDate, getSelectedDate, events }: Props) => {
       ? true
       : false;
 
-  const overflowingEvents = events.length > 1 ? events.length - 2 : false
+  const overflowingEvents = events.length > 1 ? events.length - 2 : 0
 
   return (
     <div
@@ -85,7 +85,7 @@ const CalendarDay = ({ day, selectedDate, getSelectedDate, events }: Props) => {
                 </div>
               ):(null);
             })}</>
-            <>{overflowingEvents && <p className="text-label text-slate-gray">{overflowingEvents} more...</p>}</>
+            <>{overflowingEvents > 0 && <p className="text-label text-slate-gray leading-[16px]">{overflowingEvents} more...</p>}</>
           </>
         : <div className={events.length && !day.isDisabled ? `w-[5px] h-[5px] rounded-full bg-paynes-gray` : ''}></div>
       }

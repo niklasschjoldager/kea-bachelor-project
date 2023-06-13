@@ -27,7 +27,7 @@ type Props = {
 
 const CalendarList = ({ selectedDateEvents, selectedDate }: Props) => {
   return (
-    <div className='w-100 lg:w-[160px] xl:w-[275px]'>
+    <div className='w-100 lg:w-[160px] xl:w-[230px]'>
       <div className="mb-6">
         <h2 className="flex h-[30px] items-center text-h2">
           {selectedDate.day} {selectedDate.month} {selectedDate.year}
