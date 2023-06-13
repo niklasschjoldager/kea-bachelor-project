@@ -65,7 +65,7 @@ export const request = async ({
 };
 
 export function convertToDate(datetime: string) {
-  const date = datetime.split('T')[0]
+  const date = datetime.split(' ')[0]
   const year = date.split('-')[0]
   const month = date.split('-')[1]
   const day = date.split('-')[2]
@@ -74,7 +74,7 @@ export function convertToDate(datetime: string) {
 }
 
 export function convertToTime(datetime: string) {
-  const date = datetime.split('T')[1]
+  const date = datetime.split(' ')[1]
   const hour = date.split(':')[0]
   const minuttes = date.split(':')[1]
 
