@@ -167,7 +167,7 @@ export const EventInfo = ({
               getData={updateData}
             />
           </div>
-          <div className="flex flex-col md:items-center justify-between w-full gap-3 md:gap-6 px-6 py-3 shadow-bottomBar sm:flex-row border-t-card-border border-t-[0.7px] absolute bottom-[-1px] left-0 bg-white">
+          <div className="flex flex-col md:items-center justify-between w-full gap-3 md:gap-6 px-6 py-3 shadow-bottomBar sm:flex-row border-t-card-border border-t absolute bottom-[-1px] left-0 bg-white">
             <p>
               Price per ticket: <b>{props.price} DKK</b>
             </p>
@@ -183,7 +183,7 @@ export const EventInfo = ({
           </div>
         </Form.Root>
       ) : (
-        <div className="flex flex-col md:items-center justify-between w-full gap-3 md:gap-6 px-6 py-3 shadow-bottomBar sm:flex-row border-t-card-border border-t-[0.7px] absolute bottom-[-1px] left-0 bg-white">
+        <div className="flex flex-col md:items-center justify-between w-full gap-3 md:gap-6 px-6 py-3 shadow-bottomBar sm:flex-row border-t-card-border border-t absolute bottom-[-1px] left-0 bg-white">
           {eventType == "free" ? (
             <p>You don't need to signup for this event</p>
           ) : (
