@@ -8,7 +8,7 @@ function init() {
 
   if (!root) {
     return console.error(
-      "Eventel Integration: Cannot find Eventel root. Did you forget to add it to your page? See the integration documentation (https://kea-bachelor-project.vercel.app/integration) for more info."
+      "Eventel Integration: Cannot find Eventel root. Did you forget to add it to your page? See the integration documentation (https://kea-bachelor-project.vercel.app/dashboard/integration) for more info."
     );
   }
 
@@ -16,7 +16,7 @@ function init() {
 
   if (!integrationId) {
     return console.error(
-      "Eventel Integration: Cannot find integration ID from Eventel root. Did you forget to add it to your page? See the integration documentation (https://kea-bachelor-project.vercel.app/integration) for more info."
+      "Eventel Integration: Cannot find integration ID from Eventel root. Did you forget to add it to your page? See the integration documentation (https://kea-bachelor-project.vercel.app/dashboard/integration) for more info."
     );
   }
 
