@@ -30,16 +30,23 @@ export const EventInfo = ({
   availability,
 }: Props) => {
   return (
-    <div className="max-h-[85vh] md:pt-[calc(3rem+14px)] pt-[calc(1.5rem+14px)]">
+    <div className="max-h-[85vh]">
       <div
-        className={`px-3 pt-0 pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)] flex flex-col-reverse gap-6 md:px-6 ${signupState == "signup" ? "md:h-52 pb-0 md:pb-6" : ""
+        className={`flex flex-col-reverse gap-6 ${signupState == "signup" ? "" : "pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)]"
           }`}
       >
         <div
-          className={`flex flex-col gap-3 ${signupState == "signup" ? "gap-6 md:gap-3 pb-0" : ""
+          className={`flex flex-col gap-3 px-3 md:px-6 ${signupState == "signup" ? "gap-1 md:gap-2 pb-0 pt-6" : "pt-2"
             }`}
         >
-          <h1 className="text-h1 text-dark-gray">{props.title}</h1>
+          {signupState == "signup" ? (
+            <>
+              <h1 className="text-h1 text-dark-gray">Signup</h1>
+              <h2 className="text-h3 text-dark-gray">{props.title}</h2>
+            </>
+          ) : (
+            <h1 className="text-h1 text-dark-gray">{props.title}</h1>
+          )}
           <p
             className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""
               }`}
@@ -111,7 +118,7 @@ export const EventInfo = ({
               {props.location}
             </p>
           </div>
-          {props.long_description && 
+          {((props.long_description && signupState !== "signup")) && 
           <>
             <CardDivider />
             <p
@@ -124,9 +131,9 @@ export const EventInfo = ({
           }
         </div>
 
+        {signupState !== "signup" &&
         <div
-          className={`overflow-hidden ${signupState == "signup" ? "hidden md:block" : ""
-            }`}
+          className={"overflow-hidden"}
         >
           <img
             src={`${REST_API_URL}/images/${props.image}`}
@@ -134,10 +141,12 @@ export const EventInfo = ({
             className="object-cover w-full h-auto max-h-[200px]"
           />
         </div>
+        }
       </div>
       {signupState == "signup" ? (
         <Form.Root onSubmit={submit}>
-          <div className="flex flex-col gap-6 p-6">
+          <div className="flex flex-col gap-6 p-6 pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)]">
+          <CardDivider />
             <Input
               inputId={"full_name"}
               labelText={"Full name"}

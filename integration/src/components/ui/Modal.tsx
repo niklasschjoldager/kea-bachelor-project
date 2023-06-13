@@ -18,21 +18,23 @@ const Modal = ({ children }: Props) => {
             asChild
             className="absolute cursor-pointer top-3 right-3 md:top-6 md:right-6"
           >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 13L13 1M1 1L13 13"
-                stroke="black"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <div className="bg-ghost-white rounded-full shadow-switcher p-2 border border-card-border">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 13L13 1M1 1L13 13"
+                  stroke="black"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
           </Dialog.Close>
         </Card>
       </Dialog.Content>
