@@ -30,23 +30,30 @@ export const EventInfo = ({
   availability,
 }: Props) => {
   return (
-    <>
+    <div className="max-h-[85vh]">
       <div
-        className={`p-6 flex flex-col gap-3 md:flex-row-reverse md:gap-6 ${signupState == "signup" ? "md:h-52 pb-0 md:pb-6" : ""
+        className={`flex flex-col-reverse gap-6 ${signupState == "signup" ? "" : "pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)]"
           }`}
       >
         <div
-          className={`flex flex-col gap-3 py-5 md:w-1/2 ${signupState == "signup" ? "gap-6 md:gap-3 pb-0 md:py-5" : ""
+          className={`flex flex-col gap-3 px-3 md:px-6 ${signupState == "signup" ? "gap-1 md:gap-2 pb-0 pt-6" : "pt-2"
             }`}
         >
-          <h1 className="text-h1 text-dark-gray">{props.title}</h1>
+          {signupState == "signup" ? (
+            <>
+              <h1 className="text-h1 text-dark-gray">Signup</h1>
+              <h2 className="text-h3 text-dark-gray">{props.title}</h2>
+            </>
+          ) : (
+            <h1 className="text-h1 text-dark-gray">{props.title}</h1>
+          )}
           <p
             className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""
               }`}
           >
             {props.short_description}
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 md:gap-5 my-2">
             <p className="flex items-center gap-2 text-label text-slate-gray">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +94,7 @@ export const EventInfo = ({
               </svg>
               {convertToTime(props.startDate)} - {convertToTime(props.endDate)}
             </p>
-            <p className="flex items-center gap-2 basis-full text-label text-slate-gray">
+            <p className="flex items-center gap-2 text-label text-slate-gray">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -111,29 +118,35 @@ export const EventInfo = ({
               {props.location}
             </p>
           </div>
-          <CardDivider />
-          <p
-            className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""
-              }`}
-          >
-            {props.long_description}
-          </p>
+          {((props.long_description && signupState !== "signup")) && 
+          <>
+            <CardDivider />
+            <p
+              className={`text-body text-dark-gray-faded my-3  ${signupState == "signup" ? "hidden" : ""
+                }`}
+            >
+              {props.long_description}
+            </p>
+          </>
+          }
         </div>
 
+        {signupState !== "signup" &&
         <div
-          className={`md:w-1/2 overflow-hidden ${signupState == "signup" ? "hidden md:block" : ""
-            }`}
+          className={"overflow-hidden"}
         >
           <img
             src={`${REST_API_URL}/images/${props.image}`}
             alt=""
-            className="object-cover w-full h-auto max-h-96"
+            className="object-cover w-full h-auto max-h-[200px]"
           />
         </div>
+        }
       </div>
       {signupState == "signup" ? (
         <Form.Root onSubmit={submit}>
-          <div className="flex flex-col gap-6 p-6">
+          <div className="flex flex-col gap-6 p-6 pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)]">
+          <CardDivider />
             <Input
               inputId={"full_name"}
               labelText={"Full name"}
@@ -164,8 +177,7 @@ export const EventInfo = ({
               getData={updateData}
             />
           </div>
-
-          <div className="flex flex-col items-center justify-between w-full gap-6 p-6 shadow-card md:py-3 md:flex-row">
+          <div className="flex flex-col md:items-center justify-between w-full gap-3 md:gap-6 px-6 py-3 shadow-bottomBar sm:flex-row border-t-card-border border-t absolute bottom-[-1px] left-0 bg-white">
             <p>
               Price per ticket: <b>{props.price} DKK</b>
             </p>
@@ -181,7 +193,7 @@ export const EventInfo = ({
           </div>
         </Form.Root>
       ) : (
-        <div className="flex flex-col items-center justify-between w-full gap-6 p-6 shadow-card md:py-4 md:flex-row">
+        <div className="flex flex-col md:items-center justify-between w-full gap-3 md:gap-6 px-6 py-3 shadow-bottomBar sm:flex-row border-t-card-border border-t absolute bottom-[-1px] left-0 bg-white">
           {eventType == "free" ? (
             <p>You don't need to signup for this event</p>
           ) : (
@@ -198,6 +210,6 @@ export const EventInfo = ({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };

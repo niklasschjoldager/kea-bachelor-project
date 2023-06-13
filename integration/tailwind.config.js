@@ -31,6 +31,7 @@ export default {
     boxShadow: {
       card: "2px 0px 15px 5px rgb(18, 30, 38, 0.03)",
       switcher: "0px 0px 8px 2px rgb(18, 30, 38, 0.08)",
+      bottomBar: "0px 0px 15px 7px rgb(18, 30, 38, 0.05), 10px 5px 15px 5px rgb(18, 30, 38, 0.01)",
     },
     keyframes: {
       slideUpAndFade: {
