@@ -29,7 +29,7 @@ function SignUpForm() {
         labelText="Full name"
         inputId="full-name"
         required={true}
-        maxLength={30}
+        maxLength={100}
         getData={(event) => setFullName(event.target.value)}
       />
       <Input

@@ -33,7 +33,7 @@ function App({ integrationId }: AppProps) {
 
   return (
     <div className="max-w-lg px-4 py-8 mx-auto">
-      <h2 className="text-h1">Events</h2>
+      <h2 className="text-h1 mb-8">Events</h2>
       {isLoading ? <p>Loading...</p> : <EventList events={events} />}
     </div>
   );

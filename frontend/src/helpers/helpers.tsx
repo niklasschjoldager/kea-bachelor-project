@@ -1,11 +1,7 @@
-import { useState } from "react";
-import { json } from "stream/consumers";
-
 type PostProps = {
   endpoint: string;
   type: "GET" | "POST" | "DELETE";
   body?: object;
-  // Session and status should come from a global useSession
   session: any;
   status: any;
 };
@@ -43,7 +39,7 @@ export const request = async ({
         Authorization: `Bearer ${session?.user.access_token}`,
       }
     }
-    
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_REST_API_URL || "http://127.0.0.1:8000"
       }${endpoint}`,
@@ -68,8 +64,8 @@ export const request = async ({
   }
 };
 
-export function convertToDate(datetime: string){
-  const date = datetime.split('T')[0]
+export function convertToDate(datetime: string) {
+  const date = datetime.split(' ')[0]
   const year = date.split('-')[0]
   const month = date.split('-')[1]
   const day = date.split('-')[2]
@@ -77,8 +73,8 @@ export function convertToDate(datetime: string){
   return `${day}/${month}/${year}`
 }
 
-export function convertToTime(datetime: string){
-  const date = datetime.split('T')[1]
+export function convertToTime(datetime: string) {
+  const date = datetime.split(' ')[1]
   const hour = date.split(':')[0]
   const minuttes = date.split(':')[1]
 

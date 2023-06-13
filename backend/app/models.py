@@ -7,10 +7,16 @@ import uuid
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(String(36), primary_key=True, index=True, default=str(uuid.uuid4()))
+    id = Column(
+        String(36),
+        primary_key=True,
+        index=True,
+        default=str(uuid.uuid4()),
+        autoincrement=False,
+    )
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
-    full_name = Column(String(25))
+    full_name = Column(String(100))
 
     event = relationship("Event", back_populates="user")
 
@@ -18,16 +24,22 @@ class User(Base):
 class Event(Base):
     __tablename__ = "events"
 
-    id = Column(String(36), primary_key=True, index=True, default=str(uuid.uuid4()))
-    title = Column(String(50))
+    id = Column(
+        String(36),
+        primary_key=True,
+        index=True,
+        default=str(uuid.uuid4()),
+        autoincrement=False,
+    )
+    title = Column(String(100))
     price = Column(Integer, default=0)
-    short_description = Column(String(125))
-    long_description = Column(String(800), nullable=True)
+    short_description = Column(String(150))
+    long_description = Column(String(), nullable=True)
     image = Column(String)
-    startDate = Column(DateTime)
-    endDate = Column(DateTime)
-    created_at = Column(DateTime)
-    location = Column(String)
+    startDate = Column(String)
+    endDate = Column(String)
+    created_at = Column(String)
+    location = Column(String(100))
     ticket_quantity = Column(Integer, nullable=True, default=None)
     available_tickets = Column(Integer, nullable=True, default=None)
 
@@ -47,10 +59,10 @@ class Order(Base):
         default=str(uuid.uuid4()),
         autoincrement=False,
     )
-    full_name = Column(String(255))
-    email = Column(String(255))
-    phone_number = Column(String)
-    created_at = Column(DateTime)
+    full_name = Column(String(100))
+    email = Column(String)
+    phone_number = Column(Integer)
+    created_at = Column(String)
     status = Column(String, default="pending")
     ticket_amount = Column(Integer)
     total_price = Column(Integer)

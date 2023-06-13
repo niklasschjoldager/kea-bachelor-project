@@ -39,7 +39,6 @@ const EventForm = () => {
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(data, "data");
 
     let formData = new FormData();
     for (var key in data) {
@@ -57,10 +56,7 @@ const EventForm = () => {
     if (response?.response.ok) {
       location.reload();
     } else {
-      console.log("FAIL");
       setStatusMessage("Something went wrong. Try again later")
-      console.log(statusMessage);
-
     }
   };
 
@@ -91,13 +87,16 @@ const EventForm = () => {
           inputId="title"
           required={true}
           getData={updateData}
+          maxLength={100}
         />
         <Input
           type="text"
           labelText="Short description"
+          extraLabel="(max 150 characters)"
           inputId="short_description"
           required={true}
           getData={updateData}
+          maxLength={150}
         />
         <Input
           type="longDesc"
@@ -112,6 +111,7 @@ const EventForm = () => {
           inputId="location"
           required={true}
           getData={updateData}
+          maxLength={100}
         />
         <div className="flex flex-col gap-5 md:flex-row">
           <Input

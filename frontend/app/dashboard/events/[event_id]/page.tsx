@@ -61,7 +61,6 @@ export default function Orders() {
           session: session,
           status: status,
         });
-        console.log("response", response);
         switch (endpoint.setter) {
           case "setEvent":
             setEvent(response?.data);
@@ -76,9 +75,6 @@ export default function Orders() {
 
     fetchData(endpoints);
   }, [status, session, event_id, user_id]);
-
-  console.log(event, "event");
-  console.log(orders, "orders");
 
   const deleteEvent = async () => {
     const response = await request({
