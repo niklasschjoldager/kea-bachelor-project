@@ -58,7 +58,7 @@ module.exports = {
     },
     extend: {
       maxWidth: {
-        lg: "1200px",
+        lg: "1100px",
         modal: "800px",
       },
     },
