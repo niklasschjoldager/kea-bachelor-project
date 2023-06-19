@@ -21,6 +21,11 @@ def get_orders(
     event_id,
     db: Session = Depends(get_db),
 ):
+    event = crud.get_event(db=db, user_id=current_user.id, event_id=event_id)
+
+    if event is None:
+        raise HTTPException(status_code=404, detail="Event not found")
+
     orders = crud.get_orders(db=db, event_id=event_id, user_id=current_user.id)
 
     if orders is None:

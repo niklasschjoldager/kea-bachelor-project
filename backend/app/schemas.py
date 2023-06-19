@@ -1,5 +1,5 @@
 from typing import Union
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, PositiveInt
 from datetime import datetime
 
 
@@ -69,7 +69,7 @@ class OrderBase(BaseModel):
 
 
 class OrderCreate(OrderBase):
-    ticket_amount: int
+    ticket_amount: PositiveInt
 
 
 class Order(OrderBase):
