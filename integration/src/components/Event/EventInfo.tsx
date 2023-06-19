@@ -32,12 +32,16 @@ export const EventInfo = ({
   return (
     <div className="max-h-[85vh]">
       <div
-        className={`flex flex-col-reverse gap-6 ${signupState == "signup" ? "" : "pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)]"
-          }`}
+        className={`flex flex-col-reverse gap-6 ${
+          signupState == "signup"
+            ? ""
+            : "pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)]"
+        }`}
       >
         <div
-          className={`flex flex-col gap-3 px-3 md:px-6 ${signupState == "signup" ? "gap-1 md:gap-2 pb-0 pt-6" : "pt-2"
-            }`}
+          className={`flex flex-col gap-3 px-3 md:px-6 ${
+            signupState == "signup" ? "gap-1 md:gap-2 pb-0 pt-6" : "pt-2"
+          }`}
         >
           {signupState == "signup" ? (
             <>
@@ -48,12 +52,13 @@ export const EventInfo = ({
             <h1 className="text-h1 text-dark-gray">{props.title}</h1>
           )}
           <p
-            className={`text-body text-dark-gray-faded ${signupState == "signup" ? "hidden" : ""
-              }`}
+            className={`text-body text-dark-gray-faded ${
+              signupState == "signup" ? "hidden" : ""
+            }`}
           >
             {props.short_description}
           </p>
-          <div className="flex flex-wrap gap-3 md:gap-5 my-2">
+          <div className="flex flex-wrap gap-3 my-2 md:gap-5">
             <p className="flex items-center gap-2 text-label text-slate-gray">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -73,8 +78,8 @@ export const EventInfo = ({
               {convertToDate(props.startDate) === convertToDate(props.endDate)
                 ? convertToDate(props.startDate)
                 : `${convertToDate(props.startDate)} - ${convertToDate(
-                  props.endDate
-                )}`}
+                    props.endDate
+                  )}`}
             </p>
             <p className="flex items-center gap-2 text-label text-slate-gray">
               <svg
@@ -118,35 +123,34 @@ export const EventInfo = ({
               {props.location}
             </p>
           </div>
-          {((props.long_description && signupState !== "signup")) && 
-          <>
-            <CardDivider />
-            <p
-              className={`text-body text-dark-gray-faded my-3  ${signupState == "signup" ? "hidden" : ""
+          {props.long_description && signupState !== "signup" && (
+            <>
+              <CardDivider />
+              <p
+                className={`text-body text-dark-gray-faded my-3  ${
+                  signupState == "signup" ? "hidden" : ""
                 }`}
-            >
-              {props.long_description}
-            </p>
-          </>
-          }
+              >
+                {props.long_description}
+              </p>
+            </>
+          )}
         </div>
 
-        {signupState !== "signup" &&
-        <div
-          className={"overflow-hidden"}
-        >
-          <img
-            src={`${REST_API_URL}/images/${props.image}`}
-            alt=""
-            className="object-cover w-full h-auto max-h-[200px]"
-          />
-        </div>
-        }
+        {signupState !== "signup" && (
+          <div className={"overflow-hidden"}>
+            <img
+              src={`${REST_API_URL}/images/${props.image}`}
+              alt=""
+              className="object-cover w-full h-auto max-h-[200px]"
+            />
+          </div>
+        )}
       </div>
       {signupState == "signup" ? (
         <Form.Root onSubmit={submit}>
           <div className="flex flex-col gap-6 p-6 pb-[calc(1rem+100px)] sm:pb-[calc(1rem+64.5px)]">
-          <CardDivider />
+            <CardDivider />
             <Input
               inputId={"full_name"}
               labelText={"Full name"}
@@ -174,6 +178,7 @@ export const EventInfo = ({
               labelText={"Amount of tickets"}
               required={true}
               type={"number"}
+              min={1}
               getData={updateData}
             />
           </div>

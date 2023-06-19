@@ -51,9 +51,13 @@ function EventSingleView({ props }: Props) {
     const response = await request.json();
 
     if (!request.ok) {
-      setSuccessMessage(response.detail);
-      console.log("YOYOY FAILED");
+      setSuccessMessage(
+        response?.detail[0]?.msg
+          ? "Something went wrong, please try again later"
+          : response.detail
+      );
       setSignupState("success");
+      return;
     }
 
     if (eventType === "payment" && request.ok) {
